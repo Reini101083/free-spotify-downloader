@@ -1,0 +1,310 @@
+[
+  {
+    "code": "en",
+    "name": "English"
+  },
+  {
+    "code": "de",
+    "name": "German"
+  },
+  {
+    "code": "it",
+    "name": "Italian"
+  },
+  {
+    "code": "pt",
+    "name": "Portuguese"
+  },
+  {
+    "code": "nl",
+    "name": "Dutch"
+  },
+  {
+    "code": "pl",
+    "name": "Polish"
+  },
+  {
+    "code": "hr",
+    "name": "Croatian"
+  },
+  {
+    "code": "bs",
+    "name": "Bosnian"
+  },
+  {
+    "code": "sl",
+    "name": "Slovenian"
+  },
+  {
+    "code": "mk",
+    "name": "Macedonian"
+  },
+  {
+    "code": "ru",
+    "name": "Russian"
+  },
+  {
+    "code": "uk",
+    "name": "Ukrainian"
+  },
+  {
+    "code": "bg",
+    "name": "Bulgarian"
+  },
+  {
+    "code": "el",
+    "name": "Greek"
+  },
+  {
+    "code": "ar",
+    "name": "Arabic"
+  },
+  {
+    "code": "he",
+    "name": "Hebrew"
+  },
+  {
+    "code": "fa",
+    "name": "Persian"
+  },
+  {
+    "code": "hi",
+    "name": "Hindi"
+  },
+  {
+    "code": "pa",
+    "name": "Punjabi"
+  },
+  {
+    "code": "gu",
+    "name": "Gujarati"
+  },
+  {
+    "code": "ta",
+    "name": "Tamil"
+  },
+  {
+    "code": "te",
+    "name": "Telugu"
+  },
+  {
+    "code": "kn",
+    "name": "Kannada"
+  },
+  {
+    "code": "ml",
+    "name": "Malayalam"
+  },
+  {
+    "code": "or",
+    "name": "Odia (Oriya)"
+  },
+  {
+    "code": "vi",
+    "name": "Vietnamese"
+  },
+  {
+    "code": "th",
+    "name": "Thai"
+  },
+  {
+    "code": "id",
+    "name": "Indonesian"
+  },
+  {
+    "code": "ms",
+    "name": "Malay"
+  },
+  {
+    "code": "fil",
+    "name": "Filipino (Tagalog)"
+  },
+  {
+    "code": "my",
+    "name": "Myanmar"
+  },
+  {
+    "code": "km",
+    "name": "Khmer"
+  },
+  {
+    "code": "si",
+    "name": "Sinhala (Sinhalese)"
+  },
+  {
+    "code": "am",
+    "name": "Amharic"
+  },
+  {
+    "code": "sw",
+    "name": "Swahili"
+  },
+  {
+    "code": "af",
+    "name": "Afrikaans"
+  },
+  {
+    "code": "sq",
+    "name": "Albanian"
+  },
+  {
+    "code": "hy",
+    "name": "Armenian"
+  },
+  {
+    "code": "az",
+    "name": "Azerbaijani"
+  },
+  {
+    "code": "eu",
+    "name": "Basque"
+  },
+  {
+    "code": "be",
+    "name": "Belarusian"
+  },
+  {
+    "code": "ca",
+    "name": "Catalan"
+  },
+  {
+    "code": "ga",
+    "name": "Irish"
+  },
+  {
+    "code": "gl",
+    "name": "Galician"
+  },
+  {
+    "code": "is",
+    "name": "Icelandic"
+  },
+  {
+    "code": "ka",
+    "name": "Georgian"
+  },
+  {
+    "code": "kk",
+    "name": "Kazakh"
+  },
+  {
+    "code": "ky",
+    "name": "Kyrgyz"
+  },
+  {
+    "code": "lv",
+    "name": "Latvian"
+  },
+  {
+    "code": "lb",
+    "name": "Luxembourgish"
+  },
+  {
+    "code": "mt",
+    "name": "Maltese"
+  },
+  {
+    "code": "mn",
+    "name": "Mongolian"
+  },
+  {
+    "code": "so",
+    "name": "Somali"
+  },
+  {
+    "code": "sv",
+    "name": "Swedish"
+  },
+  {
+    "code": "tg",
+    "name": "Tajik"
+  },
+  {
+    "code": "tk",
+    "name": "Turkmen"
+  },
+  {
+    "code": "uz",
+    "name": "Uzbek"
+  },
+  {
+    "code": "cy",
+    "name": "Welsh"
+  },
+  {
+    "code": "zu",
+    "name": "Zulu"
+  },
+  {
+    "code": "xh",
+    "name": "Xhosa"
+  },
+  {
+    "code": "yo",
+    "name": "Yoruba"
+  },
+  {
+    "code": "ig",
+    "name": "Igbo"
+  },
+  {
+    "code": "ha",
+    "name": "Hausa"
+  },
+  {
+    "code": "sn",
+    "name": "Shona"
+  },
+  {
+    "code": "st",
+    "name": "Sesotho"
+  },
+  {
+    "code": "ny",
+    "name": "Chichewa (Nyanja)"
+  },
+  {
+    "code": "mg",
+    "name": "Malagasy"
+  },
+  {
+    "code": "mi",
+    "name": "Maori"
+  },
+  {
+    "code": "sm",
+    "name": "Samoan"
+  },
+  {
+    "code": "haw",
+    "name": "Hawaiian"
+  },
+  {
+    "code": "hmn",
+    "name": "Hmong"
+  },
+  {
+    "code": "ceb",
+    "name": "Cebuano"
+  },
+  {
+    "code": "jv",
+    "name": "Javanese"
+  },
+  {
+    "code": "su",
+    "name": "Sundanese"
+  },
+  {
+    "code": "eo",
+    "name": "Esperanto"
+  },
+  {
+    "code": "gd",
+    "name": "Scots Gaelic"
+  },
+  {
+    "code": "fy",
+    "name": "Frisian"
+  }
+]

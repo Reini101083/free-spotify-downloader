@@ -66,7 +66,7 @@ def main():
     if args.wheel_dir:
         command.extend(['--no-index', '--find-links', str(args.wheel_dir.resolve())])
     subprocess.run(command, check=True)
-    for name in ('entry.py', 'session.py'):
+    for name in ('entry.py', 'session.py', 'provider.py', 'library.py'):
         shutil.copy2(ROOT / 'engine' / name, engine / name)
     release = json.loads((ROOT / 'node_modules/ffmpeg-static/package.json').read_text())['ffmpeg-static']['binary-release-tag']
     base = f'https://github.com/eugeneware/ffmpeg-static/releases/download/{release}'

@@ -54,7 +54,7 @@ class ResumeTests(unittest.TestCase):
             event = json.loads(output.getvalue().removeprefix(session.PREFIX))
             self.assertEqual(event['code'], 'SPOTIFY_METADATA')
             self.assertIn('429', event['detail'])
-            self.assertIn('begrenzt', event['message'])
+            self.assertIn('limiting', event['message'])
 
     def test_resume_skips_completed_and_continues_after_missing_source(self):
         with tempfile.TemporaryDirectory() as folder:

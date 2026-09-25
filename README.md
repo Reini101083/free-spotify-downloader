@@ -1,74 +1,71 @@
 # Free Spotify Downloader
 
-An independent desktop music workspace by **Jedi Meister**, licensed under **MIT**.
+A desktop music workspace by **Jedi Meister**. Original application code licensed under **MIT**.
 
-Deutsch / English · Windows · macOS · Linux
+Windows · macOS · Linux · 77 bundled interface languages
 
-## Download — wähle dein Betriebssystem
+## Download
 
-[**Aktuelle Version mit Download-Auswahl öffnen**](https://github.com/Reini101083/free-spotify-downloader/releases/latest)
+[**Choose your operating system on the latest release page**](https://github.com/Reini101083/free-spotify-downloader/releases/latest)
 
-| Betriebssystem | Paket |
+| Operating system | Download version 0.2.0 |
 | --- | --- |
-| Windows · Intel / AMD 64-Bit | [Installer herunterladen](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.1.2/Free-Spotify-Downloader-0.1.2-windows-x64-setup.exe) · [Portable herunterladen](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.1.2/Free-Spotify-Downloader-0.1.2-windows-x64-portable.exe) |
-| Mac · Apple Silicon | [DMG herunterladen](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.1.2/Free-Spotify-Downloader-0.1.2-mac-arm64.dmg) |
-| Mac · Intel | [DMG herunterladen](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.1.2/Free-Spotify-Downloader-0.1.2-mac-x64.dmg) |
-| Linux · x86_64 | [AppImage herunterladen](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.1.2/Free-Spotify-Downloader-0.1.2-linux-x86_64.AppImage) · [DEB herunterladen](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.1.2/Free-Spotify-Downloader-0.1.2-linux-amd64.deb) |
+| Windows · Intel / AMD 64-bit | [Installer](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.0/Free-Spotify-Downloader-0.2.0-windows-x64-setup.exe) · [Portable](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.0/Free-Spotify-Downloader-0.2.0-windows-x64-portable.exe) |
+| Mac · Apple Silicon | [DMG](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.0/Free-Spotify-Downloader-0.2.0-mac-arm64.dmg) |
+| Mac · Intel | [DMG](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.0/Free-Spotify-Downloader-0.2.0-mac-x64.dmg) |
+| Linux · x86_64 | [AppImage](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.0/Free-Spotify-Downloader-0.2.0-linux-x86_64.AppImage) · [DEB](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.0/Free-Spotify-Downloader-0.2.0-linux-amd64.deb) |
 
-Die Direktlinks laden **Version 0.1.2**. Auf der Release-Seite kannst du ebenfalls
-dein System auswählen. Kein GitHub-Konto
-zum Download erforderlich. [Ältere Versionen](https://github.com/Reini101083/free-spotify-downloader/releases)
-bleiben separat auswählbar. **Source code (zip)** ist der Quellcode, kein Installer.
+No GitHub account is required. [Older versions](https://github.com/Reini101083/free-spotify-downloader/releases) remain available separately. **Source code (zip)** contains source code, not an installer. Each release includes SHA-256 checksums. Python, FFmpeg and Deno are included.
 
-Die Website zeigt eine Vorschau und die App-Downloads. Musikdownloads startest du
-in der installierten Desktop-App. Python, FFmpeg und Deno sind enthalten.
+On a Mac, open **Apple menu → About This Mac** to identify Apple Silicon or Intel. Linux AppImage and DEB packages are for x86_64; DEB targets Debian and Ubuntu.
 
-## What it does
+### Windows installation
 
-- Paste a Spotify track, album or playlist link using **right-click → Paste** or the keyboard.
-- Automatically fill an empty link field when the desktop app is in the foreground.
-  Existing input is kept; use **Use copied link** to replace it. Downloads never
-  start automatically. Disable this in Settings. Only validated Spotify URLs
-  leave the main process; unrelated clipboard text is neither stored nor sent.
-- Queue multiple downloads and select MP3, M4A, FLAC, Opus or WAV.
-- Save queue state atomically. After an interruption, select **Fortsetzen / Resume**.
-- Check completed files by Spotify track ID, audio header and stored SHA-256 digest.
-  Existing valid files are skipped. Deleted or changed files are downloaded again.
-- Commit each completed track separately. Incomplete files stay in a staging folder;
-  resume retries that track. This is track-level recovery, not byte-range resuming.
-- Skip an unavailable track and continue the playlist. Each attempt is bounded to
-  10 minutes. Skipped tracks remain visible in the log and are retried on resume.
-- Stop the queue on a detected YouTube CAPTCHA/sign-in/rate-limit request. Open the
-  dedicated **YouTube confirmation** window and complete the site interaction yourself.
-  Choose **Use this session**, then **Try again** in the main window.
-- Choose German or English at the top. Settings remain clearly accessible at the bottom.
+1. Download the installer or portable executable from this repository's release page.
+2. These packages are **unsigned**. If Windows displays **Windows protected your PC**, and you trust the downloaded release, click **More info**, then **Run anyway**.
+3. Complete the installer. Approve a Windows permission prompt if the selected installation requires it.
+4. The app runs with normal user permissions. Administrator rights are **not required for everyday use**. If installation specifically fails with a permission error, right-click the installer, select **Run as administrator**, and confirm the Windows prompt. For a download-folder permission error, first choose a writable folder in Settings.
 
-Spotify is used for metadata. A separate spotDL engine finds matching audio on
-YouTube/YouTube Music. This is not a direct Spotify-stream exporter. Source
-availability, song matching, bitrate and version are not guaranteed. FLAC/WAV
-output cannot restore detail missing from a lossy source. Use content you own
-or have permission to download.
+The default folder is **Downloads/Free Spotify Downloader**. You can select a different folder or an external drive.
 
-The YouTube window is sandboxed and isolated from the main app. It has no Node
-access or app bridge. No CAPTCHA is solved automatically. Session cookies stay
-in memory until the app exits. After your explicit in-app confirmation, only
-YouTube-domain cookies are exported temporarily to the local engine, with
-restricted file permissions; they are removed when the job finishes and stale
-exports are removed on startup. You can clear the session in Settings. Google
-may reject embedded sign-in, and confirmation may still not unblock downloads.
+## Using the app
 
-## Wenn eine Playlist fehlschlägt
+1. Copy a Spotify track, album or playlist link and switch to the app, or use **right-click → Paste**.
+2. Choose an audio format and output folder in **Settings**, then select **Start downloads**. The Spotify preview loads automatically; audio does not autoplay.
+3. Open **Saved songs** to see verified audio files in the selected folder. Use Play or Show in folder directly from the list.
+4. Open **Not downloaded** for the reason a song failed. Retry one song or all failed songs. Ordinary song failures do not stop the playlist.
 
-Prüfe zuerst, ob die Playlist öffentlich erreichbar ist. Klicke auf den Auftrag:
-Die konkrete Meldung und **Download-Verlauf** zeigen, ob Spotify-Titelinformationen,
-YouTube oder der Dateizugriff betroffen sind. Vorübergehende Spotify-Verbindungsfehler
-werden einmal erneut versucht; Zugriffssperren und Anfragelimits nicht. Mit
-**Fortsetzen** werden bereits vollständig gespeicherte Titel geprüft und behalten.
-Für einen Fehlerbericht bitte App-Version und Fehlermeldung angeben.
+The clipboard feature fills only an empty field while the app is in the foreground. It preserves existing input and never starts downloads automatically. Disable it in Settings. Unrelated clipboard text is not stored or sent.
+
+The responsive interface supports small windows, light/dark/system appearance and keyboard navigation. Language selection is at the top; Settings stays accessible at the bottom on desktop and in the top bar in narrow windows.
+
+### Saved files and recovery
+
+Finished audio files go directly into the selected download folder. Working files stay in the app's internal data directory. Temporary files and invalid audio do not appear as saved songs. A playlist with zero successful files is marked **Failed**, never completed or partially saved.
+
+Queue state and per-song checkpoints are saved atomically. After a crash or pause, Resume checks the audio header and stored SHA-256 digest before reusing a file. Missing or modified files are downloaded again. This resumes at song boundaries, not at an arbitrary byte position. Each audio attempt has a ten-minute limit.
+
+Resumed jobs keep their original destination and format. New settings apply to new jobs. The former default Music folder is migrated to Downloads for new work; custom locations remain selected. Removing a queue entry does not delete saved audio.
+
+### YouTube confirmation and failures
+
+Provider error details remain available under **Details → Download log**. **Copy diagnostics** copies the selected job's report for troubleshooting. Review it before sharing; it contains source links and song titles.
+
+A detected YouTube human-verification request pauses the queue and shows an **Open YouTube** action. Complete the check yourself in the app's isolated YouTube window, then choose **Use session and resume**. Closing the window keeps downloads paused. Rate limits are shown separately and require waiting before retrying.
+
+No CAPTCHA is solved automatically. The remote YouTube page has no Node access or app bridge. Only after explicit confirmation are this window's YouTube cookies temporarily shared with the local download engine. Cookies from your usual browser are never imported. Temporary exports are removed after use and on startup; the isolated session ends when the app exits. Clear it at any time in Settings while downloads are paused. Google may reject embedded sign-in, and a completed check does not guarantee access.
+
+Spotify supplies metadata. The spotDL engine matches audio from YouTube/YouTube Music; this app does not export Spotify's audio stream. Availability, matching and source quality vary. A higher bitrate or FLAC/WAV conversion cannot restore quality absent from the source. Download content you own or have permission to save.
+
+### Languages
+
+This release bundles **77 complete interface catalogs**, available offline. English is the source language and German has been editorially reviewed. Other catalogs are machine translated and may contain mistakes. Native operating-system dialogs and provider diagnostics can use the system language or English.
+
+The requested target of 160 languages is not yet reached. Incomplete catalogs are excluded from the selector. Translations are generated during development; using the app does not send song titles, links or other user data to a translation service. See `renderer/locales/languages.json` for the exact list.
 
 ## Build and run
 
-Requires Node.js 24 and Python 3.12 on the target operating system.
+Use **Node.js 24** and **Python 3.12** on the target operating system.
 
 ```sh
 npm ci
@@ -81,61 +78,40 @@ npm run build:web
 npm start
 ```
 
-FFmpeg, Deno and the engine are packaged with the desktop app. No separate Python
-installation is needed to use a built installer.
-
 ```sh
 npm run check
 npm test
 npm run test:engine
+python scripts/smoke_engine.py
 npm run package
 ```
 
-Output is in `release/`. Build on each target OS; macOS packages require macOS.
-Windows produces an installer and a portable `.exe`, macOS `.dmg`/`.zip`, Linux
-`.AppImage`/`.deb`. The GitHub Actions workflow builds all platforms and attaches
-artifacts to the run. A new package version on `main` (or a matching version tag) publishes a GitHub
-Release after all four platform builds succeed. Published versions are never
-overwritten; increment `package.json` and its lockfile for each new release. Packages are unsigned until publisher signing certificates are configured.
+Build output is in `release/`. GitHub Actions uses Node.js 24 and native runners for Windows x64, Linux x64, macOS Intel and macOS Apple Silicon. A new version on `main` publishes a release only after all four builds succeed. Published binaries are never overwritten. Update `package.json`, `package-lock.json`, `renderer/releases.mjs`, the HTML version and README links together for a new release.
 
-For a Windows x64 portable build from Linux, `python scripts/build_windows_portable.py`
-bundles official embedded CPython 3.13.15, hash-locked Windows wheels, Windows
-FFmpeg and Windows Deno. It does not require Wine. This produces a portable
-`.exe`; the native Windows CI job additionally creates the installer. Cross-built
-packages still need a runtime test on Windows before a production release.
+The optional `scripts/build_windows_portable.py` builds a Windows portable bundle from Linux using hash-locked Windows dependencies. Native CI packages remain the release path and are checked on Windows.
 
-## Browser and Sites
+## Website
+
+The website is a preview with an operating-system and version selector. Actual audio downloads and YouTube confirmation require the desktop app. The preview does not simulate successful downloads.
 
 ```sh
 npm run build:web
 npm run dev
+npm run build:site
 ```
 
-The browser version is explicitly a preview: link validation, selection, formats,
-language and Spotify embeds work. Actual downloads and the YouTube confirmation
-window need the desktop app. No simulated downloads or fake progress are shown.
-Run `npm run build:site` to produce `dist/` for Sites hosting, configured in
-`.openai/hosting.json`.
+`build:site` produces `dist/` for the Sites configuration in `.openai/hosting.json`.
 
 ## Local data
 
-Electron's per-user application data directory contains `workspace.json` and
-`sessions/<job-id>.json`. Completed files remain in the chosen music directory.
-Jobs retain their original destination and output settings when resumed. New
-settings apply to new jobs. Session files keep the original playlist snapshot,
-so resuming does not silently switch to a changed playlist. Queue removal does
-not delete downloaded music.
-
-## License
-
-MIT permits use, modification, distribution and commercial use of our original
-code. Keep the MIT license and copyright notice with copies. Third-party
-components keep their own licenses; see `THIRD_PARTY_NOTICES.md`. The build
-collects their notices in `licenses/` and includes them in the installers.
+Electron's per-user app-data directory contains `workspace.json`, `sessions/<job-id>.json`, and internal `sessions/staging/` working directories. Completed files remain in the selected download folder. The original playlist snapshot is retained for consistent recovery.
 
 ## Verification
 
-Offline tests cover restoring interrupted jobs, serialized atomic writes,
-duplicate prevention, valid-file reuse, missing-source continuation, CAPTCHA
-pausing and cleanup of temporary session files. These tests do not claim live
-YouTube or Spotify availability. Provider behavior can change independently.
+Tests cover interrupted jobs, durable writes, duplicate prevention, valid-file reuse, continuation after missing sources, retained error details, individual retry, CAPTCHA pausing, flat output files, library validation and complete language catalogs.
+
+Each native build runs the bundled engine, starts its bundled Deno and FFmpeg, verifies packaged EJS resources, **encodes a real MP3**, promotes it into a destination folder and verifies it in the saved-file library. This is an offline component test, not proof of live YouTube availability. Browser checks cover the shared interface; the full native GUI is not automatically exercised on every operating system.
+
+## License
+
+MIT permits use, modification, distribution and commercial use of the original app code. Keep its license and copyright notice with copies. Third-party components retain their own licenses; see `THIRD_PARTY_NOTICES.md`. Their notices are included in the packages.

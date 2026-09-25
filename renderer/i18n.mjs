@@ -1,70 +1,37 @@
-const translations = {
-"Links einfügen":"Pasting links",
-"Kopierte Spotify-Links automatisch übernehmen":"Automatically import copied Spotify links",
-"Während die Desktop-App im Vordergrund ist, werden Spotify-Links ins leere Eingabefeld eingefügt. Bestehende Eingaben bleiben erhalten. Downloads startest du selbst.":"While the desktop app is in the foreground, Spotify links are pasted into the empty input. Existing text is kept. You start downloads yourself.",
-"Du kannst auch mit der rechten Maustaste im Eingabefeld „Einfügen“ wählen.":"You can also right-click the input and choose “Paste”.",
-"Neuer Spotify-Link kopiert.":"New Spotify link copied.",
-"Kopierten Link übernehmen":"Use copied link",
-"Spotify-Link automatisch eingefügt. Bereit zum Hinzufügen.":"Spotify link pasted automatically. Ready to add.",
-"Spotify-Titelliste wird geladen …":"Loading the Spotify track list …",
-"Spotify-Verbindung wird erneut versucht …":"Retrying the Spotify connection …",
-"Spotify hat keine verfügbaren Titel geliefert. Prüfe den Link und die Freigabe der Playlist.":"Spotify returned no available tracks. Check the link and playlist visibility.",
-"Spotify begrenzt gerade die Anfragen. Warte etwas und setze den Auftrag später fort.":"Spotify is limiting requests. Wait before resuming this download.",
-"Spotify gibt die Titelliste nicht frei. Prüfe, ob die Playlist öffentlich und der Link gültig ist.":"Spotify is not providing the track list. Check that the playlist is public and the link is valid.",
-"Die Verbindung zu Spotify ist fehlgeschlagen. Prüfe die Internetverbindung und versuche es später erneut.":"The Spotify connection failed. Check your internet connection and try again later.",
-"Die Spotify-Titelliste konnte nicht geladen werden. Details stehen im Download-Verlauf.":"The Spotify track list could not be loaded. See the download log for details.",
-"Dateizugriff fehlgeschlagen. Prüfe den Musikordner und den freien Speicherplatz.":"File access failed. Check the music folder and free disk space.",
-"Die Download-Engine wurde unterbrochen. Details stehen im Download-Verlauf.":"The download engine was interrupted. See the download log for details.",
-
-"App herunterladen":"Download app",
-"App herunterladen. Musik speichern.":"Get the app. Save your music.",
-"Im Browser siehst du die Vorschau. Für echte Downloads installiere die kostenlose Desktop-App.":"This browser shows a preview. Install the free desktop app to download audio.",
-"Python & FFmpeg inklusive":"Python & FFmpeg included",
-"Betriebssystem":"Operating system",
-"App-Version":"App version",
-"Passendes Paket":"Package",
-"Die Pakete sind noch nicht digital signiert.":"These packages are not digitally signed yet.",
-"Alle Versionen auf GitHub":"All versions on GitHub",
-"Bitte Mac-Chip wählen":"Choose your Mac chip",
-"Wähle Apple Silicon oder Intel.":"Choose Apple Silicon or Intel.",
-"Apple-Menü → Über diesen Mac: „Chip“ bedeutet Apple Silicon; „Prozessor: Intel“ bedeutet Intel.":"Apple menu → About This Mac: “Chip” means Apple Silicon; “Processor: Intel” means Intel.",
-"Installer: normale Installation. Portable: direkt starten, ohne Installation. Für Intel / AMD 64-Bit.":"Installer: standard installation. Portable: run without installing. For 64-bit Intel / AMD.",
-"AppImage: für viele Linux-Distributionen. DEB: für Debian und Ubuntu. Beide für x86_64.":"AppImage: for many Linux distributions. DEB: for Debian and Ubuntu. Both for x86_64.",
-"Windows · Installer · Intel / AMD 64-Bit":"Windows · Installer · Intel / AMD 64-bit",
-"Windows · Portable · Intel / AMD 64-Bit":"Windows · Portable · Intel / AMD 64-bit",
-"Mac · Apple Silicon (M1 / M2 / M3 / M4 / neuer)":"Mac · Apple Silicon (M1 / M2 / M3 / M4 / newer)",
-  'YouTube benötigt deine Bestätigung.':'YouTube needs your confirmation.','Die Warteschlange wartet. Löse die Bestätigung im App-Fenster und setze danach fort.':'Your queue is waiting. Complete the confirmation in the app window, then resume.','Bestätigung öffnen':'Open confirmation','Erneut versuchen':'Try again','YouTube-Sitzung':'YouTube session','Bei einer CAPTCHA kannst du YouTube in einem eigenen App-Fenster öffnen und die Bestätigung selbst lösen.':'If YouTube requests a CAPTCHA, open the in-app window and complete it yourself.','YouTube öffnen':'Open YouTube','Sitzung löschen':'Clear session','Eine Bestätigung garantiert keinen Download. YouTube kann eingebettete Anmeldung oder automatisierte Zugriffe weiterhin ablehnen.':'Confirmation does not guarantee a download. YouTube may still reject embedded sign-in or automated requests.','Die YouTube-Sitzung ist für Downloads in dieser App-Sitzung freigegeben.':'This YouTube session is enabled for downloads until the app closes.','YouTube-Bestätigung ist in der Desktop-App verfügbar.':'YouTube confirmation is available in the desktop app.','Bestätigung nötig':'Confirmation needed','YouTube benötigt eine manuelle Bestätigung.':'YouTube requires manual confirmation.',
-  'Zum Inhalt':'Skip to content','Free Spotify Downloader Start':'Free Spotify Downloader home','DEIN WORKSPACE':'YOUR WORKSPACE','Einstellungen':'Settings','Projekt':'Project','Deine Sammlung.':'Your collection.','Dein Rhythmus.':'Your rhythm.','Mehr Übersicht.':'Less clutter.','Mehr Raum für Musik.':'More room for music.','Herausgeber · MIT-Lizenz':'Publisher · MIT license','Sprache':'Language','Web-Vorschau':'Web preview','Desktop-App':'Desktop app','DEIN NÄCHSTER LIEBLINGSTITEL':'YOUR NEXT FAVORITE TRACK','Deine Musik.':'Your music.','Ein Link. Deine Auswahl. Deine Sammlung.':'One link. Your choice. Your collection.','Was möchtest du speichern?':'What would you like to save?','Titel · Album · Playlist':'Track · Album · Playlist','Spotify-Link':'Spotify link','Spotify-Link hier einfügen …':'Paste a Spotify link here …','Link ansehen':'Preview link','Hinzufügen':'Add to queue','Im Browser kannst du Links und Einstellungen ansehen. Downloads starten in der Desktop-App.':'Preview links and settings in your browser. Download audio in the desktop app.','Spotify liefert Titelinformationen. Audio stammt aus passenden Quellen; speichere nur Inhalte mit Erlaubnis.':'Spotify provides track information. Audio comes from matching sources; only save content you have permission to download.','DEINE SAMMLUNG':'YOUR COLLECTION','Warteschlange':'Download queue','Auftrag':'item','Aufträge':'items','Starten':'Start downloads','Aufträge filtern':'Filter downloads','Alle':'All','Aktiv':'Active','Gespeichert':'Saved','Bereit für deine Musik':'Ready for your music','Platz für deine Musik.':'Make room for your music.','Hier ist es noch ruhig.':'Nothing here yet.','In diesem Filter sind gerade keine Aufträge.':'There are no downloads in this filter.','Füge oben einen Spotify-Link ein. Deine Auswahl erscheint hier.':'Paste a Spotify link above. Your selection will appear here.','Füge oben einen Spotify-Link ein.':'Paste a Spotify link above.','Deine Auswahl erscheint hier.':'Your selection will appear here.','Playlists':'Playlists','Alben':'Albums','Einzelne Titel':'Single tracks','Download-Aufträge':'Download queue','Lokal gespeichert · jederzeit fortsetzen':'Saved locally · resume anytime','Noch keine Dateien gespeichert':'No files saved yet','Deine Ausgabe':'Your output','Audioformat':'Audio format','MP3 · überall abspielbar':'MP3 · plays everywhere','M4A · kompakt':'M4A · compact','FLAC · verlustfreier Container':'FLAC · lossless container','Opus · effizient':'Opus · efficient','WAV · unkomprimiert':'WAV · uncompressed','Ausgabe-Bitrate':'Output bitrate','Automatisch':'Automatic','Die Klangqualität hängt von der Quelle ab. Eine höhere Bitrate verbessert die Quelle nicht.':'Audio quality depends on the source. A higher bitrate cannot improve the source.','Speicherort':'Save location','In der Desktop-App wählen':'Choose in the desktop app','DEINE AUSWAHL':'YOUR SELECTION','Titelvorschau':'Track preview','Details schließen':'Close details','Spotify-Vorschau laden':'Load Spotify preview','Auf Spotify öffnen':'Open on Spotify','Musikordner öffnen':'Open music folder','Die Vorschau verbindet sich erst beim Laden mit Spotify.':'The preview connects to Spotify only when you load it.','Bereits vorhandene Audiodateien werden geprüft. Fehlende Titel werden übersprungen und im Verlauf aufgeführt.':'Existing audio files are checked. Unavailable tracks are skipped and listed in the log.','Download-Verlauf':'Download log','Noch keine Meldungen.':'No messages yet.','DEINE MUSIK. AUF DEINEM COMPUTER.':'YOUR MUSIC. ON YOUR COMPUTER.','Für deinen Desktop gemacht.':'Made for your desktop.','Gleiche Oberfläche. Lokale Downloads. Dein Speicherort.':'Same workspace. Local downloads. Your save location.','Installationspakete werden nach erfolgreichen Plattform-Builds unter Releases bereitgestellt.':'Installers are made available under Releases after successful platform builds.','MIT-Lizenz':'MIT license','Einstellungen & Informationen':'Settings & information','Einstellungen schließen':'Close settings','Der Speicherordner lässt sich in der Desktop-App festlegen.':'Choose your save location in the desktop app.','Ordner wählen':'Choose folder','Download-Komponenten':'Download components','Web-Vorschau · lokale Downloads sind in der Desktop-App verfügbar.':'Web preview · local downloads are available in the desktop app.','So entstehen die Audiodateien':'How audio files are created','Spotify liefert Titelinformationen. Die Desktop-App sucht dazu passende Audioquellen auf YouTube und YouTube Music. Verfügbarkeit, Version und Qualität können abweichen.':'Spotify provides track information. The desktop app looks for matching audio on YouTube and YouTube Music. Availability, version and quality may vary.','Speichere Inhalte, die dir gehören oder für die du eine Download-Erlaubnis hast.':'Save content you own or have permission to download.','Herausgeber: Jedi Meister':'Publisher: Jedi Meister','Eigener Anwendungscode unter MIT-Lizenz.':'Original application code licensed under MIT.','Deine Warteschlange ist noch da.':'Your queue is still here.','Fortsetzen prüft zuerst, welche Titel bereits gespeichert sind.':'Resuming first checks which tracks are already saved.','Fortsetzen':'Resume','Quellqualität bleibt entscheidend':'Quality depends on the source','Automatische Bitrate':'Automatic bitrate','Download-Engine und Audiokonverter sind bereit.':'Download engine and audio converter are ready.','Download-Komponenten fehlen. Bitte installiere ein vollständiges Desktop-Paket.':'Download components are missing. Please install a complete desktop package.','Bereit':'Ready','Läuft':'Downloading','Fehlgeschlagen':'Interrupted','Abgebrochen':'Cancelled','Teilweise':'Some skipped','Vorschau':'Preview','Pausiert':'Paused','Vorhanden':'Already saved','Deine Auswahl wird verarbeitet':'Processing your selection','Vorschau ausgewählt.':'Preview selected.','Web-Vorschau. Audiodownloads sind in der Desktop-App verfügbar.':'Web preview. Audio downloads are available in the desktop app.','Zur Warteschlange hinzugefügt.':'Added to your queue.','Link zur Vorschau hinzugefügt.':'Link added for preview.','Den Speicherort wählst du in der Desktop-App.':'Choose the save location in the desktop app.','Bitte füge einen gültigen Spotify-Link ein.':'Please paste a valid Spotify link.','Bitte füge einen vollständigen Spotify-Link ein.':'Please paste a complete Spotify link.','Erlaubt sind Spotify-Links zu Titeln, Alben und Playlists.':'Use a Spotify link to a track, album or playlist.','Dieser Link ist bereits in deiner Warteschlange.':'This link is already in your queue.','Warteschlange konnte nicht gespeichert werden.':'Your queue could not be saved.','Sitzung wiederhergestellt. Bereit zum Fortsetzen.':'Session restored. Ready to resume.','Vorhandene Dateien werden beim Start geprüft.':'Existing files will be checked when you start.','Vorhandene Dateien werden geprüft …':'Checking existing files …','Bereit zum Starten':'Ready to start','Pausiert. Fertige Titel bleiben erhalten.':'Paused. Completed tracks are kept.','Pausiert. Bereit zum Fortsetzen.':'Paused. Ready to resume.','Wird pausiert …':'Pausing …','Unterbrochen. Du kannst den Auftrag fortsetzen.':'Interrupted. You can resume this download.','Fortschritt des aktuellen Titels':'Download progress','Spotify-Vorschau':'Spotify preview'
-}
-let language = 'de'
-try { language = localStorage.getItem('fsd-language') === 'en' ? 'en' : 'de' } catch {}
-const originals = new WeakMap()
+import { STRINGS } from './strings.mjs'
+import languages from './locales/languages.mjs'
+const english = Object.fromEntries(STRINGS.map(value => [value, value]))
+let dictionary = english, language = 'en', generation = 0
+export const LANGUAGES = languages
 export const getLanguage = () => language
-export function setLanguage(value) { language = value === 'en' ? 'en' : 'de'; try { localStorage.setItem('fsd-language', language) } catch {} }
-export function translate(value) {
-  if (language !== 'en') return value
-  if (translations[value]) return translations[value]
-  return value.replace(/^(\d+) Auftrag wartet$/, '$1 download waiting').replace(/^(\d+) Aufträge warten$/, '$1 downloads waiting').replace(/^(\d+) Datei gespeichert$/, '$1 file saved').replace(/^(\d+) Dateien gespeichert$/, '$1 files saved').replace(/^(\d+) gespeichert · (\d+) bereits vorhanden · (\d+) übersprungen$/, '$1 saved · $2 already present · $3 skipped').replace(/Spotify Titel/g,'Spotify Track').replace(/^Titel ·/,'Track ·').replace(/ pausieren$/, ' pause').replace(/ entfernen$/, ' remove').replace(/ fortsetzen$/, ' resume').replace(/ erneut prüfen$/, ' check again')
+export function translate(value, variables = {}) {
+  let output = dictionary[value] || english[value] || value
+  for (const [key, text] of Object.entries(variables)) output = output.replaceAll(`{${key}}`, String(text))
+  return output
 }
-export function translatePage() {
-  document.documentElement.lang = language
-  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT)
-  while (walker.nextNode()) {
-    const node = walker.currentNode
-    if (node.parentElement.closest('script,style,pre,option[value="de"],option[value="en"]')) continue
-    const prior = originals.get(node)
-    const source = prior && prior.last === node.nodeValue ? prior.source : node.nodeValue
-    const whitespace = source.match(/^(\s*)(.*?)(\s*)$/s)
-    const next = whitespace[1] + translate(whitespace[2]) + whitespace[3]
-    if (node.nodeValue !== next) node.nodeValue = next
-    originals.set(node, { source, last: next })
-  }
-  for (const node of document.querySelectorAll('[placeholder],[aria-label]')) {
-    for (const attribute of ['placeholder','aria-label']) {
-      if (!node.hasAttribute(attribute)) continue
-      const key = 'i18n' + attribute.replace('-','')
-      node.dataset[key] ||= node.getAttribute(attribute)
-      node.setAttribute(attribute, translate(node.dataset[key]))
-    }
-  }
+export const t = translate
+export function languageName(code, native = true) {
+  const item = languages.find(item => item.code === code)
+  try { return new Intl.DisplayNames([native ? code : language], { type: 'language' }).of(code) || item?.name || code } catch { return item?.name || code }
 }
+export async function setLanguage(value) {
+  const request = ++generation
+  const item = languages.find(item => item.code.toLowerCase() === String(value).toLowerCase()) || languages.find(item => item.code === String(value).split('-')[0])
+  const code = item?.code || 'en'
+  const next = code === 'en' ? english : (await import(`./locales/${code}.mjs`)).default
+  if (request !== generation) return
+  dictionary = next; language = code
+  document.documentElement.lang = code
+  document.documentElement.dir = ['ar','fa','he','ur','ps','sd','ug','yi','ckb','dv'].includes(code) ? 'rtl' : 'ltr'
+  try { localStorage.setItem('fsd-language', code) } catch { /* optional preference */ }
+  translatePage()
+  document.dispatchEvent(new CustomEvent('language-changed'))
+}
+export function translatePage(root = document) {
+  for (const node of root.querySelectorAll('[data-i18n]')) node.textContent = t(node.dataset.i18n)
+  for (const node of root.querySelectorAll('[data-i18n-placeholder]')) node.setAttribute('placeholder', t(node.dataset.i18nPlaceholder))
+  for (const node of root.querySelectorAll('[data-i18n-aria]')) node.setAttribute('aria-label', t(node.dataset.i18nAria))
+}
+let initial = navigator.language || 'en'
+try { initial = localStorage.getItem('fsd-language') || initial } catch { /* browser storage may be unavailable */ }
+try { await setLanguage(initial) } catch { await setLanguage('en') }

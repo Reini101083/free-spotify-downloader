@@ -1,12 +1,12 @@
 export const REPOSITORY = 'https://github.com/Reini101083/free-spotify-downloader'
-export const RELEASE_VERSION = '0.1.2'
+export const RELEASE_VERSION = '0.2.0'
 export const PACKAGES = [
-  { id: 'windows-setup', os: 'windows', label: 'Windows · Installer · Intel / AMD 64-Bit', suffix: 'windows-x64-setup.exe', extension: '.exe', primary: true },
-  { id: 'windows-portable', os: 'windows', label: 'Windows · Portable · Intel / AMD 64-Bit', suffix: 'windows-x64-portable.exe', extension: '.exe' },
-  { id: 'mac-arm', os: 'mac', label: 'Mac · Apple Silicon (M1 / M2 / M3 / M4 / neuer)', suffix: 'mac-arm64.dmg', extension: '.dmg' },
+  { id: 'windows-setup', os: 'windows', label: 'Windows installer', suffix: 'windows-x64-setup.exe', extension: '.exe', primary: true },
+  { id: 'windows-portable', os: 'windows', label: 'Windows portable', suffix: 'windows-x64-portable.exe', extension: '.exe' },
+  { id: 'mac-arm', os: 'mac', label: 'Mac · Apple Silicon', suffix: 'mac-arm64.dmg', extension: '.dmg' },
   { id: 'mac-intel', os: 'mac', label: 'Mac · Intel', suffix: 'mac-x64.dmg', extension: '.dmg' },
-  { id: 'linux-appimage', os: 'linux', label: 'Linux · AppImage · x86_64', suffix: 'linux-x86_64.AppImage', extension: '.AppImage', primary: true },
-  { id: 'linux-deb', os: 'linux', label: 'Linux · Debian / Ubuntu · amd64', suffix: 'linux-amd64.deb', extension: '.deb' },
+  { id: 'linux-appimage', os: 'linux', label: 'Linux · AppImage', suffix: 'linux-x86_64.AppImage', extension: '.AppImage', primary: true },
+  { id: 'linux-deb', os: 'linux', label: 'Linux · Debian / Ubuntu', suffix: 'linux-amd64.deb', extension: '.deb' },
 ]
 export function packageFile(item, version = RELEASE_VERSION) {
   if (!/^\d+\.\d+\.\d+$/.test(version)) throw new Error('Invalid release version')

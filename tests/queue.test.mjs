@@ -91,3 +91,20 @@ test('manual confirmation pauses the entire queue and releases temporary cookies
   assert.equal(job.status, 'blocked'); assert.equal(queue.running, false); assert.equal(children.length, 1); assert.equal(released, true)
   queue.resume(job.id); assert.equal(job.requiresAuth, false)
 })
+
+test('all missing songs are failed, retained for retry, and do not stop the next playlist', async () => {
+  const { queue, children } = setup(); const first = queue.enqueue(link); queue.enqueue(other); queue.start(); await flush()
+  output(children[0], { type:'track', id:'1'.repeat(22), index:1, total:1, title:'Missing', status:'skipped', error:'Source unavailable', skipped:1 })
+  output(children[0], { type:'summary', saved:0, existing:0, skipped:1 }); children[0].emit('close', 0); await flush()
+  assert.equal(first.status,'failed'); assert.equal(first.tracks[0].error,'Source unavailable'); assert.equal(children.length,2)
+  children[1].emit('close',1)
+  queue.resume(first.id, first.tracks[0].id); queue.start(); await flush()
+  assert.equal(children[2].args.at(-1),first.tracks[0].id); assert.ok(children[2].args.includes('--only-track'))
+  children[2].emit('close',1)
+})
+test('individual retry keeps partial status when earlier songs exist', async () => {
+  const { queue, children } = setup(); const job=queue.enqueue(link); job.status='partial'; job.tracks=[{id:'1'.repeat(22),status:'saved'},{id:'2'.repeat(22),status:'skipped'}]
+  queue.resume(job.id,'2'.repeat(22)); queue.start(); await flush()
+  output(children[0],{type:'summary',saved:0,existing:0,skipped:1});children[0].emit('close',0)
+  assert.equal(job.status,'partial')
+})
