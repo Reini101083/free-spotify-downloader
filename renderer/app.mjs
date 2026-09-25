@@ -1,5 +1,6 @@
 import { translate, translatePage, getLanguage, setLanguage } from './i18n.mjs'
 import { preferences, spotifyLink } from './domain.mjs'
+import { initializeDownloads } from './downloads.mjs'
 const $ = selector => document.querySelector(selector)
 const bridge = window.desktop
 let previewSequence = 0
@@ -50,7 +51,8 @@ function render() {
   $('#youtube-state').textContent = state.youtubeReady ? 'Die YouTube-Sitzung ist für Downloads in dieser App-Sitzung freigegeben.' : 'Bei einer CAPTCHA kannst du YouTube in einem eigenen App-Fenster öffnen und die Bestätigung selbst lösen.'
   $('#recovery-banner').hidden = !bridge || !state.jobs.some(job => job.status === 'paused')
   const queued = state.jobs.filter(job => job.status === 'queued').length
-  $('#start-button').disabled = !bridge || !queued || state.running || !state.health.engine || !state.health.ffmpeg
+  $('#start-button').disabled = !!bridge && (!queued || state.running || !state.health.engine || !state.health.ffmpeg)
+  $('#start-button span').textContent = bridge ? 'Starten' : 'App herunterladen'
   $('#queue-status').textContent = state.running ? 'Deine Auswahl wird verarbeitet' : queued ? `${queued} ${queued === 1 ? 'Auftrag wartet' : 'Aufträge warten'}` : 'Bereit für deine Musik'
   const saved = state.jobs.reduce((sum, job) => sum + (job.saved || 0), 0)
   $('#saved-count').textContent = saved ? `${saved} ${saved === 1 ? 'Datei gespeichert' : 'Dateien gespeichert'}` : 'Noch keine Dateien gespeichert'
@@ -95,7 +97,10 @@ $('#auth-resume').addEventListener('click', () => action(async () => { for (cons
 $('#language').value = getLanguage()
 $('#language').addEventListener('change', () => { setLanguage($('#language').value); render() })
 $('#resume-all').addEventListener('click', () => action(async () => { for (const job of state.jobs.filter(item => item.status === 'paused')) update(await bridge.resume(job.id)); update(await bridge.start()) }))
-$('#start-button').addEventListener('click', () => action(async () => update(await bridge.start())))
+$('#start-button').addEventListener('click', () => {
+  if (bridge) void action(async () => update(await bridge.start()))
+  else { $('#desktop-card').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'center' }); $('#desktop-card').focus({ preventScroll: true }) }
+})
 for (const control of [$('#format'), $('#bitrate')]) control.addEventListener('change', () => action(async () => {
   const value = preferences({ format: $('#format').value, bitrate: $('#bitrate').value })
   if (bridge) update(await bridge.savePreferences(value))
@@ -112,6 +117,7 @@ $('#spotify-button').addEventListener('click', () => action(async () => { const 
 $('#open-folder-button').addEventListener('click', () => action(() => bridge.openFolder()))
 for (const link of document.querySelectorAll('a.external')) if (bridge) link.addEventListener('click', event => { event.preventDefault(); void action(() => bridge.external(link.href)) })
 if (bridge) {
+  $('#top-download').hidden = true
   $('#mode').textContent = 'Desktop-App'; $('#add-button span').textContent = 'Hinzufügen'
   $('#mode-hint').textContent = 'Spotify liefert Titelinformationen. Audio stammt aus passenden Quellen; speichere nur Inhalte mit Erlaubnis.'
   $('#desktop-card').hidden = true; $('#open-folder-button').hidden = false
@@ -119,6 +125,7 @@ if (bridge) {
   bridge.onStorageError(() => toast('Warteschlange konnte nicht gespeichert werden.'))
   await action(async () => { update(await bridge.state()); $('#version').textContent = `v${state.version}` })
 } else {
+  initializeDownloads()
   try { state.settings = preferences(JSON.parse(localStorage.getItem('fsd-preferences-v1') || '{}')) } catch { /* use defaults */ }
   $('#log-details').hidden = true
 }

@@ -4,6 +4,24 @@ An independent desktop music workspace by **Jedi Meister**, licensed under **MIT
 
 Deutsch / English · Windows · macOS · Linux
 
+## Download — wähle dein Betriebssystem
+
+[**Aktuelle Version mit Download-Auswahl öffnen**](https://github.com/Reini101083/free-spotify-downloader/releases/latest)
+
+| Betriebssystem | Paket |
+| --- | --- |
+| Windows · Intel / AMD 64-Bit | Installer `.exe` oder Portable `.exe` |
+| Mac · Apple Silicon | `.dmg` für M-Chips |
+| Mac · Intel | `.dmg` für Intel-Prozessoren |
+| Linux · x86_64 | `.AppImage` oder `.deb` für Debian / Ubuntu |
+
+Die passende Datei steht direkt in der Tabelle der Release-Seite. Kein GitHub-Konto
+zum Download erforderlich. [Ältere Versionen](https://github.com/Reini101083/free-spotify-downloader/releases)
+bleiben separat auswählbar. **Source code (zip)** ist der Quellcode, kein Installer.
+
+Die Website zeigt eine Vorschau und die App-Downloads. Musikdownloads startest du
+in der installierten Desktop-App. Python, FFmpeg und Deno sind enthalten.
+
 ## What it does
 
 - Paste a Spotify track, album or playlist link into a responsive desktop interface.
@@ -36,7 +54,7 @@ may reject embedded sign-in, and confirmation may still not unblock downloads.
 
 ## Build and run
 
-Requires Node.js 22 and Python 3.12 on the target operating system.
+Requires Node.js 24 and Python 3.12 on the target operating system.
 
 ```sh
 npm ci
@@ -62,8 +80,9 @@ npm run package
 Output is in `release/`. Build on each target OS; macOS packages require macOS.
 Windows produces an installer and a portable `.exe`, macOS `.dmg`/`.zip`, Linux
 `.AppImage`/`.deb`. The GitHub Actions workflow builds all platforms and attaches
-artifacts to the run. A version tag creates a **draft** release once every build
-succeeds. Packages are unsigned until publisher signing certificates are configured.
+artifacts to the run. A new package version on `main` (or a matching version tag) publishes a GitHub
+Release after all four platform builds succeed. Published versions are never
+overwritten; increment `package.json` and its lockfile for each new release. Packages are unsigned until publisher signing certificates are configured.
 
 For a Windows x64 portable build from Linux, `python scripts/build_windows_portable.py`
 bundles official embedded CPython 3.13.15, hash-locked Windows wheels, Windows

@@ -1,7 +1,7 @@
 {
   "name": "free-spotify-downloader",
   "productName": "Free Spotify Downloader",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "description": "Your music, your collection. A desktop music workspace by Jedi Meister.",
   "author": {
@@ -122,5 +122,8 @@
     "portable": {
       "artifactName": "Free-Spotify-Downloader-${version}-windows-${arch}-portable.${ext}"
     }
+  },
+  "engines": {
+    "node": ">=24 <25"
   }
 }
