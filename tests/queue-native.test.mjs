@@ -11,5 +11,6 @@ test('native process pause advances only the selected playlist on this operating
   const second=queue.enqueue('https://open.spotify.com/playlist/abcdefghijklmnopqrstuv')
   queue.start();await ready(queue,first.id)
   const firstChild=queue.active.child;const closed=once(firstChild,'close');queue.cancel(first.id);await closed;await ready(queue,second.id)
+  if(process.platform==='win32')assert.equal(firstChild.exitCode,0,'Windows pause must use graceful stdin shutdown before taskkill fallback')
   assert.equal(first.status,'paused');assert.equal(second.status,'running');assert.equal(queue.running,true);assert.notEqual(queue.active.child.pid,firstChild.pid)
 })

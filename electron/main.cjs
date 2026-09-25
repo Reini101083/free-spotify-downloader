@@ -9,7 +9,7 @@ let window, queue, store, engine, engineArgs = [], ffmpeg, deno, youtube, safeTo
 let uiLanguage = 'en', clipboardLinks, clipboardTimer, rendererReady = false
 const health = { engine: false, ffmpeg: false, deno: false, checked: false }
 let libraryFiles = new Map(), libraryBusy = false, libraryError = '', libraryRevision = 0
-let publicLibrary, trustedLibrary
+let publicLibrary, trustedLibrary, libraryRefresh
 const title = 'Free Spotify Downloader'
 
 async function exists(file) { try { await fs.access(file); return true } catch { return false } }
@@ -78,6 +78,7 @@ else {
     health.ffmpeg = !!ffmpeg && await exists(ffmpeg)
     health.deno = await exists(deno)
     ;({ publicLibrary, trustedLibrary } = await import(pathToFileURL(path.join(__dirname, '../shared/library.mjs'))))
+    const { LibraryRefresh } = await import(pathToFileURL(path.join(__dirname, '../shared/library-refresh.mjs')))
     const { AtomicStore } = await import(pathToFileURL(path.join(__dirname, '../shared/store.mjs')))
     store = new AtomicStore(path.join(app.getPath('userData'), 'workspace.json'))
     const saved = await store.read()
@@ -101,7 +102,20 @@ else {
       } catch { /* A new job may not have a checkpoint yet. */ }
       if (job.folder === previousDefault && !job.saved && !job.existing && !job.tracks.some(track => ['saved', 'existing'].includes(track.status))) job.folder = defaultFolder
     }
+    libraryRefresh = new LibraryRefresh({
+      folder: () => queue.folder,
+      scan: async folder => {
+        const { stdout } = await runFile(engine, [...engineArgs, '--library', folder], { windowsHide: true, timeout: 60000, maxBuffer: 16 * 1024 * 1024 })
+        return trustedLibrary(JSON.parse(stdout), folder)
+      },
+      onStart: () => { libraryBusy = true; libraryError = ''; broadcast() },
+      onResult: files => { libraryFiles = files; libraryError = ''; libraryRevision++; broadcast() },
+      onError: () => { libraryError = 'Saved songs could not be checked. Check the folder and try again.' },
+      onFinish: () => { libraryBusy = false; broadcast() },
+    })
+    queue.on('library-change', ({ folder }) => { if (folder === queue.folder) libraryRefresh.request() })
     queue.on('change', () => { broadcast(); void persist().catch(error => { if (window && !window.isDestroyed()) window.webContents.send('storage-error', error.message) }) })
+    libraryRefresh.request()
     session.defaultSession.setPermissionRequestHandler((_contents, _permission, callback) => callback(false))
     session.defaultSession.setPermissionCheckHandler(() => false)
     handle('state', state)
@@ -126,7 +140,7 @@ else {
     handle('preferences', async value => { queue.settings = domain.preferences(value); await persist(); broadcast(); checkClipboard(); return state() })
     handle('choose-folder', async () => {
       const result = await dialog.showOpenDialog(window, { title: 'Choose download folder', defaultPath: queue.folder, properties: ['openDirectory', 'createDirectory'] })
-      if (!result.canceled && result.filePaths[0]) { queue.folder = result.filePaths[0]; libraryFiles.clear(); libraryRevision++; await persist(); broadcast() }
+      if (!result.canceled && result.filePaths[0]) { queue.folder = result.filePaths[0]; libraryFiles.clear(); libraryRevision++; libraryRefresh.request(); await persist(); broadcast() }
       return state()
     })
     handle('enqueue', async url => {
@@ -160,7 +174,7 @@ else {
     app.on('activate', () => { if (BrowserWindow.getAllWindows().length === 0) void createWindow() })
   }).catch(error => { dialog.showErrorBox('The app could not start', error.message); app.quit() })
   app.on('window-all-closed', () => { if (process.platform !== 'darwin') app.quit() })
-  app.on('before-quit', () => { clearInterval(clipboardTimer); queue?.stopAll() })
+  app.on('before-quit', () => { clearInterval(clipboardTimer); libraryRefresh?.dispose(); queue?.stopAll() })
 }
 
 async function checkRuntime() {
@@ -173,13 +187,6 @@ async function checkRuntime() {
 }
 
 async function refreshLibrary() {
-  if (libraryBusy) return state()
-  libraryBusy = true; libraryError = ''; broadcast()
-  const folder = queue.folder
-  try {
-    const { stdout } = await runFile(engine, [...engineArgs, '--library', folder], { windowsHide: true, timeout: 60000, maxBuffer: 16 * 1024 * 1024 })
-    if (folder === queue.folder) { libraryFiles = trustedLibrary(JSON.parse(stdout), folder); libraryRevision++ }
-  } catch { libraryError = 'Saved songs could not be checked. Check the folder and try again.' }
-  finally { libraryBusy = false; broadcast() }
+  await libraryRefresh.refresh()
   return state()
 }

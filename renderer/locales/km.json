@@ -200,5 +200,8 @@
   "Up next": "បន្ទាប់",
   "Waiting": "កំពុងរង់ចាំ",
   "Queue position {position}": "ទីតាំងក្នុងជួរ៖ {position}",
-  "Maximum 100 open downloads.": "ការទាញយកដែលមិនទាន់បញ្ចប់ច្រើនបំផុត 100។"
+  "Maximum 100 open downloads.": "ការទាញយកដែលមិនទាន់បញ្ចប់ច្រើនបំផុត 100។",
+  "Simultaneous songs": "ចម្រៀងដែលទាញយកក្នុងពេលតែមួយ",
+  "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.": "ការទាញយកស្របគ្នាកាន់តែច្រើនអាចធ្វើឱ្យ YouTube ដាក់កំហិត។ ចាប់ផ្តើមពី 1; បញ្ជីចាក់នៅតែត្រូវបានទាញយកម្តងមួយ។",
+  "Changes apply when the next playlist starts or a paused playlist resumes.": "ការផ្លាស់ប្តូរនឹងមានប្រសិទ្ធភាពនៅពេលបញ្ជីចាក់បន្ទាប់ចាប់ផ្តើម ឬបញ្ជីចាក់ដែលបានផ្អាកត្រូវបានបន្តឡើងវិញ។"
 }

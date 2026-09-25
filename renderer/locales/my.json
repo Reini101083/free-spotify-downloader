@@ -200,5 +200,8 @@
   "Up next": "နောက်တစ်ခု",
   "Waiting": "စောင့်ဆိုင်းနေသည်",
   "Queue position {position}": "တန်းစီနေရာ: {position}",
-  "Maximum 100 open downloads.": "မပြီးဆုံးသေးသော ဒေါင်းလုဒ် အများဆုံး 100 ခု။"
+  "Maximum 100 open downloads.": "မပြီးဆုံးသေးသော ဒေါင်းလုဒ် အများဆုံး 100 ခု။",
+  "Simultaneous songs": "တစ်ပြိုင်နက် ဒေါင်းလုဒ်လုပ်မည့် သီချင်းများ",
+  "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.": "တစ်ပြိုင်နက် ဒေါင်းလုဒ်ပိုလုပ်ခြင်းကြောင့် YouTube ၏ ကန့်သတ်ချက်များ သက်ရောက်လာနိုင်သည်။ 1 ဖြင့် စတင်ပါ။ သီချင်းစာရင်းများကို တစ်ခုချင်းစီသာ ဆက်လက် ဒေါင်းလုဒ်လုပ်မည်။",
+  "Changes apply when the next playlist starts or a paused playlist resumes.": "နောက်သီချင်းစာရင်း စတင်ချိန် သို့မဟုတ် ခေတ္တရပ်ထားသော သီချင်းစာရင်းကို ပြန်လည်ဆက်လုပ်ချိန်တွင် ပြောင်းလဲမှုများ အကျိုးသက်ရောက်မည်။"
 }

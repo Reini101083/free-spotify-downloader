@@ -200,5 +200,8 @@
   "Up next": "Tiếp theo",
   "Waiting": "Đang chờ",
   "Queue position {position}": "Vị trí trong hàng đợi: {position}",
-  "Maximum 100 open downloads.": "Tối đa 100 lượt tải chưa hoàn tất."
+  "Maximum 100 open downloads.": "Tối đa 100 lượt tải chưa hoàn tất.",
+  "Simultaneous songs": "Bài hát tải đồng thời",
+  "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.": "Tải nhiều hơn cùng lúc có thể kích hoạt giới hạn của YouTube. Hãy bắt đầu với 1; các danh sách phát vẫn được tải lần lượt từng danh sách.",
+  "Changes apply when the next playlist starts or a paused playlist resumes.": "Thay đổi có hiệu lực khi danh sách phát tiếp theo bắt đầu hoặc danh sách phát đang tạm dừng được tiếp tục."
 }

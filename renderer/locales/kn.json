@@ -200,5 +200,8 @@
   "Up next": "ಮುಂದಿನದು",
   "Waiting": "ಕಾಯುತ್ತಿದೆ",
   "Queue position {position}": "ಸರದಿಯಲ್ಲಿ ಸ್ಥಾನ: {position}",
-  "Maximum 100 open downloads.": "ಗರಿಷ್ಠ 100 ಅಪೂರ್ಣ ಡೌನ್‌ಲೋಡ್‌ಗಳು."
+  "Maximum 100 open downloads.": "ಗರಿಷ್ಠ 100 ಅಪೂರ್ಣ ಡೌನ್‌ಲೋಡ್‌ಗಳು.",
+  "Simultaneous songs": "ಏಕಕಾಲದಲ್ಲಿ ಡೌನ್‌ಲೋಡ್ ಆಗುವ ಹಾಡುಗಳು",
+  "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.": "ಹೆಚ್ಚಿನ ಸಮಾನಾಂತರ ಡೌನ್‌ಲೋಡ್‌ಗಳು YouTube ನಿರ್ಬಂಧಗಳನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಬಹುದು. 1ರಿಂದ ಪ್ರಾರಂಭಿಸಿ; ಪ್ಲೇಲಿಸ್ಟ್‌ಗಳು ಇನ್ನೂ ಒಂದರ ನಂತರ ಒಂದರಂತೆ ಡೌನ್‌ಲೋಡ್ ಆಗುತ್ತವೆ.",
+  "Changes apply when the next playlist starts or a paused playlist resumes.": "ಮುಂದಿನ ಪ್ಲೇಲಿಸ್ಟ್ ಪ್ರಾರಂಭವಾದಾಗ ಅಥವಾ ವಿರಾಮಗೊಳಿಸಿದ ಪ್ಲೇಲಿಸ್ಟ್ ಪುನರಾರಂಭವಾದಾಗ ಬದಲಾವಣೆಗಳು ಅನ್ವಯವಾಗುತ್ತವೆ."
 }

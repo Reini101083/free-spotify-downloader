@@ -200,5 +200,8 @@
   "Up next": "An ath fhear",
   "Waiting": "A' feitheamh",
   "Queue position {position}": "Ionad sa chiudha: {position}",
-  "Maximum 100 open downloads.": "100 luchdadh a-nuas fosgailte aig a' char as motha."
+  "Maximum 100 open downloads.": "100 luchdadh a-nuas fosgailte aig a' char as motha.",
+  "Simultaneous songs": "Òrain aig an aon àm",
+  "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.": "Le barrachd luchdaidhean a-nuas aig an aon àm, dh’fhaodadh cuingeachaidhean YouTube a dhol an gnìomh. Tòisich le 1; thèid liostaichean-cluiche a phròiseasadh fhathast aon mu seach.",
+  "Changes apply when the next playlist starts or a paused playlist resumes.": "Thig na h-atharraichean gu buil nuair a thòisicheas an ath liosta-cluiche no nuair a thèid liosta-cluiche a bha na stad a leantainn air adhart."
 }

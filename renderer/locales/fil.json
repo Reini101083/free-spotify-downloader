@@ -200,5 +200,8 @@
   "Up next": "Susunod",
   "Waiting": "Naghihintay",
   "Queue position {position}": "Posisyon sa pila: {position}",
-  "Maximum 100 open downloads.": "Hanggang 100 hindi pa tapos na pag-download."
+  "Maximum 100 open downloads.": "Hanggang 100 hindi pa tapos na pag-download.",
+  "Simultaneous songs": "Mga kantang sabay na dina-download",
+  "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.": "Maaaring mag-trigger ng mga limitasyon ng YouTube ang mas maraming sabay-sabay na pag-download. Magsimula sa 1; isa-isa pa rin ang pag-download ng mga playlist.",
+  "Changes apply when the next playlist starts or a paused playlist resumes.": "Ilalapat ang mga pagbabago kapag nagsimula ang susunod na playlist o ipinagpatuloy ang isang naka-pause na playlist."
 }

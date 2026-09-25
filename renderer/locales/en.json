@@ -200,5 +200,8 @@
   "Up next": "Up next",
   "Waiting": "Waiting",
   "Queue position {position}": "Queue position {position}",
-  "Maximum 100 open downloads.": "Maximum 100 open downloads."
+  "Maximum 100 open downloads.": "Maximum 100 open downloads.",
+  "Simultaneous songs": "Simultaneous songs",
+  "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.": "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.",
+  "Changes apply when the next playlist starts or a paused playlist resumes.": "Changes apply when the next playlist starts or a paused playlist resumes."
 }

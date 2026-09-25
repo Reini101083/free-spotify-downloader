@@ -200,5 +200,8 @@
   "Up next": "Ho latelang",
   "Waiting": "E emetse",
   "Queue position {position}": "Sebaka moleng: {position}",
-  "Maximum 100 open downloads.": "Ho jarolla ho butsoeng ho sa feteng 100."
+  "Maximum 100 open downloads.": "Ho jarolla ho butsoeng ho sa feteng 100.",
+  "Simultaneous songs": "Lipina ka nako e le 'ngoe",
+  "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.": "Ho jarolla lintho tse ngata ka nako e le 'ngoe ho ka etsa hore YouTube e behe meeli. Qala ka 1; manane a lipina a ntse a sebetsoa ka bonngoe.",
+  "Changes apply when the next playlist starts or a paused playlist resumes.": "Liphetoho li qala ho sebetsa ha lenane le latelang la lipina le qala kapa ha ho tsoeloa pele ka lenane la lipina le emisitsoeng ka nakoana."
 }

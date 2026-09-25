@@ -200,5 +200,8 @@
   "Up next": "Èyí tó kàn",
   "Waiting": "Ń dúró",
   "Queue position {position}": "Ipò nínú ìlà: {position}",
-  "Maximum 100 open downloads.": "Ó pọ̀ jù, ìgbàsílẹ̀ 100 ló lè ṣí sílẹ̀."
+  "Maximum 100 open downloads.": "Ó pọ̀ jù, ìgbàsílẹ̀ 100 ló lè ṣí sílẹ̀.",
+  "Simultaneous songs": "Àwọn orin ní àkókò kan náà",
+  "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.": "Gbígba ọ̀pọ̀ orin sílẹ̀ ní àkókò kan náà lè mú kí YouTube fi ààlà sí gbígbà wọ́n sílẹ̀. Bẹ̀rẹ̀ pẹ̀lú 1; a ṣì ń gba àwọn àkójọ orin sílẹ̀ lọ́kọ̀ọ̀kan.",
+  "Changes apply when the next playlist starts or a paused playlist resumes.": "Àwọn àyípadà yóò bẹ̀rẹ̀ sí í ṣiṣẹ́ nígbà tí àkójọ orin tó kàn bá bẹ̀rẹ̀ tàbí tí a bá tẹ̀ síwájú pẹ̀lú àkójọ orin tí a dá dúró fún ìgbà díẹ̀."
 }

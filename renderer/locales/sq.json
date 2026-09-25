@@ -200,5 +200,8 @@
   "Up next": "Në vijim",
   "Waiting": "Në pritje",
   "Queue position {position}": "Pozicioni në radhë: {position}",
-  "Maximum 100 open downloads.": "Maksimumi 100 shkarkime të papërfunduara."
+  "Maximum 100 open downloads.": "Maksimumi 100 shkarkime të papërfunduara.",
+  "Simultaneous songs": "Këngë njëkohësisht",
+  "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.": "Më shumë shkarkime paralele mund të aktivizojnë kufizimet e YouTube. Fillo me 1; listat e luajtjes vazhdojnë të përpunohen një nga një.",
+  "Changes apply when the next playlist starts or a paused playlist resumes.": "Ndryshimet zbatohen kur fillon lista tjetër e luajtjes ose rifillon një listë e vendosur në pauzë."
 }

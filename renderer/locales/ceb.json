@@ -200,5 +200,8 @@
   "Up next": "Sunod",
   "Waiting": "Naghulat",
   "Queue position {position}": "Posisyon sa pila: {position}",
-  "Maximum 100 open downloads.": "Labing daghan 100 ka bukas nga pag-download."
+  "Maximum 100 open downloads.": "Labing daghan 100 ka bukas nga pag-download.",
+  "Simultaneous songs": "Mga kanta nga dungan i-download",
+  "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.": "Ang mas daghang dungan nga pag-download mahimong makapaandar sa mga limitasyon sa YouTube. Sugdi sa 1; ang mga playlist iproseso gihapon tagsa-tagsa.",
+  "Changes apply when the next playlist starts or a paused playlist resumes.": "Magamit ang mga kausaban kon magsugod ang sunod nga playlist o ipadayon ang playlist nga gihunong kadiyot."
 }

@@ -200,5 +200,8 @@
   "Up next": "Okulandelayo",
   "Waiting": "Kulindile",
   "Queue position {position}": "Indawo kulayini: {position}",
-  "Maximum 100 open downloads.": "Ukulanda okuvuliwe okungadluli ku-100."
+  "Maximum 100 open downloads.": "Ukulanda okuvuliwe okungadluli ku-100.",
+  "Simultaneous songs": "Izingoma ngesikhathi esisodwa",
+  "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.": "Ukulanda okuningi ngesikhathi esisodwa kungabangela ukuthi i-YouTube ibeke imikhawulo. Qala ngo-1; izinhlu zokudlalayo zisacutshungulwa ngayinye ngesikhathi.",
+  "Changes apply when the next playlist starts or a paused playlist resumes.": "Izinguquko ziqala ukusebenza lapho kuqala uhlu lokudlalayo olulandelayo noma kuqhutshekwa nohlu lokudlalayo olumiswe okwesikhashana."
 }

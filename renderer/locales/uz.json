@@ -200,5 +200,8 @@
   "Up next": "Keyingisi",
   "Waiting": "Kutilmoqda",
   "Queue position {position}": "Navbatdagi o‘rin: {position}",
-  "Maximum 100 open downloads.": "Ko‘pi bilan 100 ta tugallanmagan yuklab olish."
+  "Maximum 100 open downloads.": "Ko‘pi bilan 100 ta tugallanmagan yuklab olish.",
+  "Simultaneous songs": "Bir vaqtda yuklab olinadigan qo‘shiqlar",
+  "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.": "Bir vaqtda ko‘proq yuklab olish YouTube cheklovlarini ishga tushirishi mumkin. 1 dan boshlang; pleylistlar hali ham bittadan qayta ishlanadi.",
+  "Changes apply when the next playlist starts or a paused playlist resumes.": "O‘zgarishlar keyingi pleylist boshlanganda yoki to‘xtatib turilgan pleylist davom ettirilganda qo‘llanadi."
 }

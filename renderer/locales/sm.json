@@ -200,5 +200,8 @@
   "Up next": "Sosoo ai",
   "Waiting": "O lo'o fa'atali",
   "Queue position {position}": "Tulaga i le laina: {position}",
-  "Maximum 100 open downloads.": "E lē sili atu i le 100 la'uina mai o lo'o tatala."
+  "Maximum 100 open downloads.": "E lē sili atu i le 100 la'uina mai o lo'o tatala.",
+  "Simultaneous songs": "Pese e sii mai i le taimi e tasi",
+  "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.": "O le fa'aopoopoina o siiina mai i le taimi e tasi e ono fa'aoso ai tapula'a a YouTube. Amata i le 1; e fa'agasolo pea lisi o pese ta'itasi.",
+  "Changes apply when the next playlist starts or a paused playlist resumes.": "E fa'aaogā suiga pe a amata le isi lisi o pese pe toe fa'aauau se lisi o pese na taofi mo sina taimi."
 }

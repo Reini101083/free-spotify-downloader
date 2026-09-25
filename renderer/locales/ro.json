@@ -200,5 +200,8 @@
   "Up next": "Urmează",
   "Waiting": "În așteptare",
   "Queue position {position}": "Poziție în coadă: {position}",
-  "Maximum 100 open downloads.": "Maximum 100 de descărcări nefinalizate."
+  "Maximum 100 open downloads.": "Maximum 100 de descărcări nefinalizate.",
+  "Simultaneous songs": "Melodii simultane",
+  "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.": "Mai multe descărcări simultane pot declanșa restricțiile YouTube. Începe cu 1; listele de redare sunt procesate în continuare pe rând.",
+  "Changes apply when the next playlist starts or a paused playlist resumes.": "Modificările se aplică atunci când începe următoarea listă de redare sau când este reluată o listă pusă pe pauză."
 }

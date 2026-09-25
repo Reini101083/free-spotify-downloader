@@ -200,5 +200,8 @@
   "Up next": "Nke na-esote",
   "Waiting": "Na-eche",
   "Queue position {position}": "Ọnọdụ n'ahịrị: {position}",
-  "Maximum 100 open downloads.": "Oke nbudata mepere emepe bụ 100."
+  "Maximum 100 open downloads.": "Oke nbudata mepere emepe bụ 100.",
+  "Simultaneous songs": "Abụ ndị a na-ebudata n'otu oge",
+  "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.": "Ịbudata ọtụtụ ihe n'otu oge nwere ike ime ka YouTube tinye oke. Malite na 1; a ka na-ahazi ndepụta egwu otu otu.",
+  "Changes apply when the next playlist starts or a paused playlist resumes.": "Mgbanwe ndị a ga-amalite ịrụ ọrụ mgbe ndepụta egwu na-esote malitere ma ọ bụ mgbe a gara n'ihu na ndepụta egwu a kwụsịtụrụ."
 }

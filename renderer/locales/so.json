@@ -200,5 +200,8 @@
   "Up next": "Kan xiga",
   "Waiting": "Sugaya",
   "Queue position {position}": "Booska safka: {position}",
-  "Maximum 100 open downloads.": "Ugu badnaan 100 soo dejin oo aan dhammaystirmin."
+  "Maximum 100 open downloads.": "Ugu badnaan 100 soo dejin oo aan dhammaystirmin.",
+  "Simultaneous songs": "Heeso isku mar la soo dejiyo",
+  "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.": "Soo dejinno badan oo isku mar socda waxay sababi karaan in YouTube xaddidaad saaro. Ku bilow 1; liisaska heesaha weli mid mid ayaa loo soo dejinayaa.",
+  "Changes apply when the next playlist starts or a paused playlist resumes.": "Isbeddelladu waxay dhaqan galayaan marka liiska heesaha ee xiga bilaabmo ama liis heeso oo la hakiyey dib loo sii wado."
 }

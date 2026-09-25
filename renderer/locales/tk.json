@@ -200,5 +200,8 @@
   "Up next": "Indiki",
   "Waiting": "Garaşýar",
   "Queue position {position}": "Nobatdaky orun: {position}",
-  "Maximum 100 open downloads.": "Iň köp 100 tamamlanmadyk göçürip alma."
+  "Maximum 100 open downloads.": "Iň köp 100 tamamlanmadyk göçürip alma.",
+  "Simultaneous songs": "Bir wagtda ýüklenýän aýdymlar",
+  "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.": "Bir wagtda has köp faýl ýüklemek YouTube çäklendirmelerini işjeňleşdirip biler. 1 bilen başlaň; aýdym sanawlary öňküsi ýaly bir-birden işlenýär.",
+  "Changes apply when the next playlist starts or a paused playlist resumes.": "Üýtgeşmeler indiki aýdym sanawy başlananda ýa-da arakesme berlen aýdym sanawy dowam etdirilende güýje girýär."
 }

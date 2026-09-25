@@ -200,5 +200,8 @@
   "Up next": "ඊළඟට",
   "Waiting": "රැඳී සිටී",
   "Queue position {position}": "පෝලිමේ ස්ථානය: {position}",
-  "Maximum 100 open downloads.": "නිම නොකළ බාගැනීම් උපරිම 100ක්."
+  "Maximum 100 open downloads.": "නිම නොකළ බාගැනීම් උපරිම 100ක්.",
+  "Simultaneous songs": "එකවර බාගන්නා ගීත",
+  "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.": "වැඩිපුර සමාන්තර බාගැනීම් YouTube සීමා ක්‍රියාත්මක වීමට හේතු විය හැක. 1කින් ආරම්භ කරන්න; ධාවන ලැයිස්තු තවමත් එකින් එක බාගනී.",
+  "Changes apply when the next playlist starts or a paused playlist resumes.": "ඊළඟ ධාවන ලැයිස්තුව ආරම්භ වන විට හෝ විරාම කළ ධාවන ලැයිස්තුවක් නැවත අරඹන විට වෙනස්කම් ක්‍රියාත්මක වේ."
 }

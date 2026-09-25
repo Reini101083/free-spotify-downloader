@@ -200,5 +200,8 @@
   "Up next": "Дараагийнх",
   "Waiting": "Хүлээж байна",
   "Queue position {position}": "Дарааллын байрлал: {position}",
-  "Maximum 100 open downloads.": "Хамгийн ихдээ 100 дуусаагүй таталт."
+  "Maximum 100 open downloads.": "Хамгийн ихдээ 100 дуусаагүй таталт.",
+  "Simultaneous songs": "Зэрэг татах дууны тоо",
+  "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.": "Зэрэг таталтын тоог нэмэх нь YouTube-ийн хязгаарлалтад хүргэж болзошгүй. 1-ээс эхлээрэй; тоглуулах жагсаалтуудыг урьдын адил нэг нэгээр нь боловсруулна.",
+  "Changes apply when the next playlist starts or a paused playlist resumes.": "Дараагийн тоглуулах жагсаалт эхлэхэд эсвэл түр зогсоосон тоглуулах жагсаалтыг үргэлжлүүлэхэд өөрчлөлтүүд хэрэгжинэ."
 }

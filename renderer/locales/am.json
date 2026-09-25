@@ -200,5 +200,8 @@
   "Up next": "ቀጣይ",
   "Waiting": "በመጠባበቅ ላይ",
   "Queue position {position}": "በተራ ውስጥ ያለው ቦታ፦ {position}",
-  "Maximum 100 open downloads.": "ከፍተኛው 100 ያልተጠናቀቁ ማውረዶች።"
+  "Maximum 100 open downloads.": "ከፍተኛው 100 ያልተጠናቀቁ ማውረዶች።",
+  "Simultaneous songs": "በአንድ ጊዜ የሚወርዱ ዘፈኖች",
+  "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.": "ብዙ ትይዩ ማውረዶች የYouTube ገደቦችን ሊያስከትሉ ይችላሉ። በ1 ይጀምሩ፤ አጫዋች ዝርዝሮች አሁንም አንድ በአንድ ይወርዳሉ።",
+  "Changes apply when the next playlist starts or a paused playlist resumes.": "ለውጦች የሚተገበሩት ቀጣዩ አጫዋች ዝርዝር ሲጀምር ወይም ለጊዜው የቆመ አጫዋች ዝርዝር ሲቀጥል ነው።"
 }

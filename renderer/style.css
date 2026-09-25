@@ -82,3 +82,5 @@
 @media(max-width:480px){.composer-footer>.queue-capacity{order:3;max-width:none;width:100%;justify-content:space-between;padding:12px 0 0;border-top:1px solid var(--line);margin-top:2px}.welcome h1{font-size:25px}}
 :root{--accent:#0067d9;--accent-hover:#0058be}
 .button.primary{background:#0067d9;color:#fff}.button.primary:hover:not(:disabled){background:#0058be}
+.parallel-setting{display:block;margin-top:20px;max-width:260px}.parallel-setting select{font-variant-numeric:tabular-nums}.settings-section #parallel-scope{margin-top:6px}
+.active-song-list{grid-column:2/-1;list-style:none;padding:0;margin:0;color:var(--muted);font-size:12px;line-height:1.6;display:grid;gap:5px;overflow-wrap:anywhere}.active-song-list li{padding-inline-start:12px;border-inline-start:2px solid var(--accent);min-width:0}

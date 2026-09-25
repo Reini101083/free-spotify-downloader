@@ -200,5 +200,8 @@
   "Up next": "הבאה בתור",
   "Waiting": "בהמתנה",
   "Queue position {position}": "מיקום בתור: {position}",
-  "Maximum 100 open downloads.": "עד 100 הורדות שלא הושלמו."
+  "Maximum 100 open downloads.": "עד 100 הורדות שלא הושלמו.",
+  "Simultaneous songs": "שירים במקביל",
+  "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.": "יותר הורדות במקביל עלולות להפעיל מגבלות של YouTube. כדאי להתחיל עם 1; רשימות ההשמעה עדיין מעובדות אחת בכל פעם.",
+  "Changes apply when the next playlist starts or a paused playlist resumes.": "השינויים חלים כאשר רשימת ההשמעה הבאה מתחילה או כאשר רשימה מושהית ממשיכה."
 }

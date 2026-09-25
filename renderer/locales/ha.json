@@ -200,5 +200,8 @@
   "Up next": "Na gaba",
   "Waiting": "Ana jira",
   "Queue position {position}": "Matsayi a layi: {position}",
-  "Maximum 100 open downloads.": "Ba fiye da zazzagewa 100 a buɗe ba."
+  "Maximum 100 open downloads.": "Ba fiye da zazzagewa 100 a buɗe ba.",
+  "Simultaneous songs": "Waƙoƙi a lokaci guda",
+  "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.": "Zazzage abubuwa da yawa a lokaci guda na iya jawo ƙuntatawar YouTube. Fara da 1; har yanzu ana sarrafa jerin waƙoƙi ɗaya bayan ɗaya.",
+  "Changes apply when the next playlist starts or a paused playlist resumes.": "Sauye-sauyen za su fara aiki lokacin da jerin waƙoƙi na gaba ya fara ko aka ci gaba da jerin waƙoƙin da aka dakatar na ɗan lokaci."
 }

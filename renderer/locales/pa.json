@@ -200,5 +200,8 @@
   "Up next": "ਅਗਲਾ",
   "Waiting": "ਉਡੀਕ ਵਿੱਚ",
   "Queue position {position}": "ਕਤਾਰ ਵਿੱਚ ਸਥਾਨ: {position}",
-  "Maximum 100 open downloads.": "ਵੱਧ ਤੋਂ ਵੱਧ 100 ਅਧੂਰੇ ਡਾਊਨਲੋਡ।"
+  "Maximum 100 open downloads.": "ਵੱਧ ਤੋਂ ਵੱਧ 100 ਅਧੂਰੇ ਡਾਊਨਲੋਡ।",
+  "Simultaneous songs": "ਇੱਕੋ ਸਮੇਂ ਡਾਊਨਲੋਡ ਹੋਣ ਵਾਲੇ ਗੀਤ",
+  "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.": "ਇੱਕੋ ਸਮੇਂ ਵੱਧ ਡਾਊਨਲੋਡ ਕਰਨ ਨਾਲ YouTube ਦੀਆਂ ਪਾਬੰਦੀਆਂ ਲਾਗੂ ਹੋ ਸਕਦੀਆਂ ਹਨ। 1 ਨਾਲ ਸ਼ੁਰੂ ਕਰੋ; ਪਲੇਲਿਸਟਾਂ ਅਜੇ ਵੀ ਇੱਕ-ਇੱਕ ਕਰਕੇ ਡਾਊਨਲੋਡ ਹੋਣਗੀਆਂ।",
+  "Changes apply when the next playlist starts or a paused playlist resumes.": "ਤਬਦੀਲੀਆਂ ਅਗਲੀ ਪਲੇਲਿਸਟ ਸ਼ੁਰੂ ਹੋਣ ਜਾਂ ਰੋਕੀ ਗਈ ਪਲੇਲਿਸਟ ਮੁੜ ਜਾਰੀ ਹੋਣ 'ਤੇ ਲਾਗੂ ਹੁੰਦੀਆਂ ਹਨ।"
 }

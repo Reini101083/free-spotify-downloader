@@ -200,5 +200,8 @@
   "Up next": "Следно",
   "Waiting": "На чекање",
   "Queue position {position}": "Место во редицата: {position}",
-  "Maximum 100 open downloads.": "Најмногу 100 незавршени преземања."
+  "Maximum 100 open downloads.": "Најмногу 100 незавршени преземања.",
+  "Simultaneous songs": "Истовремени песни",
+  "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.": "Повеќе паралелни преземања може да ги активираат ограничувањата на YouTube. Започни со 1; плејлистите и понатаму се обработуваат една по една.",
+  "Changes apply when the next playlist starts or a paused playlist resumes.": "Промените се применуваат кога ќе започне следната плејлиста или ќе продолжи паузирана плејлиста."
 }

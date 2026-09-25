@@ -200,5 +200,8 @@
   "Up next": "Zvinotevera",
   "Waiting": "Zvakamirira",
   "Queue position {position}": "Nzvimbo mumutsetse: {position}",
-  "Maximum 100 open downloads.": "Kudhaunirodha kwakavhurika kusingapfuuri 100."
+  "Maximum 100 open downloads.": "Kudhaunirodha kwakavhurika kusingapfuuri 100.",
+  "Simultaneous songs": "Nziyo panguva imwe chete",
+  "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.": "Kudhawunirodha zvinhu zvakawanda panguva imwe chete kungaita kuti YouTube iise miganhu. Tanga ne1; rondedzero dzenziyo dzichiri kudhawunirodhwa imwe chete panguva.",
+  "Changes apply when the next playlist starts or a paused playlist resumes.": "Shanduko dzinotanga kushanda panotanga rondedzero yenziyo inotevera kana panoendererwa mberi nerondedzero yenziyo yakambomiswa."
 }

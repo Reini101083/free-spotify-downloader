@@ -3,7 +3,7 @@ import { preferences, spotifyLink, MAX_OPEN_DOWNLOADS, OPEN_DOWNLOAD_STATUSES, q
 import { initializeDownloads } from './downloads.mjs'
 const $ = selector => document.querySelector(selector)
 const bridge = window.desktop
-let view = 'queue', selectedId = null, detailId = null, pendingClipboardLink = null, limit = 50, toastTimer, embedId = null, previousRunning = false, refreshTimer, previewSequence = 0
+let view = 'queue', selectedId = null, detailId = null, pendingClipboardLink = null, limit = 50, toastTimer, embedId = null, previewSequence = 0
 let state = { jobs: [], settings: preferences(), running: false, folder: '', health: {}, library: { files: [], loading: false, error: '', revision: 0 } }
 const statuses = { queued:'Ready', running:'Downloading', completed:'Saved', failed:'Failed', partial:'Some songs missing', paused:'Paused', blocked:'Confirmation needed', preview:'Preview' }
 const node = (tag, className, text) => { const result = document.createElement(tag); if (className) result.className = className; if (text !== undefined) result.textContent = text; return result }
@@ -14,10 +14,8 @@ function toast(message) { $('#toast').textContent = t(message); $('#toast').hidd
 async function action(callback) { try { return await callback() } catch (error) { toast(error.message.replace(/^Error invoking remote method '[^']+': Error: /, '')); return null } }
 function update(value) {
   if (!value) return
-  const finished = previousRunning && !value.running
-  state = value; previousRunning = value.running
+  state = value
   render()
-  if (finished && bridge) { clearTimeout(refreshTimer); refreshTimer = setTimeout(() => void action(async () => update(await bridge.library())), 400) }
 }
 function button(label, symbol, callback) {
   const result = node('button', 'button icon'); result.type = 'button'; result.dataset.action = label; result.title = t(label); result.setAttribute('aria-label', t(label)); result.append(icon(symbol)); result.addEventListener('click', () => void action(callback)); return result
@@ -126,6 +124,8 @@ function renderJobs(list) {
     statusLine.append(node('span',`row-status ${job.status}`+(position===0?' next':''),t(status)))
     if (position >= 0) statusLine.append(node('span','queue-position',t('Queue position {position}',{position:number(position+activeCount+1)})))
     if (job.status === 'running' && Number.isFinite(job.progress)) statusLine.append(node('span','queue-percent',new Intl.NumberFormat(getLanguage(),{style:'percent',maximumFractionDigits:0}).format(Math.max(0,Math.min(100,job.progress))/100)))
+    const activeSongs = job.status === 'running' ? (job.tracks || []).filter(track=>track.status==='running').slice(0,3) : []
+    if (activeSongs.length > 1) statusLine.append(node('span','queue-position',t('{count} songs',{count:number(activeSongs.length)})))
     copy.append(statusLine)
     if (bridge && job.status === 'queued') {
       const pause=button(job.cancelled?'Pausing…':'Pause downloads','pause',async()=>update(await bridge.cancel(job.id)))
@@ -134,7 +134,8 @@ function renderJobs(list) {
     } else if (bridge && !['running','paused'].includes(job.status)) controls.append(button('Retry','rotate-ccw', () => retry(job)))
     controls.append(button('Details','more-horizontal', () => { detailId = job.id; renderDetails(); $('#details-dialog').showModal() }))
     if (job.status !== 'running') controls.append(button('Remove','x', async () => { if (bridge) update(await bridge.remove(job.id)); else { state.jobs = state.jobs.filter(item => item.id !== job.id); render() } }))
-    if (job.message && job.status !== 'queued') item.append(node('p','row-message'+(job.status === 'failed' ? ' error' : ''), translateMessage(job.message)))
+    if (activeSongs.length > 1) { const songs = node('ul','active-song-list'); for (const track of activeSongs) songs.append(node('li','',track.title)); item.append(songs) }
+    else if (job.message && job.status !== 'queued') item.append(node('p','row-message'+(job.status === 'failed' ? ' error' : ''), translateMessage(job.message)))
     if (job.status === 'running') { const progress = node('progress','visually-hidden'); progress.max = 100; if (Number.isFinite(job.progress)) progress.value = job.progress; progress.setAttribute('aria-label', t('Download progress')+': '+job.title); item.append(progress) }
     list.append(item)
   }
@@ -216,7 +217,7 @@ function render() {
   const blocked = state.jobs.find(job=>job.status==='blocked'); $('#auth-banner').hidden = !bridge || !blocked
   if (blocked) { const rate=blocked.blockReason==='rate_limit'; $('#auth-title').textContent=t(rate?'YouTube is limiting requests. Wait before trying again.':'YouTube needs your confirmation.'); $('#auth-text').textContent=t(rate?'Try again later':'Downloads are paused. Complete the check in the YouTube window, then choose “Use session and resume”.'); $('#auth-open').hidden=rate }
   $('#recovery-banner').hidden = !bridge || state.running || !state.jobs.some(job=>job.status==='paused')
-  $('#format').value=state.settings.format; $('#bitrate').value=state.settings.bitrate; $('#bitrate').disabled=['flac','wav'].includes(state.settings.format)
+  $('#parallel-songs').value=String(state.settings.parallelSongs || 1); $('#format').value=state.settings.format; $('#bitrate').value=state.settings.bitrate; $('#bitrate').disabled=['flac','wav'].includes(state.settings.format)
   $('#clipboard-enabled').checked=state.settings.clipboard; $('#clipboard-enabled').disabled=!bridge; $('#preview-enabled').checked=state.settings.preview
   $('#output-short').textContent=state.settings.format.toUpperCase()+(state.settings.bitrate==='auto'||$('#bitrate').disabled?'':` · ${state.settings.bitrate.slice(0,-1)} kbps`)
   $('#folder-short').textContent=state.folder?.split(/[\\/]/).at(-1)||t('Download folder'); $('#folder-shortcut').title=state.folder||t('Choose folder'); $('#settings-folder').textContent=state.folder||t('This website is a preview. Audio downloads run in the desktop app.')
@@ -266,7 +267,7 @@ const chooseFolder=()=>action(async()=>{if(bridge){update(await bridge.chooseFol
 $('#choose-folder').addEventListener('click',chooseFolder);$('#folder-shortcut').addEventListener('click',chooseFolder)
 $('#open-folder').addEventListener('click',()=>void action(()=>bridge.openFolder()))
 $('#copy-diagnostics').addEventListener('click',()=>void action(async()=>{await bridge.copyDiagnostics(detailId);toast('Diagnostics copied.')}))
-for(const control of [$('#format'),$('#bitrate'),$('#clipboard-enabled'),$('#preview-enabled')])control.addEventListener('change',()=>void action(async()=>{const settings=preferences({format:$('#format').value,bitrate:$('#bitrate').value,clipboard:$('#clipboard-enabled').checked,preview:$('#preview-enabled').checked});if(!settings.clipboard){pendingClipboardLink=null;$('#clipboard-prompt').hidden=true}if(bridge)update(await bridge.savePreferences(settings));else{state.settings=settings;render()}}))
+for(const control of [$('#format'),$('#bitrate'),$('#parallel-songs'),$('#clipboard-enabled'),$('#preview-enabled')])control.addEventListener('change',()=>void action(async()=>{const settings=preferences({parallelSongs:Number($('#parallel-songs').value),format:$('#format').value,bitrate:$('#bitrate').value,clipboard:$('#clipboard-enabled').checked,preview:$('#preview-enabled').checked});if(!settings.clipboard){pendingClipboardLink=null;$('#clipboard-prompt').hidden=true}if(bridge)update(await bridge.savePreferences(settings));else{state.settings=settings;render()}}))
 for(const link of document.querySelectorAll('a.external'))if(bridge)link.addEventListener('click',event=>{event.preventDefault();void action(()=>bridge.external(link.href))})
 document.addEventListener('language-changed',render)
 if(bridge){$('#mode').removeAttribute('data-i18n');$('#mode').textContent=t('Desktop app');$('#desktop-card').hidden=true;$('#top-download').hidden=true;$('#preview-mode-note').hidden=true;bridge.subscribe(update);bridge.onStorageError(()=>toast('Your queue could not be saved.'));await action(async()=>{update(await bridge.state());$('#version').textContent=`v${state.version}`});bridge.onClipboardLink(link=>{try{link=spotifyLink(link).url}catch{return}if(!state.settings.clipboard||$('#spotify-url').value.trim()===link)return;if(!$('#spotify-url').value.trim())acceptClipboard(link);else{pendingClipboardLink=link;$('#clipboard-prompt').hidden=false}});await action(()=>bridge.ready(getLanguage()));void action(async()=>update(await bridge.library()))}

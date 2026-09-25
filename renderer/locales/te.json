@@ -200,5 +200,8 @@
   "Up next": "తదుపరిది",
   "Waiting": "వేచి ఉంది",
   "Queue position {position}": "వరుసలో స్థానం: {position}",
-  "Maximum 100 open downloads.": "గరిష్ఠంగా 100 అసంపూర్తి డౌన్‌లోడ్‌లు."
+  "Maximum 100 open downloads.": "గరిష్ఠంగా 100 అసంపూర్తి డౌన్‌లోడ్‌లు.",
+  "Simultaneous songs": "ఏకకాలంలో డౌన్‌లోడ్ అయ్యే పాటలు",
+  "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.": "ఎక్కువ సమాంతర డౌన్‌లోడ్‌లు YouTube పరిమితులను ప్రేరేపించవచ్చు. 1తో ప్రారంభించండి; ప్లేలిస్ట్‌లు ఇప్పటికీ ఒకదాని తర్వాత ఒకటి డౌన్‌లోడ్ అవుతాయి.",
+  "Changes apply when the next playlist starts or a paused playlist resumes.": "తదుపరి ప్లేలిస్ట్ ప్రారంభమైనప్పుడు లేదా పాజ్ చేసిన ప్లేలిస్ట్ తిరిగి కొనసాగినప్పుడు మార్పులు వర్తిస్తాయి."
 }

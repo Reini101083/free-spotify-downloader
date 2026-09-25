@@ -200,5 +200,8 @@
   "Up next": "An chéad cheann eile",
   "Waiting": "Ag fanacht",
   "Queue position {position}": "Suíomh sa scuaine: {position}",
-  "Maximum 100 open downloads.": "100 íoslódáil neamhchríochnaithe ar a mhéad."
+  "Maximum 100 open downloads.": "100 íoslódáil neamhchríochnaithe ar a mhéad.",
+  "Simultaneous songs": "Amhráin ag an am céanna",
+  "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.": "D'fhéadfadh níos mó íoslódálacha comhuaineacha srianta YouTube a ghníomhachtú. Tosaigh le 1; déantar seinmliosta amháin ag an am fós.",
+  "Changes apply when the next playlist starts or a paused playlist resumes.": "Cuirtear na hathruithe i bhfeidhm nuair a thosaíonn an chéad seinmliosta eile nó nuair a atosaítear seinmliosta a cuireadh ar sos."
 }

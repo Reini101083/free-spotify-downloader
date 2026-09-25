@@ -31,7 +31,7 @@ class ResumeTests(unittest.TestCase):
                         return 1, 'Connection timed out'
                     session.atomic_save(args[2], [track])
                     return 0, ''
-                self.assertEqual(json.loads(manifest.read_text())['tracks'], [track])
+                self.assertEqual(json.loads(manifest.read_text())['tracks'], [dict(track, status='running')])
                 self.assertIn('--max-filename-length', args)
                 wav(Path(args[args.index('--output') + 1]).parent / ('Very long title ' * 8 + '.wav'))
                 return 0, ''

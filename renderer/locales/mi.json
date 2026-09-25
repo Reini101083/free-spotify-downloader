@@ -200,5 +200,8 @@
   "Up next": "E whai ake nei",
   "Waiting": "E tatari ana",
   "Queue position {position}": "Tūranga i te rārangi: {position}",
-  "Maximum 100 open downloads.": "Kia 100 te mōrahi o ngā tikiake e tuwhera ana."
+  "Maximum 100 open downloads.": "Kia 100 te mōrahi o ngā tikiake e tuwhera ana.",
+  "Simultaneous songs": "Ngā waiata tukutahi",
+  "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.": "Mā te whakapiki i ngā tikiake tukutahi ka pā mai pea ngā here a YouTube. Tīmata ki te 1; ka tukatukahia tonutia ngā rārangipāpāho kotahi i te wā.",
+  "Changes apply when the next playlist starts or a paused playlist resumes.": "Ka mana ngā huringa ina tīmata te rārangipāpāho e whai ake nei, ina haere tonu anō rānei tētahi rārangipāpāho kua whakatārewatia."
 }

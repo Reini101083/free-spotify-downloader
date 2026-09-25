@@ -22,7 +22,7 @@ export function spotifyLink(value) {
 }
 
 export function preferences(value = {}) {
-  return { format: FORMATS.includes(value.format) ? value.format : 'mp3', bitrate: BITRATES.includes(value.bitrate) ? value.bitrate : '192k', clipboard: value.clipboard !== false, preview: value.preview !== false }
+  return { format: FORMATS.includes(value.format) ? value.format : 'mp3', bitrate: BITRATES.includes(value.bitrate) ? value.bitrate : '192k', parallelSongs: [1, 2, 3].includes(value.parallelSongs) ? value.parallelSongs : 1, clipboard: value.clipboard !== false, preview: value.preview !== false }
 }
 
 export function cleanOutput(value) {

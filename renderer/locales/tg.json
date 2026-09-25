@@ -200,5 +200,8 @@
   "Up next": "Навбатӣ",
   "Waiting": "Дар интизорӣ",
   "Queue position {position}": "Ҷой дар навбат: {position}",
-  "Maximum 100 open downloads.": "Ҳадди аксар 100 боргирии нотамом."
+  "Maximum 100 open downloads.": "Ҳадди аксар 100 боргирии нотамом.",
+  "Simultaneous songs": "Сурудҳои ҳамзамон",
+  "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.": "Зиёд кардани боргириҳои ҳамзамон метавонад маҳдудиятҳои YouTube-ро фаъол кунад. Аз 1 оғоз кунед; рӯйхатҳои навозиш ҳанӯз ҳам як-як коркард мешаванд.",
+  "Changes apply when the next playlist starts or a paused playlist resumes.": "Тағйирот ҳангоми оғоз шудани рӯйхати навозиши навбатӣ ё идома ёфтани рӯйхати навозиши таваққуфшуда татбиқ мешавад."
 }

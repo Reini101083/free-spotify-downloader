@@ -6,7 +6,7 @@ import os from 'node:os'
 import path from 'node:path'
 import { DownloadQueue } from '../shared/queue.mjs'
 import { AtomicStore } from '../shared/store.mjs'
-import { spotifyLink, MAX_OPEN_DOWNLOADS, queuedDownloads } from '../shared/domain.mjs'
+import { spotifyLink, preferences, MAX_OPEN_DOWNLOADS, queuedDownloads } from '../shared/domain.mjs'
 const link = 'https://open.spotify.com/track/1234567890123456789012'
 const other = 'https://open.spotify.com/track/abcdefghijklmnopqrstuv'
 const flush = () => new Promise(resolve => setImmediate(resolve))
@@ -252,4 +252,67 @@ test('global pause during session preparation cannot start a worker or fail cook
   queue.start(); await flush(); queue.stopAll(); releasePreparation(); await flush()
   assert.equal(first.status, 'paused'); assert.equal(second.status, 'paused'); assert.equal(children.length, 0)
   assert.equal(queue.running, false); assert.equal(queue.launching, false)
+})
+
+test('song concurrency accepts only 1–3 and older preferences safely default to one', () => {
+  for (const parallelSongs of [1, 2, 3]) assert.equal(preferences({ parallelSongs }).parallelSongs, parallelSongs)
+  for (const parallelSongs of [undefined, null, 0, -1, 4, 2.5, '3', NaN, Infinity]) assert.equal(preferences({ parallelSongs }).parallelSongs, 1)
+  const { queue } = setup(); const job = queue.enqueue(link); delete job.settings.parallelSongs
+  assert.equal(setup({ jobs: queue.jobs }).queue.jobs[0].settings.parallelSongs, 1)
+})
+
+test('song concurrency uses current preference on each launch or resume while active runs and audio settings stay unchanged', async () => {
+  const { queue, children } = setup({ settings: { parallelSongs: 3, format: 'flac' } })
+  const first = queue.enqueue(link)
+  queue.settings = preferences({ parallelSongs: 2 })
+  const second = queue.enqueue(other)
+  assert.equal(first.settings.parallelSongs, 3); assert.equal(second.settings.parallelSongs, 2)
+  queue.start(); await flush()
+  assert.equal(children.length, 1)
+  assert.equal(children[0].args[children[0].args.indexOf('--parallel-songs') + 1], '2')
+  assert.equal(children[0].args[children[0].args.indexOf('--format') + 1], 'flac')
+  queue.settings = preferences({ parallelSongs: 1 })
+  assert.equal(first.settings.parallelSongs, 2)
+  queue.stopAll(); children[0].emit('close', 1); await flush()
+  const restored = setup({ jobs: queue.jobs, settings: { parallelSongs: 1 } })
+  for (const job of restored.queue.jobs) restored.queue.resume(job.id)
+  restored.queue.start(); await flush()
+  assert.equal(restored.children.length, 1)
+  assert.equal(restored.children[0].args[restored.children[0].args.indexOf('--parallel-songs') + 1], '1')
+  assert.equal(restored.children[0].args[restored.children[0].args.indexOf('--format') + 1], 'flac')
+  restored.queue.settings = preferences({ parallelSongs: 3 })
+  assert.equal(restored.queue.active.job.settings.parallelSongs, 1)
+  output(restored.children[0], { type: 'summary', saved: 1, existing: 0, skipped: 0 }); restored.children[0].emit('close', 0); await flush()
+  assert.equal(restored.queue.active.job.id, second.id)
+  assert.equal(restored.children[1].args[restored.children[1].args.indexOf('--parallel-songs') + 1], '3')
+  restored.children[1].emit('close', 1)
+})
+
+test('parallel song progress follows completed count, stays monotonic, and resets on a new run', async () => {
+  const { queue, children } = setup({ settings: { parallelSongs: 3 } })
+  const job = queue.enqueue(link); job.progress = 90
+  queue.start(); await flush(); assert.equal(job.progress, undefined)
+  const event = { type: 'track', id: '3'.repeat(22), index: 3, total: 3, title: 'Third song', status: 'running', completed: 0, saved: 0 }
+  output(children[0], event); assert.equal(job.progress, 0)
+  output(children[0], { ...event, status: 'saved', completed: 1, saved: 1 }); assert.equal(job.progress, 100 / 3)
+  output(children[0], { ...event, id: '1'.repeat(22), index: 1, title: 'First song', completed: 0 })
+  assert.equal(job.progress, 100 / 3); assert.equal(job.saved, 1)
+  assert.equal(job.message, '1/3 · First song')
+  output(children[0], { ...event, id: '1'.repeat(22), index: 1, status: 'saved', completed: 2, saved: 2 }); assert.equal(job.progress, 200 / 3)
+  output(children[0], { ...event, id: '2'.repeat(22), index: 2, status: 'saved', completed: 3, saved: 3 }); assert.equal(job.progress, 100)
+  output(children[0], { type: 'summary', saved: 3, existing: 0, skipped: 0 }); children[0].emit('close', 0)
+  assert.equal(job.status, 'completed')
+})
+
+test('duplicate song entries in a legacy checkpoint settle correctly after a single download', async () => {
+  const { queue, children } = setup(); const job = queue.enqueue(link); queue.start(); await flush()
+  const track = { id: '1'.repeat(22), title: 'Repeated song', status: 'pending' }
+  output(children[0], { type: 'plan', reset: true, tracks: [track, track] })
+  const event = { type: 'track', ...track, total: 2, file: '/music/Repeated song.mp3', saved: 1 }
+  output(children[0], { ...event, index: 1, completed: 1, status: 'saved' })
+  output(children[0], { ...event, index: 2, completed: 2, existing: 1, status: 'existing' })
+  output(children[0], { type: 'summary', saved: 1, existing: 1, skipped: 0 }); children[0].emit('close', 0)
+  assert.deepEqual(job.tracks.map(item => item.status), ['saved', 'existing'])
+  assert.equal(job.status, 'completed')
+  assert.equal(new Set(job.tracks.map(item => item.file)).size, 1)
 })

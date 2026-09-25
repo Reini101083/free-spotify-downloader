@@ -200,5 +200,8 @@
   "Up next": "Келесі",
   "Waiting": "Күтуде",
   "Queue position {position}": "Кезектегі орын: {position}",
-  "Maximum 100 open downloads.": "Ең көбі 100 аяқталмаған жүктеу."
+  "Maximum 100 open downloads.": "Ең көбі 100 аяқталмаған жүктеу.",
+  "Simultaneous songs": "Бір мезгілде жүктелетін әндер",
+  "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.": "Бір мезгілде көбірек жүктеу YouTube шектеулерін іске қосуы мүмкін. 1-ден бастаңыз; ойнату тізімдері әлі де кезекпен өңделеді.",
+  "Changes apply when the next playlist starts or a paused playlist resumes.": "Өзгерістер келесі ойнату тізімі басталғанда немесе кідіртілген ойнату тізімі жалғасқанда қолданылады."
 }

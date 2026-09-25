@@ -200,5 +200,8 @@
   "Up next": "Следующая",
   "Waiting": "Ожидание",
   "Queue position {position}": "Место в очереди: {position}",
-  "Maximum 100 open downloads.": "Не более 100 незавершённых загрузок."
+  "Maximum 100 open downloads.": "Не более 100 незавершённых загрузок.",
+  "Simultaneous songs": "Одновременно загружаемые песни",
+  "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.": "Больше параллельных загрузок может привести к ограничениям YouTube. Начните с 1; плейлисты по-прежнему обрабатываются по одному.",
+  "Changes apply when the next playlist starts or a paused playlist resumes.": "Изменения применяются при запуске следующего плейлиста или возобновлении приостановленного."
 }

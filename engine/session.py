@@ -1,5 +1,7 @@
 """Own resumable coordinator. Only complete, validated tracks enter the music folder."""
 import argparse
+import _thread
+from concurrent.futures import FIRST_COMPLETED, ThreadPoolExecutor, wait
 import hashlib
 import shutil
 import json
@@ -14,6 +16,39 @@ import threading
 import time
 
 PREFIX = 'FSD_EVENT '
+PARALLEL_START_INTERVAL = 5.0
+_worker_context = threading.local()
+
+
+class WorkerCancelled(RuntimeError):
+    pass
+
+
+class WorkerGroup:
+    """Track every provider process, including processes in separate POSIX sessions."""
+    def __init__(self):
+        self.lock = threading.RLock()
+        self.processes = set()
+        self.cancelled = False
+
+    def start(self, arguments, **options):
+        with self.lock:
+            if self.cancelled:
+                raise WorkerCancelled('Download paused')
+            process = subprocess.Popen(arguments, **options)
+            self.processes.add(process)
+            return process
+
+    def finished(self, process):
+        with self.lock:
+            self.processes.discard(process)
+
+    def cancel(self):
+        with self.lock:
+            self.cancelled = True
+            processes = tuple(self.processes)
+        for process in processes:
+            kill_tree(process)
 
 
 class SessionError(RuntimeError):
@@ -143,11 +178,11 @@ def command(*args):
 
 
 def kill_tree(process):
-    if process.poll() is not None:
-        return
     if os.name == 'nt':
-        subprocess.run(['taskkill', '/PID', str(process.pid), '/T', '/F'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=False)
+        if process.poll() is None:
+            subprocess.run(['taskkill', '/PID', str(process.pid), '/T', '/F'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=False)
     else:
+        # The provider can exit before an ffmpeg child. Kill its process group too.
         try:
             os.killpg(process.pid, signal.SIGKILL)
         except ProcessLookupError:
@@ -158,11 +193,24 @@ def kill_tree(process):
 def run_worker(args, timeout):
     # Redirect into a temporary file so a noisy provider cannot fill RAM or block a pipe.
     with tempfile.TemporaryFile() as log:
-        process = subprocess.Popen(command(*args), stdin=subprocess.DEVNULL, stdout=log, stderr=subprocess.STDOUT, start_new_session=os.name != 'nt', creationflags=subprocess.CREATE_NO_WINDOW if os.name == 'nt' else 0, env={**os.environ, 'PYTHONUTF8': '1', 'PYTHONIOENCODING': 'utf-8'})
+        group = getattr(_worker_context, 'group', None)
+        start = group.start if group else subprocess.Popen
+        process = start(command(*args), stdin=subprocess.DEVNULL, stdout=log, stderr=subprocess.STDOUT, start_new_session=os.name != 'nt', creationflags=subprocess.CREATE_NO_WINDOW if os.name == 'nt' else 0, env={**os.environ, 'PYTHONUTF8': '1', 'PYTHONIOENCODING': 'utf-8'})
         try:
-            code = process.wait(timeout=timeout)
+            deadline = time.monotonic() + timeout
+            while True:
+                try:
+                    # A short wait lets the Windows main thread handle a parent-close
+                    # interrupt even while Spotify metadata is being resolved.
+                    code = process.wait(timeout=min(0.25, max(0, deadline - time.monotonic())))
+                    break
+                except subprocess.TimeoutExpired:
+                    if time.monotonic() >= deadline:
+                        raise subprocess.TimeoutExpired(process.args, timeout)
         finally:
             kill_tree(process)
+            if group:
+                group.finished(process)
         log.seek(0, 2)
         log.seek(max(0, log.tell() - 48000))
         return code, log.read().decode('utf8', errors='replace')
@@ -250,7 +298,53 @@ def run_session(argv):
     parser.add_argument('--deno')
     parser.add_argument('--only-track')
     parser.add_argument('--cookie-file')
+    parser.add_argument('--parallel-songs', type=int, choices=[1, 2, 3], default=1)
     args = parser.parse_args(argv)
+    workers = WorkerGroup()
+    previous = getattr(_worker_context, 'group', None)
+    _worker_context.group = workers
+    try:
+        _run_session(args, workers)
+    finally:
+        workers.cancel()
+        _worker_context.group = previous
+
+
+def _prepare_download(args, track, stage, workers):
+    # Worker threads only create private staging files. The coordinator owns public files.
+    _worker_context.group = workers
+    arguments = ['download', track['url'], '--format', args.format, '--output', str(stage / '{artists} - {title}.{output-ext}'), '--max-filename-length', '100', '--overwrite', 'force', '--threads', '1', '--no-cache', '--ffmpeg', args.ffmpeg, '--log-level', 'ERROR']
+    if args.format not in ['flac', 'wav']:
+        arguments += ['--bitrate', args.bitrate]
+    if args.cookie_file:
+        # yt-dlp writes its cookie jar on exit. Give concurrent workers private jars
+        # so they cannot truncate or overwrite one another's session material.
+        cookie_file = stage / 'youtube-session.cookies.txt'
+        with open(cookie_file, 'xb') as target, open(args.cookie_file, 'rb') as source:
+            os.chmod(cookie_file, 0o600)
+            shutil.copyfileobj(source, target)
+        arguments += ['--cookie-file', str(cookie_file)]
+    if args.deno:
+        from provider import runtime_options
+        arguments += ['--yt-dlp-args', runtime_options(args.deno)]
+    try:
+        return run_worker(arguments, 600)
+    finally:
+        _worker_context.group = None
+
+
+def _confirmation(log):
+    detail = provider_failure(log)
+    rate_pattern = r'HTTP Error 429|too many requests|this content isn.t available.{0,30}try again later'
+    if not re.search(r'captcha|confirm.{0,20}(not a bot|you.re not)|sign in to confirm|' + rate_pattern, detail, re.I):
+        return None
+    rate_limit = bool(re.search(rate_pattern, detail, re.I))
+    video = re.search(r'(?:\[youtube\]\s+|watch\?v=)([A-Za-z0-9_-]{11})', detail + log)
+    return {'detail': detail, 'reason': 'rate_limit' if rate_limit else 'confirmation',
+            'url': 'https://www.youtube.com/watch?v=' + video[1] if video else 'https://www.youtube.com/'}
+
+
+def _run_session(args, workers):
     manifest = Path(args.session)
     folder = Path(args.folder).resolve()
     folder.mkdir(parents=True, exist_ok=True)
@@ -286,75 +380,149 @@ def run_session(argv):
         download_index = {}
     for offset in range(0, len(tracks), 20):
         emit('plan', reset=offset == 0, tracks=[{'id': track['id'], 'title': track['title'][:300], 'status': track.get('status', 'pending'), 'error': track.get('error', '')[-1000:], 'file': track.get('file')} for track in tracks[offset:offset + 20]])
-    saved = existing = skipped = 0
+    saved = existing = skipped = completed = 0
+    # Coalesce duplicate Spotify identities before workers start. Their playlist entries
+    # still settle individually, but only one provider request and one file are needed.
+    grouped = {}
     for index, track in enumerate(tracks):
-        if args.only_track and track['id'] != args.only_track:
-            continue
-        track.pop('error', None)
-        # A filename alone is never proof of a completed download. Check its audio header.
-        index_key = track['id'] + ':' + args.format
-        entry = download_index.get(index_key, {})
-        verified = verified_download(folder, track, entry if isinstance(entry, dict) else {}, args.format)
-        if verified:
-            if verified.stem.endswith(f"[{track['id']}]"):
-                destination = available_destination(folder, clean_audio_name(verified.stem, track['id']), verified.suffix)
-                promote(verified, destination, manifest.stem)
-                write_track_identity(destination, track['id'])
-                track.update(file=str(destination), sha256=fingerprint(destination), status='existing')
-                atomic_save(manifest, data)
-                download_index[index_key] = {'file': track['file'], 'sha256': track['sha256']}
+        if not args.only_track or track['id'] == args.only_track:
+            grouped.setdefault(track['id'], []).append((index, track))
+    pending = list(grouped.values())
+    active = {}
+    next_group = 0
+    next_launch = 0.0
+    interval = PARALLEL_START_INTERVAL if args.parallel_songs > 1 else 0.0
+    executor = ThreadPoolExecutor(max_workers=args.parallel_songs, thread_name_prefix='audio')
+
+    def track_event(index, track):
+        emit('track', id=track['id'], file=track.get('file'), index=index + 1,
+             total=len(tracks), title=track['title'], status=track['status'],
+             error=track.get('error', ''), saved=saved, existing=existing,
+             skipped=skipped, completed=completed)
+
+    def settle(group, status, file=None, error=''):
+        nonlocal saved, existing, skipped, completed
+        for duplicate, (index, track) in enumerate(group):
+            track.pop('error', None)
+            track['status'] = 'existing' if duplicate and status == 'saved' else status
+            if file:
+                track.update(file=str(file), sha256=fingerprint(file))
+                download_index[track['id'] + ':' + args.format] = {
+                    'file': track['file'], 'sha256': track['sha256']}
                 atomic_save(index_file, download_index)
-                verified.unlink()
-                verified = destination
-            existing += 1
-            track.update(status='existing', file=str(verified), sha256=fingerprint(verified))
-        else:
-            emit('track', id=track['id'], index=index + 1, total=len(tracks), title=track['title'], status='running')
-            try:
-                with tempfile.TemporaryDirectory(prefix='track-', dir=staging) as stage:
-                    arguments = ['download', track['url'], '--format', args.format, '--output', str(Path(stage) / '{artists} - {title}.{output-ext}'), '--max-filename-length', '100', '--overwrite', 'force', '--threads', '1', '--no-cache', '--ffmpeg', args.ffmpeg, '--log-level', 'ERROR']
-                    if args.format not in ['flac', 'wav']:
-                        arguments += ['--bitrate', args.bitrate]
-                    if args.cookie_file:
-                        arguments += ['--cookie-file', args.cookie_file]
-                    if args.deno:
-                        from provider import runtime_options
-                        arguments += ['--yt-dlp-args', runtime_options(args.deno)]
-                    code, log = run_worker(arguments, 600)
-                    detail = provider_failure(log)
-                    if re.search(r'captcha|confirm.{0,20}(not a bot|you.re not)|sign in to confirm|HTTP Error 429|too many requests', detail, re.I):
-                        rate_limit = bool(re.search(r'HTTP Error 429|too many requests', detail, re.I))
-                        track.update(status='blocked', error=detail)
-                        atomic_save(manifest, data)
-                        video = re.search(r'(?:\[youtube\]\s+|watch\?v=)([A-Za-z0-9_-]{11})', detail + log)
-                        url = 'https://www.youtube.com/watch?v=' + video[1] if video else 'https://www.youtube.com/'
-                        emit('track', id=track['id'], index=index + 1, total=len(tracks), title=track['title'], status='blocked', error=detail, saved=saved, existing=existing, skipped=skipped)
-                        emit('auth', title=track['title'], url=url, reason='rate_limit' if rate_limit else 'confirmation', detail=detail)
+            if error:
+                track['error'] = error[-1000:]
+            saved += track['status'] == 'saved'
+            existing += track['status'] == 'existing'
+            skipped += track['status'] == 'skipped'
+            completed += 1
+            atomic_save(manifest, data)
+            track_event(index, track)
+
+    def reuse(group):
+        _, track = group[0]
+        entry = download_index.get(track['id'] + ':' + args.format, {})
+        verified = verified_download(folder, track, entry if isinstance(entry, dict) else {}, args.format)
+        if not verified:
+            return False
+        if verified.stem.endswith(f"[{track['id']}]"):
+            destination = available_destination(folder, clean_audio_name(verified.stem, track['id']), verified.suffix)
+            promote(verified, destination, manifest.stem)
+            write_track_identity(destination, track['id'])
+            track.update(file=str(destination), sha256=fingerprint(destination), status='existing')
+            atomic_save(manifest, data)
+            download_index[track['id'] + ':' + args.format] = {'file': track['file'], 'sha256': track['sha256']}
+            atomic_save(index_file, download_index)
+            verified.unlink()
+            verified = destination
+        settle(group, 'existing', file=verified)
+        return True
+
+    def checkpoint_unfinished():
+        for group, _stage in active.values():
+            for index, track in group:
+                if track.get('status') == 'running':
+                    track['status'] = 'pending'
+                    track.pop('error', None)
+                    track_event(index, track)
+        atomic_save(manifest, data)
+
+    try:
+        while next_group < len(pending) or active:
+            # Fill only the available slots, pacing provider starts centrally. Waiting
+            # does not block completed workers from being checked and checkpointed.
+            while (next_group < len(pending) and len(active) < args.parallel_songs
+                   and not any(future.done() for future in active)):
+                group = pending[next_group]
+                if reuse(group):
+                    next_group += 1
+                    continue
+                # Rechecking after disk verification also covers a provider result
+                # arriving while a large existing-file lookup was in progress.
+                if any(future.done() for future in active) or time.monotonic() < next_launch:
+                    break
+                next_group += 1
+                stage = Path(tempfile.mkdtemp(prefix='track-', dir=staging))
+                index, track = group[0]
+                for _index, item in group:
+                    item.pop('error', None)
+                    item['status'] = 'running'
+                atomic_save(manifest, data)
+                track_event(index, track)
+                future = executor.submit(_prepare_download, args, track, stage, workers)
+                active[future] = (group, stage)
+                next_launch = time.monotonic() + interval
+            if not active:
+                if next_group < len(pending):
+                    time.sleep(min(0.25, max(0.0, next_launch - time.monotonic())))
+                continue
+            timeout = 0.25
+            if next_group < len(pending) and len(active) < args.parallel_songs:
+                timeout = min(timeout, max(0.0, next_launch - time.monotonic()))
+            done, _ = wait(active, timeout=timeout, return_when=FIRST_COMPLETED)
+            for future in done:
+                group, stage = active[future]
+                index, track = group[0]
+                try:
+                    code, log = future.result()
+                    confirmation = _confirmation(log)
+                    if confirmation:
+                        # No new worker can start once access is denied. Other staged
+                        # results remain retryable; never count them as downloaded.
+                        workers.cancel()
+                        for blocked_index, blocked in group:
+                            blocked.update(status='blocked', error=confirmation['detail'][-1000:])
+                            track_event(blocked_index, blocked)
+                        active.pop(future)
+                        checkpoint_unfinished()
+                        emit('auth', title=track['title'], **confirmation)
                         return
-                    files = [file for file in Path(stage).iterdir() if file.suffix == '.' + args.format and valid_audio(file)]
+                    files = [file for file in stage.iterdir() if file.suffix == '.' + args.format and valid_audio(file)]
                     if code or len(files) != 1:
-                        raise RuntimeError(detail or 'No matching audio source')
+                        raise RuntimeError(provider_failure(log) or 'No matching audio source')
                     source = files[0]
                     write_track_identity(source, track['id'])
                     destination = available_destination(folder, clean_audio_name(source.stem, track['id']), source.suffix)
-                    # Persist identity privately before promotion, so a crash cannot lose resume data.
+                    # Persist the chosen path and hash before the atomic promotion.
                     track.update(file=str(destination), sha256=fingerprint(source))
                     atomic_save(manifest, data)
-                    download_index[index_key] = {'file': track['file'], 'sha256': track['sha256']}
+                    download_index[track['id'] + ':' + args.format] = {'file': track['file'], 'sha256': track['sha256']}
                     atomic_save(index_file, download_index)
                     promote(source, destination, manifest.stem)
-                    saved += 1
-                    track.update(status='saved', file=str(destination), sha256=fingerprint(destination))
-            except (RuntimeError, subprocess.TimeoutExpired) as error:
-                skipped += 1
-                track.update(status='skipped', error=(str(error).strip() or f'{type(error).__name__}: No details were returned by the audio provider.')[-1000:])
-        if track['status'] in ('saved', 'existing'):
-            download_index[index_key] = {'file': track['file'], 'sha256': track['sha256']}
-            atomic_save(index_file, download_index)
-        atomic_save(manifest, data)
-        emit('track', id=track['id'], file=track.get('file'), index=index + 1, total=len(tracks), title=track['title'], status=track['status'], error=track.get('error', ''), saved=saved, existing=existing, skipped=skipped)
-    shutil.rmtree(staging, ignore_errors=True)
-    emit('summary', saved=saved, existing=existing, skipped=skipped, total=len(tracks))
+                    settle(group, 'saved', file=destination)
+                except (RuntimeError, subprocess.TimeoutExpired) as error:
+                    settle(group, 'skipped', error=str(error).strip() or f'{type(error).__name__}: No details were returned by the audio provider.')
+                active.pop(future)
+                shutil.rmtree(stage, ignore_errors=True)
+        emit('summary', saved=saved, existing=existing, skipped=skipped, total=len(tracks), completed=completed)
+    finally:
+        # Covers pause, SIGTERM, parent stdin closing, exceptions and authentication.
+        # Cancel process trees before joining threads, otherwise shutdown would wait
+        # for the ten-minute provider timeout while detached downloads continued.
+        workers.cancel()
+        executor.shutdown(wait=True, cancel_futures=True)
+        checkpoint_unfinished()
+        shutil.rmtree(staging, ignore_errors=True)
 
 
 def interrupted(_signum, _frame):
@@ -368,6 +536,8 @@ def main(argv):
     else:
         def parent_watchdog():
             os.read(sys.stdin.fileno(), 1)
-            os.kill(os.getpid(), signal.SIGTERM)
+            # os.kill(SIGTERM) calls TerminateProcess on Windows and bypasses all
+            # cleanup. Schedule a Python interrupt so every worker is stopped first.
+            _thread.interrupt_main()
         threading.Thread(target=parent_watchdog, daemon=True).start()
         run_session(argv)

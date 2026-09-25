@@ -200,5 +200,8 @@
   "Up next": "Επόμενη",
   "Waiting": "Σε αναμονή",
   "Queue position {position}": "Θέση στην ουρά: {position}",
-  "Maximum 100 open downloads.": "Έως 100 μη ολοκληρωμένες λήψεις."
+  "Maximum 100 open downloads.": "Έως 100 μη ολοκληρωμένες λήψεις.",
+  "Simultaneous songs": "Ταυτόχρονα τραγούδια",
+  "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.": "Περισσότερες παράλληλες λήψεις μπορεί να ενεργοποιήσουν περιορισμούς του YouTube. Ξεκίνα με 1· οι λίστες αναπαραγωγής εξακολουθούν να εκτελούνται μία κάθε φορά.",
+  "Changes apply when the next playlist starts or a paused playlist resumes.": "Οι αλλαγές εφαρμόζονται όταν ξεκινήσει η επόμενη λίστα αναπαραγωγής ή συνεχιστεί μια λίστα που έχει τεθεί σε παύση."
 }

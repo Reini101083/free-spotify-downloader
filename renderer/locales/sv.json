@@ -200,5 +200,8 @@
   "Up next": "Härnäst",
   "Waiting": "Väntar",
   "Queue position {position}": "Plats i kön: {position}",
-  "Maximum 100 open downloads.": "Högst 100 ofullständiga nedladdningar."
+  "Maximum 100 open downloads.": "Högst 100 ofullständiga nedladdningar.",
+  "Simultaneous songs": "Samtidiga låtar",
+  "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.": "Fler samtidiga nedladdningar kan utlösa YouTubes begränsningar. Börja med 1; spellistor behandlas fortfarande en i taget.",
+  "Changes apply when the next playlist starts or a paused playlist resumes.": "Ändringarna gäller när nästa spellista startar eller en pausad spellista återupptas."
 }

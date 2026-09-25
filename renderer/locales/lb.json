@@ -200,5 +200,8 @@
   "Up next": "Als Nächst",
   "Waiting": "Waart",
   "Queue position {position}": "Positioun an der Waardeschlaang: {position}",
-  "Maximum 100 open downloads.": "Maximal 100 oppen Downloads."
+  "Maximum 100 open downloads.": "Maximal 100 oppen Downloads.",
+  "Simultaneous songs": "Gläichzäiteg Lidder",
+  "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.": "Méi gläichzäiteg Downloads kënnen d'Limitte vu YouTube ausléisen. Fänkt mat 1 un; Playlëschte ginn nach ëmmer eng no där anerer verschafft.",
+  "Changes apply when the next playlist starts or a paused playlist resumes.": "D'Ännerunge gëlle soubal déi nächst Playlëscht ufänkt oder eng pauséiert Playlëscht weidergefouert gëtt."
 }

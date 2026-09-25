@@ -200,5 +200,8 @@
   "Up next": "Seterusnya",
   "Waiting": "Menunggu",
   "Queue position {position}": "Kedudukan dalam baris gilir: {position}",
-  "Maximum 100 open downloads.": "Maksimum 100 muat turun yang belum selesai."
+  "Maximum 100 open downloads.": "Maksimum 100 muat turun yang belum selesai.",
+  "Simultaneous songs": "Lagu serentak",
+  "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.": "Lebih banyak muat turun selari mungkin mencetuskan sekatan YouTube. Mulakan dengan 1; senarai main masih diproses satu demi satu.",
+  "Changes apply when the next playlist starts or a paused playlist resumes.": "Perubahan berkuat kuasa apabila senarai main seterusnya bermula atau senarai main yang dijeda disambung semula."
 }

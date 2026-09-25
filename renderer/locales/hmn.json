@@ -200,5 +200,8 @@
   "Up next": "Tom ntej",
   "Waiting": "Tos",
   "Queue position {position}": "Chaw nyob hauv kab: {position}",
-  "Maximum 100 open downloads.": "Tso cai rau ntau kawg 100 qhov rub tawm uas tseem qhib."
+  "Maximum 100 open downloads.": "Tso cai rau ntau kawg 100 qhov rub tawm uas tseem qhib.",
+  "Simultaneous songs": "Cov nkauj rub tawm tib lub sijhawm",
+  "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.": "Kev rub tawm ntau yam tib lub sijhawm yuav ua rau YouTube cov kev txwv pib siv. Pib nrog 1; cov npe nkauj tseem ua ib daim zuj zus xwb.",
+  "Changes apply when the next playlist starts or a paused playlist resumes.": "Cov kev hloov yuav pib siv thaum pib daim npe nkauj tom ntej lossis thaum rov txuas ntxiv daim npe nkauj uas tau nres ib ntus."
 }

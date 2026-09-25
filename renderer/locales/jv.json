@@ -200,5 +200,8 @@
   "Up next": "Sabanjure",
   "Waiting": "Ngenteni",
   "Queue position {position}": "Posisi ing antrean: {position}",
-  "Maximum 100 open downloads.": "Maksimal 100 undhuhan sing mbukak."
+  "Maximum 100 open downloads.": "Maksimal 100 undhuhan sing mbukak.",
+  "Simultaneous songs": "Lagu sing diundhuh bebarengan",
+  "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.": "Ngundhuh luwih akeh kanthi bebarengan bisa micu watesan YouTube. Wiwiti saka 1; dhaptar lagu tetep diproses siji-siji.",
+  "Changes apply when the next playlist starts or a paused playlist resumes.": "Owah-owahan ditrapake nalika dhaptar lagu sabanjure diwiwiti utawa dhaptar lagu sing lagi dijeda diterusake."
 }

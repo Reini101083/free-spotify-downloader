@@ -200,5 +200,8 @@
   "Up next": "Nākamā",
   "Waiting": "Gaida",
   "Queue position {position}": "Vieta rindā: {position}",
-  "Maximum 100 open downloads.": "Ne vairāk kā 100 nepabeigtas lejupielādes."
+  "Maximum 100 open downloads.": "Ne vairāk kā 100 nepabeigtas lejupielādes.",
+  "Simultaneous songs": "Vienlaikus lejupielādējamās dziesmas",
+  "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.": "Vairāk vienlaicīgu lejupielāžu var aktivizēt YouTube ierobežojumus. Sāciet ar 1; atskaņošanas saraksti joprojām tiek apstrādāti pa vienam.",
+  "Changes apply when the next playlist starts or a paused playlist resumes.": "Izmaiņas stājas spēkā, kad sākas nākamā atskaņošanas saraksta apstrāde vai tiek atsākts apturēts saraksts."
 }

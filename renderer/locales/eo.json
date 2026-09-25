@@ -200,5 +200,8 @@
   "Up next": "Sekva",
   "Waiting": "Atendante",
   "Queue position {position}": "Pozicio en la atendovico: {position}",
-  "Maximum 100 open downloads.": "Maksimume 100 malfermitaj elŝutoj."
+  "Maximum 100 open downloads.": "Maksimume 100 malfermitaj elŝutoj.",
+  "Simultaneous songs": "Samtempaj kantoj",
+  "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.": "Pli da samtempaj elŝutoj povas ekigi limigojn de YouTube. Komencu per 1; ludlistoj ankoraŭ estas traktataj unuope.",
+  "Changes apply when the next playlist starts or a paused playlist resumes.": "Ŝanĝoj efektiviĝas kiam la sekva ludlisto komenciĝas aŭ paŭzigita ludlisto estas daŭrigata."
 }

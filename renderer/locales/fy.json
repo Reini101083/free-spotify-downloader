@@ -200,5 +200,8 @@
   "Up next": "Hjirnei",
   "Waiting": "Wachtsje",
   "Queue position {position}": "Plak yn de wachtrige: {position}",
-  "Maximum 100 open downloads.": "Maksimaal 100 iepen downloads."
+  "Maximum 100 open downloads.": "Maksimaal 100 iepen downloads.",
+  "Simultaneous songs": "Lieten tagelyk",
+  "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.": "Mear downloads tagelyk kinne de beheiningen fan YouTube aktivearje. Begjin mei 1; ôfspyllisten wurde noch altyd ien foar ien ferwurke.",
+  "Changes apply when the next playlist starts or a paused playlist resumes.": "Feroarings wurde tapast as de folgjende ôfspyllist begjint of in pauzearre ôfspyllist ferfette wurdt."
 }

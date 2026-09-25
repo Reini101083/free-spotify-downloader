@@ -63,7 +63,11 @@ export class DownloadQueue extends EventEmitter {
     const advance = () => { this.launching = false; void this.next() }
     job.status = 'running'; job.message = 'Checking existing files…'
     job.folder ||= this.folder
+    // Parallelism is operational: apply the current preference to this run,
+    // while preserving the playlist's original audio format and destination.
+    job.settings.parallelSongs = preferences(this.settings).parallelSongs
     job.saved = 0; job.existing = 0; job.skipped = 0
+    delete job.progress
     this.changed()
     try { await this.persist() } catch {
       if (stopped()) { advance(); return }
@@ -71,7 +75,7 @@ export class DownloadQueue extends EventEmitter {
       this.launching = false; this.running = false; this.changed(); return
     }
     if (stopped()) { advance(); return }
-    const args = [...this.engineArgs, '--session', path.join(this.stateDirectory, `${job.id}.json`), '--url', job.url, '--folder', job.folder, '--format', job.settings.format, '--bitrate', job.settings.bitrate, '--ffmpeg', this.ffmpeg]
+    const args = [...this.engineArgs, '--session', path.join(this.stateDirectory, `${job.id}.json`), '--url', job.url, '--folder', job.folder, '--format', job.settings.format, '--bitrate', job.settings.bitrate, '--parallel-songs', String(job.settings.parallelSongs), '--ffmpeg', this.ffmpeg]
     if (this.deno) args.push('--deno', this.deno)
     if (job.retryTrack) args.push('--only-track', job.retryTrack)
     let child, cookieLease
@@ -87,7 +91,7 @@ export class DownloadQueue extends EventEmitter {
       this.launching = false; this.changed(); void this.next(); return
     }
     this.active = { job, child }; this.launching = false
-    let settled = false, summary = null, failure = null, pending = '', killTimer
+    let settled = false, summary = null, failure = null, pending = '', completedCount = 0, killTimer
     const line = value => {
       // A stopped worker must never pause or overwrite the next playlist.
       if (settled || job.cancelled) return
@@ -103,16 +107,23 @@ export class DownloadQueue extends EventEmitter {
           }
           if (event.type === 'auth') { job.requiresAuth = true; job.authUrl = event.url; job.blockReason = event.reason || 'confirmation'; this.running = false }
           if (event.type === 'track') {
-            job.message = `${event.index}/${event.total} · ${event.title}`
-            job.progress = event.total ? 100 * (event.index - (event.status === 'running' ? 1 : 0)) / event.total : 0
+            const completed = Number.isInteger(event.completed) && event.completed >= 0 ? event.completed : null
+            if (completed !== null) completedCount = Math.max(completedCount, completed)
+            job.message = `${completed !== null ? completedCount : event.index}/${event.total} · ${event.title}`
+            const processed = completed !== null ? completedCount : (event.index - (event.status === 'running' ? 1 : 0))
+            if (Number.isInteger(event.total) && event.total > 0 && Number.isFinite(processed)) job.progress = Math.max(job.progress || 0, Math.min(100, 100 * Math.max(0, processed) / event.total))
             job.logs.push(`${event.index}/${event.total} ${event.title} · ${event.status}${event.error ? `: ${event.error}` : ''}`)
             const trackId = event.id || String(event.index)
-            const previous = job.tracks.find(track => track.id === trackId)
+            // A legacy checkpoint may contain the same song more than once.
+            // Its entries settle separately even though the engine downloads once.
+            const indexed = Number.isInteger(event.index) ? job.tracks[event.index - 1] : null
+            const previous = indexed?.id === trackId ? indexed : job.tracks.find(track => track.id === trackId)
             const track = { id: trackId, title: cleanOutput(event.title), status: event.status, error: event.error ? cleanOutput(event.error) : '', file: event.file || previous?.file || null }
             if (previous) Object.assign(previous, track)
             else job.tracks.push(track)
+            if (['saved', 'existing'].includes(event.status) && typeof event.file === 'string' && event.file) this.emit('library-change', { folder: job.folder })
           }
-          for (const key of ['saved','existing','skipped']) if (Number.isInteger(event[key]) && event[key] >= 0) job[key] = event[key]
+          for (const key of ['saved','existing','skipped']) if (Number.isInteger(event[key]) && event[key] >= 0) job[key] = Math.max(job[key] || 0, event[key])
         } catch { job.logs.push(cleanOutput(value)) }
       } else if (value.trim()) job.logs.push(cleanOutput(value))
       job.logs = job.logs.slice(-80)
@@ -136,6 +147,8 @@ export class DownloadQueue extends EventEmitter {
       }
       delete job.progress
       this.jobs = retainJobs(this.jobs)
+      // A pause can land after file promotion but before its track event arrives.
+      this.emit('library-change', { folder: job.folder })
       this.active = null; this.changed(); void this.next()
     }
     // `error` can precede `close`: wait for the worker's actual termination
@@ -159,7 +172,12 @@ export class DownloadQueue extends EventEmitter {
   }
   stopProcess(child, force = false) {
     if (!child.pid) return
-    if (process.platform === 'win32') spawn('taskkill', ['/pid', String(child.pid), '/T', '/F'], { windowsHide: true, stdio: 'ignore' }).on('error', () => child.kill())
+    if (process.platform === 'win32') {
+      // The engine's stdin watchdog performs checkpoint and worker cleanup.
+      // taskkill is only the fallback if graceful shutdown does not finish.
+      if (!force && child.stdin && !child.stdin.destroyed) { child.stdin.end(); return }
+      spawn('taskkill', ['/pid', String(child.pid), '/T', '/F'], { windowsHide: true, stdio: 'ignore' }).on('error', () => child.kill())
+    }
     else { try { process.kill(-child.pid, force ? 'SIGKILL' : 'SIGTERM') } catch { child.kill(force ? 'SIGKILL' : 'SIGTERM') } }
   }
   stopAll() { this.running = false; for (const job of this.jobs) if (['queued', 'running'].includes(job.status)) this.cancel(job.id) }

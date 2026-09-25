@@ -200,5 +200,8 @@
   "Up next": "بعدی",
   "Waiting": "در انتظار",
   "Queue position {position}": "جایگاه در صف: {position}",
-  "Maximum 100 open downloads.": "حداکثر 100 دانلود ناتمام."
+  "Maximum 100 open downloads.": "حداکثر 100 دانلود ناتمام.",
+  "Simultaneous songs": "آهنگ‌های هم‌زمان",
+  "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.": "دانلودهای هم‌زمان بیشتر ممکن است محدودیت‌های YouTube را فعال کند. با 1 شروع کنید؛ فهرست‌های پخش همچنان یکی‌یکی پردازش می‌شوند.",
+  "Changes apply when the next playlist starts or a paused playlist resumes.": "تغییرات زمانی اعمال می‌شوند که فهرست پخش بعدی شروع شود یا فهرست پخش متوقف‌شده از سر گرفته شود."
 }

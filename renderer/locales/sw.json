@@ -200,5 +200,8 @@
   "Up next": "Unaofuata",
   "Waiting": "Unasubiri",
   "Queue position {position}": "Nafasi kwenye foleni: {position}",
-  "Maximum 100 open downloads.": "Kiwango cha juu ni vipakuzi 100 ambavyo havijakamilika."
+  "Maximum 100 open downloads.": "Kiwango cha juu ni vipakuzi 100 ambavyo havijakamilika.",
+  "Simultaneous songs": "Nyimbo zinazopakuliwa kwa wakati mmoja",
+  "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.": "Kupakua zaidi kwa wakati mmoja kunaweza kusababisha vikwazo vya YouTube. Anza na 1; orodha za kucheza bado zinapakuliwa moja baada ya nyingine.",
+  "Changes apply when the next playlist starts or a paused playlist resumes.": "Mabadiliko yanatumika orodha inayofuata ya kucheza inapoanza au orodha iliyositishwa kwa muda inapoendelea."
 }

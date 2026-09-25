@@ -200,5 +200,8 @@
   "Up next": "അടുത്തത്",
   "Waiting": "കാത്തിരിക്കുന്നു",
   "Queue position {position}": "ക്യൂവിലെ സ്ഥാനം: {position}",
-  "Maximum 100 open downloads.": "പരമാവധി 100 പൂർത്തിയാകാത്ത ഡൗൺലോഡുകൾ."
+  "Maximum 100 open downloads.": "പരമാവധി 100 പൂർത്തിയാകാത്ത ഡൗൺലോഡുകൾ.",
+  "Simultaneous songs": "ഒരേസമയം ഡൗൺലോഡ് ചെയ്യുന്ന പാട്ടുകൾ",
+  "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.": "കൂടുതൽ സമാന്തര ഡൗൺലോഡുകൾ YouTube നിയന്ത്രണങ്ങൾ സജീവമാക്കിയേക്കാം. 1 ഉപയോഗിച്ച് തുടങ്ങുക; പ്ലേലിസ്റ്റുകൾ ഇപ്പോഴും ഓരോന്നായി ഡൗൺലോഡ് ചെയ്യും.",
+  "Changes apply when the next playlist starts or a paused playlist resumes.": "അടുത്ത പ്ലേലിസ്റ്റ് ആരംഭിക്കുമ്പോഴോ താൽക്കാലികമായി നിർത്തിയ പ്ലേലിസ്റ്റ് പുനരാരംഭിക്കുമ്പോഴോ മാറ്റങ്ങൾ ബാധകമാകും."
 }

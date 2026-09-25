@@ -200,5 +200,8 @@
   "Up next": "Наступная",
   "Waiting": "Чакае",
   "Queue position {position}": "Месца ў чарзе: {position}",
-  "Maximum 100 open downloads.": "Не больш за 100 незавершаных спамповак."
+  "Maximum 100 open downloads.": "Не больш за 100 незавершаных спамповак.",
+  "Simultaneous songs": "Песні, якія спампоўваюцца адначасова",
+  "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.": "Больш паралельных спамповак можа выклікаць абмежаванні YouTube. Пачніце з 1; плэйлісты па-ранейшаму апрацоўваюцца па адным.",
+  "Changes apply when the next playlist starts or a paused playlist resumes.": "Змены прымяняюцца пры запуску наступнага плэйліста або аднаўленні прыпыненага."
 }

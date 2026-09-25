@@ -200,5 +200,8 @@
   "Up next": "Հաջորդը",
   "Waiting": "Սպասում է",
   "Queue position {position}": "Դիրքը հերթում՝ {position}",
-  "Maximum 100 open downloads.": "Առավելագույնը 100 չավարտված ներբեռնում։"
+  "Maximum 100 open downloads.": "Առավելագույնը 100 չավարտված ներբեռնում։",
+  "Simultaneous songs": "Միաժամանակ ներբեռնվող երգեր",
+  "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.": "Ավելի շատ զուգահեռ ներբեռնումներ կարող են առաջացնել YouTube-ի սահմանափակումներ։ Սկսեք 1-ից․ երգացանկերը շարունակում են ներբեռնվել մեկ առ մեկ։",
+  "Changes apply when the next playlist starts or a paused playlist resumes.": "Փոփոխությունները կիրառվում են հաջորդ երգացանկը սկսելիս կամ դադարեցված երգացանկը վերսկսելիս։"
 }

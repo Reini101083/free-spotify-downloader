@@ -200,5 +200,8 @@
   "Up next": "Li jmiss",
   "Waiting": "Qed jistenna",
   "Queue position {position}": "Pożizzjoni fil-kju: {position}",
-  "Maximum 100 open downloads.": "Massimu ta’ 100 tniżżil mhux lest."
+  "Maximum 100 open downloads.": "Massimu ta’ 100 tniżżil mhux lest.",
+  "Simultaneous songs": "Kanzunetti fl-istess ħin",
+  "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.": "Aktar tniżżil fl-istess ħin jista’ jattiva l-limiti ta’ YouTube. Ibda b’1; il-playlists xorta jiġu pproċessati waħda kull darba.",
+  "Changes apply when the next playlist starts or a paused playlist resumes.": "Il-bidliet japplikaw meta tibda l-playlist li jmiss jew titkompla playlist li kienet imwaqqfa temporanjament."
 }

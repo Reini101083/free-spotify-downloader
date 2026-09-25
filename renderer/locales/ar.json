@@ -200,5 +200,8 @@
   "Up next": "التالي",
   "Waiting": "قيد الانتظار",
   "Queue position {position}": "الموضع في قائمة الانتظار: {position}",
-  "Maximum 100 open downloads.": "الحد الأقصى 100 تنزيل غير مكتمل."
+  "Maximum 100 open downloads.": "الحد الأقصى 100 تنزيل غير مكتمل.",
+  "Simultaneous songs": "الأغاني المتزامنة",
+  "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.": "قد تؤدي زيادة التنزيلات المتوازية إلى تفعيل قيود YouTube. ابدأ بـ 1؛ تظل قوائم التشغيل تُعالج واحدة تلو الأخرى.",
+  "Changes apply when the next playlist starts or a paused playlist resumes.": "تُطبَّق التغييرات عند بدء قائمة التشغيل التالية أو استئناف قائمة تشغيل متوقفة مؤقتًا."
 }

@@ -200,5 +200,8 @@
   "Up next": "A continuació",
   "Waiting": "En espera",
   "Queue position {position}": "Posició a la cua: {position}",
-  "Maximum 100 open downloads.": "Màxim de 100 baixades pendents de completar."
+  "Maximum 100 open downloads.": "Màxim de 100 baixades pendents de completar.",
+  "Simultaneous songs": "Cançons simultànies",
+  "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.": "Més baixades en paral·lel poden activar els límits de YouTube. Comença amb 1; les llistes de reproducció continuen processant-se una cada vegada.",
+  "Changes apply when the next playlist starts or a paused playlist resumes.": "Els canvis s'apliquen quan comença la llista de reproducció següent o es reprèn una llista en pausa."
 }

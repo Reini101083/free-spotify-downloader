@@ -22,7 +22,7 @@ with tempfile.TemporaryDirectory() as directory:
         stream.setnchannels(1); stream.setsampwidth(2); stream.setframerate(8000); stream.writeframes(b'\0\0' * 8000)
     manifest = folder / 'job.json'
     manifest.write_text(json.dumps({'url':'fixture','tracks':[{'id':track_id,'url':'https://open.spotify.com/track/'+track_id,'title':'Local fixture'}]}))
-    process = subprocess.Popen([str(engine), '--session', str(manifest), '--url', 'fixture', '--folder', str(folder), '--format', 'wav', '--bitrate', 'auto', '--ffmpeg', 'unused'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    process = subprocess.Popen([str(engine), '--session', str(manifest), '--url', 'fixture', '--folder', str(folder), '--format', 'wav', '--bitrate', 'auto', '--ffmpeg', 'unused', '--parallel-songs', '3'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     try:
         process.wait(timeout=45)
         stdout, stderr = process.communicate()

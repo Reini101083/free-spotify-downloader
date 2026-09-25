@@ -200,5 +200,8 @@
   "Up next": "Hierna",
   "Waiting": "In de wachtrij",
   "Queue position {position}": "Positie in de wachtrij: {position}",
-  "Maximum 100 open downloads.": "Maximaal 100 onafgeronde downloads."
+  "Maximum 100 open downloads.": "Maximaal 100 onafgeronde downloads.",
+  "Simultaneous songs": "Gelijktijdige nummers",
+  "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.": "Meer gelijktijdige downloads kunnen beperkingen van YouTube activeren. Begin met 1; afspeellijsten worden nog steeds één voor één verwerkt.",
+  "Changes apply when the next playlist starts or a paused playlist resumes.": "Wijzigingen gelden zodra de volgende afspeellijst start of een gepauzeerde afspeellijst wordt hervat."
 }

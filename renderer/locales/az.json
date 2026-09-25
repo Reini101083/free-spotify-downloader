@@ -200,5 +200,8 @@
   "Up next": "Növbəti",
   "Waiting": "Gözləyir",
   "Queue position {position}": "Növbədəki mövqe: {position}",
-  "Maximum 100 open downloads.": "Maksimum 100 tamamlanmamış endirmə."
+  "Maximum 100 open downloads.": "Maksimum 100 tamamlanmamış endirmə.",
+  "Simultaneous songs": "Eyni anda endirilən mahnılar",
+  "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.": "Daha çox paralel endirmə YouTube məhdudiyyətlərini işə sala bilər. 1 ilə başlayın; pleylistlər yenə də bir-bir emal olunur.",
+  "Changes apply when the next playlist starts or a paused playlist resumes.": "Dəyişikliklər növbəti pleylist başladıqda və ya fasilə verilmiş pleylist davam etdirildikdə tətbiq olunur."
 }

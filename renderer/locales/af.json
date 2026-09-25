@@ -200,5 +200,8 @@
   "Up next": "Volgende",
   "Waiting": "Wag",
   "Queue position {position}": "Posisie in die tou: {position}",
-  "Maximum 100 open downloads.": "Hoogstens 100 onvoltooide aflaaie."
+  "Maximum 100 open downloads.": "Hoogstens 100 onvoltooide aflaaie.",
+  "Simultaneous songs": "Gelyktydige liedjies",
+  "More parallel downloads may trigger YouTube limits. Start with 1; playlists still run one at a time.": "Meer gelyktydige aflaaie kan YouTube se beperkings aktiveer. Begin met 1; snitlyste word steeds een op 'n slag verwerk.",
+  "Changes apply when the next playlist starts or a paused playlist resumes.": "Veranderings geld wanneer die volgende snitlys begin of 'n onderbreekte snitlys hervat word."
 }
