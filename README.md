@@ -2,18 +2,18 @@
 
 A desktop music workspace by **Jedi Meister**. Original application code licensed under **MIT**.
 
-Windows · macOS · Linux · 77 bundled interface languages
+Windows · macOS · Linux · 79 bundled interface languages
 
 ## Download
 
 [**Choose your operating system on the latest release page**](https://github.com/Reini101083/free-spotify-downloader/releases/latest)
 
-| Operating system | Download version 0.2.0 |
+| Operating system | Download version 0.2.1 |
 | --- | --- |
-| Windows · Intel / AMD 64-bit | [Installer](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.0/Free-Spotify-Downloader-0.2.0-windows-x64-setup.exe) · [Portable](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.0/Free-Spotify-Downloader-0.2.0-windows-x64-portable.exe) |
-| Mac · Apple Silicon | [DMG](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.0/Free-Spotify-Downloader-0.2.0-mac-arm64.dmg) |
-| Mac · Intel | [DMG](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.0/Free-Spotify-Downloader-0.2.0-mac-x64.dmg) |
-| Linux · x86_64 | [AppImage](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.0/Free-Spotify-Downloader-0.2.0-linux-x86_64.AppImage) · [DEB](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.0/Free-Spotify-Downloader-0.2.0-linux-amd64.deb) |
+| Windows · Intel / AMD 64-bit | [Installer](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.1/Free-Spotify-Downloader-0.2.1-windows-x64-setup.exe) · [Portable](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.1/Free-Spotify-Downloader-0.2.1-windows-x64-portable.exe) |
+| Mac · Apple Silicon | [DMG](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.1/Free-Spotify-Downloader-0.2.1-mac-arm64.dmg) |
+| Mac · Intel | [DMG](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.1/Free-Spotify-Downloader-0.2.1-mac-x64.dmg) |
+| Linux · x86_64 | [AppImage](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.1/Free-Spotify-Downloader-0.2.1-linux-x86_64.AppImage) · [DEB](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.1/Free-Spotify-Downloader-0.2.1-linux-amd64.deb) |
 
 No GitHub account is required. [Older versions](https://github.com/Reini101083/free-spotify-downloader/releases) remain available separately. **Source code (zip)** contains source code, not an installer. Each release includes SHA-256 checksums. Python, FFmpeg and Deno are included.
 
@@ -59,7 +59,7 @@ Spotify supplies metadata. The spotDL engine matches audio from YouTube/YouTube 
 
 ### Languages
 
-This release bundles **77 complete interface catalogs**, available offline. English is the source language and German has been editorially reviewed. Other catalogs are machine translated and may contain mistakes. Native operating-system dialogs and provider diagnostics can use the system language or English.
+This release bundles **79 complete interface catalogs**, available offline. English is the source language and German has been editorially reviewed. Other catalogs are machine translated and may contain mistakes. Native operating-system dialogs and provider diagnostics can use the system language or English.
 
 The requested target of 160 languages is not yet reached. Incomplete catalogs are excluded from the selector. Translations are generated during development; using the app does not send song titles, links or other user data to a translation service. See `renderer/locales/languages.json` for the exact list.
 
@@ -110,7 +110,7 @@ Electron's per-user app-data directory contains `workspace.json`, `sessions/<job
 
 Tests cover interrupted jobs, durable writes, duplicate prevention, valid-file reuse, continuation after missing sources, retained error details, individual retry, CAPTCHA pausing, flat output files, library validation and complete language catalogs.
 
-Each native build runs the bundled engine, starts its bundled Deno and FFmpeg, verifies packaged EJS resources, **encodes a real MP3**, promotes it into a destination folder and verifies it in the saved-file library. This is an offline component test, not proof of live YouTube availability. Browser checks cover the shared interface; the full native GUI is not automatically exercised on every operating system.
+Each native build runs the bundled engine, starts its bundled Deno and FFmpeg, verifies packaged EJS resources, downloads an audio fixture through the real spotDL/yt-dlp provider from a loopback HTTP server, rejects an HTML error page, **encodes a real MP3 through spotDL**, promotes it into a destination folder and verifies it in the saved-file library. This is an offline component test, not proof of live YouTube availability. Browser checks cover the shared interface; the full native GUI is not automatically exercised on every operating system.
 
 ## License
 

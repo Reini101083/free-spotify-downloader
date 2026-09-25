@@ -9,10 +9,11 @@ import wave
 root = Path(__file__).resolve().parent.parent
 engine = root / 'engine-dist' / ('spotdl-engine.exe' if sys.platform == 'win32' else 'spotdl-engine')
 extension = '.exe' if sys.platform == 'win32' else ''
-check = subprocess.run([str(engine), '--diagnostics', str(root / 'node_modules' / 'ffmpeg-static' / ('ffmpeg' + extension)), str(root / 'node_modules' / 'deno' / ('deno' + extension))], capture_output=True, text=True, timeout=90, check=True)
+check = subprocess.run([str(engine), '--download-diagnostics', str(root / 'node_modules' / 'ffmpeg-static' / ('ffmpeg' + extension)), str(root / 'node_modules' / 'deno' / ('deno' + extension))], capture_output=True, text=True, timeout=90, check=True)
 health = json.loads(check.stdout.strip().splitlines()[-1])
 assert health['ejs'] and health['mp3_conversion'] and health['saved_file_verified'], health
-print('Packaged engine: Deno/EJS loaded, FFmpeg encoded a real MP3 and library verified it.')
+assert health['http_audio_download'] and health['html_error_rejected'], health
+print('Packaged engine: actual HTTP audio received through spotDL/yt-dlp; HTML error rejected; MP3 converted through spotDL, promoted and verified.')
 with tempfile.TemporaryDirectory() as directory:
     folder = Path(directory)
     track_id = '1234567890123456789012'

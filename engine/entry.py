@@ -7,9 +7,9 @@ if __name__ == '__main__':
     if len(sys.argv) > 1 and sys.argv[1] == '--library':
         from library import main
         main(sys.argv[2])
-    elif len(sys.argv) > 1 and sys.argv[1] == '--diagnostics':
+    elif len(sys.argv) > 1 and sys.argv[1] in ('--diagnostics', '--download-diagnostics'):
         from provider import diagnostics
-        diagnostics(sys.argv[2], sys.argv[3])
+        diagnostics(sys.argv[2], sys.argv[3], download_check=sys.argv[1] == '--download-diagnostics')
     elif len(sys.argv) > 1 and sys.argv[1] in ('--session', '--resolve'):
         from session import main, report_error
         try:

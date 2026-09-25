@@ -306,5 +306,13 @@
   {
     "code": "fy",
     "name": "Frisian"
+  },
+  {
+    "code": "fr",
+    "name": "French"
+  },
+  {
+    "code": "es",
+    "name": "Spanish"
   }
 ]

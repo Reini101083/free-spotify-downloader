@@ -3,7 +3,7 @@ const { Menu } = require('electron')
 module.exports = function installContextMenu(window, language) {
   window.webContents.on('context-menu', (_event, params) => {
     if (params.frame !== window.webContents.mainFrame) return
-    const english = language() === 'en'
+    const english = language() !== 'de'
     const item = (role, de, en, enabled = true) => ({ role, label: english ? en : de, enabled })
     const flags = params.editFlags
     const template = params.isEditable ? [
