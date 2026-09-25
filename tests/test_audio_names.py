@@ -24,8 +24,8 @@ def wav(file):
 class AudioNameTests(unittest.TestCase):
     def test_repeated_same_track_is_downloaded_only_once(self):
         with tempfile.TemporaryDirectory() as temporary:
-            folder = Path(temporary) / 'Downloads'
-            manifest = Path(temporary) / 'app-data' / 'job.json'
+            folder = Path(temporary).resolve() / 'Downloads'
+            manifest = Path(temporary).resolve() / 'app-data' / 'job.json'
             track = {'id': '1' * 22, 'url': 'track', 'title': 'Song'}
             session.atomic_save(manifest, {'url': 'playlist', 'tracks': [dict(track), dict(track)]})
             def worker(args, _timeout):
@@ -35,13 +35,13 @@ class AudioNameTests(unittest.TestCase):
                 session.run_session(['--session', str(manifest), '--url', 'playlist', '--folder', str(folder), '--format', 'wav', '--bitrate', 'auto', '--ffmpeg', 'unused'])
             self.assertEqual(download.call_count, 1)
             self.assertEqual([p.name for p in folder.iterdir()], ['Artist - Song.wav'])
-            tracks = json.loads(manifest.read_text())['tracks']
+            tracks = json.loads(manifest.read_text(encoding='utf8'))['tracks']
             self.assertEqual(tracks[0]['file'], tracks[1]['file'])
 
     def test_all_output_formats_store_identity_in_metadata(self):
         ffmpeg = Path(__file__).parents[1] / 'node_modules' / 'ffmpeg-static' / ('ffmpeg.exe' if sys.platform == 'win32' else 'ffmpeg')
         with tempfile.TemporaryDirectory() as temporary:
-            root = Path(temporary)
+            root = Path(temporary).resolve()
             wav(root / 'source.wav')
             for extension in ('mp3', 'm4a', 'flac', 'opus', 'wav'):
                 with self.subTest(extension=extension):
@@ -59,7 +59,7 @@ class AudioNameTests(unittest.TestCase):
 
     def test_clean_names_collision_resume_cross_playlist_and_renaming(self):
         with tempfile.TemporaryDirectory() as temporary:
-            root = Path(temporary)
+            root = Path(temporary).resolve()
             folder = root / 'Downloads'
             folder.mkdir()
             manifests = root / 'app-data'
@@ -77,7 +77,7 @@ class AudioNameTests(unittest.TestCase):
                 run(manifest)
                 self.assertEqual(download.call_count, 2)
             self.assertEqual(sorted(p.name for p in folder.iterdir()), ['Bijelo Dugme - Sve Će To (2).wav', 'Bijelo Dugme - Sve Će To.wav'])
-            for track in json.loads(manifest.read_text())['tracks']:
+            for track in json.loads(manifest.read_text(encoding='utf8'))['tracks']:
                 self.assertEqual(session.read_track_identity(Path(track['file'])), track['id'])
             another = manifests / 'two.json'
             session.atomic_save(another, {'url': 'playlist', 'tracks': tracks})
@@ -88,18 +88,18 @@ class AudioNameTests(unittest.TestCase):
                 original.rename(folder / 'My renamed song.wav')
                 run(manifest)
             self.assertEqual(len(list(folder.iterdir())), 2)
-            self.assertEqual(json.loads(manifest.read_text())['tracks'][0]['file'], str(folder / 'My renamed song.wav'))
+            self.assertEqual(json.loads(manifest.read_text(encoding='utf8'))['tracks'][0]['file'], str(folder / 'My renamed song.wav'))
             modified = folder / 'My renamed song.wav'
             session.write_track_identity(modified, '1' * 22)
             with modified.open('ab') as stream:
                 stream.write(b'modified')
-            record = json.loads(manifest.read_text())['tracks'][0]
+            record = json.loads(manifest.read_text(encoding='utf8'))['tracks'][0]
             self.assertTrue(session.valid_audio(modified))
             self.assertIsNone(session.verified_download(folder, {'id': '1' * 22}, record, 'wav'))
 
     def test_legacy_names_migrate_without_overwriting_existing_song(self):
         with tempfile.TemporaryDirectory() as temporary:
-            folder = Path(temporary)
+            folder = Path(temporary).resolve()
             legacy = folder / ('Artist - Song [' + '1' * 22 + '].wav')
             wav(legacy)
             occupied = folder / 'Artist - Song.wav'
@@ -113,7 +113,7 @@ class AudioNameTests(unittest.TestCase):
             renamed = folder / 'Artist - Song (2).wav'
             self.assertTrue(session.valid_audio(renamed))
             self.assertEqual(session.read_track_identity(renamed), '1' * 22)
-            self.assertEqual(json.loads(manifest.read_text())['tracks'][0]['file'], str(renamed))
+            self.assertEqual(json.loads(manifest.read_text(encoding='utf8'))['tracks'][0]['file'], str(renamed))
 
     def test_portable_names_keep_unicode_and_remove_invalid_windows_characters(self):
         self.assertEqual(session.clean_audio_name('CON', '1' * 22), '_CON')
