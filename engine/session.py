@@ -60,6 +60,84 @@ def fingerprint(file):
         return hashlib.file_digest(stream, 'sha256').hexdigest()
 
 
+def clean_audio_name(stem, track_id):
+    stem = stem.removesuffix(f'[{track_id}]').strip()
+    stem = re.sub(r'[<>:"/\\|?*\x00-\x1f]', '_', stem)
+    stem = re.sub(r'\s+', ' ', stem).strip(' .')
+    # Bound UTF-8 bytes as well as characters for Linux/macOS and Windows.
+    stem = stem.encode('utf8')[:180].decode('utf8', errors='ignore').rstrip(' .') or 'Track'
+    if re.fullmatch(r'CON|PRN|AUX|NUL|COM[1-9]|LPT[1-9]', stem.split('.')[0], re.I):
+        stem = '_' + stem
+    return stem
+
+
+def available_destination(folder, stem, extension):
+    destination = folder / (stem + extension)
+    number = 2
+    while destination.exists() or destination.is_symlink():
+        destination = folder / f'{stem} ({number}){extension}'
+        number += 1
+    return destination
+
+
+def write_track_identity(file, track_id):
+    from mutagen import File
+    from mutagen.id3 import ID3, TXXX
+    from mutagen.mp4 import MP4
+    audio = File(file)
+    if audio.tags is None:
+        audio.add_tags()
+    if isinstance(audio.tags, ID3):
+        audio.tags.add(TXXX(encoding=3, desc='SPOTIFY_TRACK_ID', text=[track_id]))
+    elif isinstance(audio, MP4):
+        audio.tags['----:com.apple.iTunes:SPOTIFY_TRACK_ID'] = [track_id.encode('utf8')]
+    else:
+        audio.tags['SPOTIFY_TRACK_ID'] = [track_id]
+    audio.save()
+
+
+def read_track_identity(file):
+    from mutagen import File
+    from mutagen.id3 import ID3
+    from mutagen.mp4 import MP4
+    try:
+        audio = File(file)
+        if audio is None or audio.tags is None:
+            return None
+        if isinstance(audio.tags, ID3):
+            tag = audio.tags.get('TXXX:SPOTIFY_TRACK_ID')
+            return str(tag.text[0]) if tag and tag.text else None
+        if isinstance(audio, MP4):
+            values = audio.tags.get('----:com.apple.iTunes:SPOTIFY_TRACK_ID', [])
+            return bytes(values[0]).decode('utf8') if values else None
+        values = audio.tags.get('SPOTIFY_TRACK_ID', [])
+        return str(values[0]) if values else None
+    except Exception:
+        return None
+
+
+def verified_download(folder, track, entry, extension):
+    candidates = []
+    expected_hash = track.get('sha256') or entry.get('sha256')
+    for record in (track, entry):
+        if record.get('file') and record.get('sha256'):
+            candidates.append((Path(record['file']), record['sha256']))
+    # Compatibility with earlier versions whose public filenames contained IDs.
+    candidates.extend((file, expected_hash) for file in folder.iterdir()
+                      if file.name.endswith(f"[{track['id']}].{extension}"))
+    for file, checksum in candidates:
+        if (file.parent == folder and file.suffix == '.' + extension and not file.is_symlink()
+                and valid_audio(file) and (not checksum or fingerprint(file) == checksum)):
+            return file
+    # Embedded identity also survives app-data loss and manual filename changes.
+    for file in folder.iterdir():
+        if (not file.is_symlink() and file.is_file() and file.suffix == '.' + extension
+                and read_track_identity(file) == track['id'] and valid_audio(file)
+                and (not expected_hash or fingerprint(file) == expected_hash)):
+            return file
+    return None
+
+
 def command(*args):
     return [sys.executable, *([] if getattr(sys, 'frozen', False) else [str(Path(__file__).with_name('entry.py'))]), *args]
 
@@ -199,6 +277,13 @@ def run_session(argv):
         data['tracks'] = resolve_tracks(args.url, result_file)
         atomic_save(manifest, data)
     tracks = data['tracks']
+    index_file = manifest.parent / 'library-index' / (hashlib.sha256(str(folder).encode()).hexdigest() + '.json')
+    try:
+        download_index = json.loads(index_file.read_text(encoding='utf8'))
+        if not isinstance(download_index, dict):
+            download_index = {}
+    except (FileNotFoundError, ValueError):
+        download_index = {}
     for offset in range(0, len(tracks), 20):
         emit('plan', reset=offset == 0, tracks=[{'id': track['id'], 'title': track['title'][:300], 'status': track.get('status', 'pending'), 'error': track.get('error', '')[-1000:], 'file': track.get('file')} for track in tracks[offset:offset + 20]])
     saved = existing = skipped = 0
@@ -207,16 +292,27 @@ def run_session(argv):
             continue
         track.pop('error', None)
         # A filename alone is never proof of a completed download. Check its audio header.
-        candidates = [file for file in folder.iterdir() if file.name.endswith(f"[{track['id']}].{args.format}")]
-        verified = next((file for file in candidates if valid_audio(file) and (not track.get('sha256') or fingerprint(file) == track['sha256'])), None)
+        index_key = track['id'] + ':' + args.format
+        entry = download_index.get(index_key, {})
+        verified = verified_download(folder, track, entry if isinstance(entry, dict) else {}, args.format)
         if verified:
+            if verified.stem.endswith(f"[{track['id']}]"):
+                destination = available_destination(folder, clean_audio_name(verified.stem, track['id']), verified.suffix)
+                promote(verified, destination, manifest.stem)
+                write_track_identity(destination, track['id'])
+                track.update(file=str(destination), sha256=fingerprint(destination), status='existing')
+                atomic_save(manifest, data)
+                download_index[index_key] = {'file': track['file'], 'sha256': track['sha256']}
+                atomic_save(index_file, download_index)
+                verified.unlink()
+                verified = destination
             existing += 1
             track.update(status='existing', file=str(verified), sha256=fingerprint(verified))
         else:
             emit('track', id=track['id'], index=index + 1, total=len(tracks), title=track['title'], status='running')
             try:
                 with tempfile.TemporaryDirectory(prefix='track-', dir=staging) as stage:
-                    arguments = ['download', track['url'], '--format', args.format, '--output', str(Path(stage) / '{artists} - {title} [{track-id}].{output-ext}'), '--max-filename-length', '100', '--overwrite', 'force', '--threads', '1', '--no-cache', '--ffmpeg', args.ffmpeg, '--log-level', 'ERROR']
+                    arguments = ['download', track['url'], '--format', args.format, '--output', str(Path(stage) / '{artists} - {title}.{output-ext}'), '--max-filename-length', '100', '--overwrite', 'force', '--threads', '1', '--no-cache', '--ffmpeg', args.ffmpeg, '--log-level', 'ERROR']
                     if args.format not in ['flac', 'wav']:
                         arguments += ['--bitrate', args.bitrate]
                     if args.cookie_file:
@@ -239,15 +335,22 @@ def run_session(argv):
                     if code or len(files) != 1:
                         raise RuntimeError(detail or 'No matching audio source')
                     source = files[0]
-                    # Ensure the stable Spotify ID is present even if a provider omitted it.
-                    name = source.stem.removesuffix(f"[{track['id']}]").rstrip()[:75] + f" [{track['id']}]"
-                    destination = folder / (name + source.suffix)
+                    write_track_identity(source, track['id'])
+                    destination = available_destination(folder, clean_audio_name(source.stem, track['id']), source.suffix)
+                    # Persist identity privately before promotion, so a crash cannot lose resume data.
+                    track.update(file=str(destination), sha256=fingerprint(source))
+                    atomic_save(manifest, data)
+                    download_index[index_key] = {'file': track['file'], 'sha256': track['sha256']}
+                    atomic_save(index_file, download_index)
                     promote(source, destination, manifest.stem)
                     saved += 1
                     track.update(status='saved', file=str(destination), sha256=fingerprint(destination))
             except (RuntimeError, subprocess.TimeoutExpired) as error:
                 skipped += 1
                 track.update(status='skipped', error=(str(error).strip() or f'{type(error).__name__}: No details were returned by the audio provider.')[-1000:])
+        if track['status'] in ('saved', 'existing'):
+            download_index[index_key] = {'file': track['file'], 'sha256': track['sha256']}
+            atomic_save(index_file, download_index)
         atomic_save(manifest, data)
         emit('track', id=track['id'], file=track.get('file'), index=index + 1, total=len(tracks), title=track['title'], status=track['status'], error=track.get('error', ''), saved=saved, existing=existing, skipped=skipped)
     shutil.rmtree(staging, ignore_errors=True)

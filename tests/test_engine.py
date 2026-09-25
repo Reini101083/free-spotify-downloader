@@ -41,8 +41,9 @@ class ResumeTests(unittest.TestCase):
             self.assertEqual(resolves, 2)
             self.assertIn('"saved": 1', output.getvalue())
             audio = Path(json.loads(manifest.read_text())['tracks'][0]['file'])
-            self.assertLessEqual(len(audio.name), 104)
-            self.assertTrue(audio.name.endswith('[' + track['id'] + '].wav'))
+            self.assertLessEqual(len(audio.name.encode('utf8')), 184)
+            self.assertNotIn(track['id'], audio.name)
+            self.assertEqual(session.read_track_identity(audio), track['id'])
 
     def test_playlist_denial_is_not_retried_and_emits_structured_failure(self):
         with tempfile.TemporaryDirectory() as folder, patch.object(session, 'run_worker', return_value=(1, 'HTTP 429 Too many requests')) as worker:
