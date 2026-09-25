@@ -194,5 +194,6 @@
   "Audio provider error": "خطای ارائه دهنده صدا",
   "Cookie session cleared.": "جلسه کوکی پاک شد.",
   "Download list": "لیست دانلود",
-  "Version": "نسخه"
+  "Version": "نسخه",
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "ورود اختیاری ممکن است کپچاها را کاهش دهد، اما استفاده از حساب می‌تواند باعث مسدودشدن موقت یا دائمی آن شود. از حساب اصلی استفاده نکنید؛ حساب‌های جداگانه هم در خطرند."
 }

@@ -194,5 +194,6 @@
   "Audio provider error": "Ошибка поставщика аудио",
   "Cookie session cleared.": "Сеанс cookie очищен.",
   "Download list": "Список загрузки",
-  "Version": "Версия"
+  "Version": "Версия",
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Необязательный вход может сократить проверки CAPTCHA, но использование аккаунта грозит временной или постоянной блокировкой. Не используйте основной аккаунт; отдельные аккаунты тоже под угрозой."
 }

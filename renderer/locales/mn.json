@@ -194,5 +194,6 @@
   "Audio provider error": "Аудио үйлчилгээ үзүүлэгчийн алдаа",
   "Cookie session cleared.": "Күүки сесс арилсан.",
   "Download list": "Татаж авах жагсаалт",
-  "Version": "Хувилбар"
+  "Version": "Хувилбар",
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Сонголтоор нэвтрэх нь CAPTCHA-г багасгаж болох ч бүртгэл ашигласнаар түр эсвэл бүрмөсөн хаалгаж болзошгүй. Үндсэн бүртгэлээ бүү ашигла; тусдаа бүртгэл ч эрсдэлтэй."
 }

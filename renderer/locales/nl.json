@@ -194,5 +194,6 @@
   "Audio provider error": "Fout met audioprovider",
   "Cookie session cleared.": "Cookiesessie gewist.",
   "Download list": "Downloadlijst",
-  "Version": "Versie"
+  "Version": "Versie",
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Optioneel inloggen kan CAPTCHA's verminderen, maar accountgebruik kan tot tijdelijke of permanente blokkering leiden. Gebruik liever niet je hoofdaccount; ook aparte accounts lopen risico."
 }

@@ -194,5 +194,6 @@
   "Audio provider error": "Greška audio provajdera",
   "Cookie session cleared.": "Sesija kolačića je obrisana.",
   "Download list": "Lista za preuzimanje",
-  "Version": "Verzija"
+  "Version": "Verzija",
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Dobrovoljna prijava može smanjiti CAPTCHA provjere, ali korištenje računa može dovesti do privremene ili trajne blokade. Izbjegavaj glavni račun; i odvojeni računi su u opasnosti."
 }

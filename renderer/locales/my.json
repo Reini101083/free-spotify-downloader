@@ -194,5 +194,6 @@
   "Audio provider error": "အသံပံ့ပိုးပေးသူ အမှား",
   "Cookie session cleared.": "ကွတ်ကီးစက်ရှင်ကို ရှင်းထားသည်။",
   "Download list": "ဒေါင်းလုဒ်စာရင်း",
-  "Version": "ဗားရှင်း"
+  "Version": "ဗားရှင်း",
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "စိတ်ကြိုက်အကောင့်ဝင်ခြင်းက CAPTCHA များကို လျှော့ချနိုင်သော်လည်း အကောင့်အသုံးပြုမှုကြောင့် ယာယီ သို့မဟုတ် အမြဲတမ်းပိတ်ပင်ခံရနိုင်သည်။ ပင်မအကောင့်ကို ရှောင်ပါ။ သီးခြားအကောင့်များလည်း အန္တရာယ်ရှိသည်။"
 }

@@ -194,5 +194,6 @@
   "Audio provider error": "Oudioverskafferfout",
   "Cookie session cleared.": "Koekiesessie is skoongemaak.",
   "Download list": "Aflaai lys",
-  "Version": "Weergawe"
+  "Version": "Weergawe",
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Opsionele aanmelding kan CAPTCHA's verminder, maar rekeninggebruik kan tot tydelike of permanente opskorting lei. Vermy jou hoofrekening; aparte rekeninge loop ook gevaar."
 }

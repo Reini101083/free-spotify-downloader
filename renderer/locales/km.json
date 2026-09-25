@@ -194,5 +194,6 @@
   "Audio provider error": "កំហុសអ្នកផ្តល់សំឡេង",
   "Cookie session cleared.": "សម័យខូគីត្រូវបានសម្អាត។",
   "Download list": "បញ្ជីទាញយក",
-  "Version": "កំណែ"
+  "Version": "កំណែ",
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "ការចូលគណនីតាមជម្រើសអាចកាត់បន្ថយ CAPTCHA ប៉ុន្តែការប្រើគណនីអាចបណ្តាលឱ្យផ្អាកបណ្តោះអាសន្ន ឬជាអចិន្ត្រៃយ៍។ ជៀសវាងគណនីចម្បងរបស់អ្នក។ គណនីដាច់ដោយឡែកក៏មានហានិភ័យដែរ។"
 }

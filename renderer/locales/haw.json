@@ -194,5 +194,6 @@
   "Audio provider error": "Hewa ka mea hoʻolako leo",
   "Cookie session cleared.": "Hoʻopau ʻia ke kau kuki.",
   "Download list": "Hoʻoiho i ka papa inoa",
-  "Version": "Manao"
+  "Version": "Manao",
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Hiki i ke komo koho ke hoʻēmi i nā CAPTCHA, akā hiki ke kāpae ʻia ka moʻokāki no kekahi manawa a mau loa paha. Mai hoʻohana i kāu moʻokāki nui; pilikia pū nā moʻokāki kaʻawale."
 }

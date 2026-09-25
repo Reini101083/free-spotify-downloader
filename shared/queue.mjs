@@ -72,6 +72,8 @@ export class DownloadQueue extends EventEmitter {
     this.active = { job, child }; this.launching = false
     let settled = false, summary = null, failure = null, pending = '', killTimer
     const line = value => {
+      // A stopped worker must never pause or overwrite the next playlist.
+      if (settled || job.cancelled) return
       if (value.startsWith('FSD_EVENT ')) {
         try {
           const event = JSON.parse(value.slice(10))
@@ -103,9 +105,9 @@ export class DownloadQueue extends EventEmitter {
     child.stderr?.on('data', chunk => { cleanOutput(chunk).split(/\r?\n/).forEach(line) })
     const finish = code => {
       if (settled) return
+      if (pending) { const last = pending; pending = ''; line(last) }
       settled = true; clearTimeout(killTimer)
       void cookieLease?.release().catch(() => {})
-      if (pending) line(pending)
       if (job.cancelled) { job.status = 'paused'; job.message = 'Paused. Completed songs are kept.' }
       else if (job.requiresAuth) { job.status = 'blocked'; job.message = job.blockReason === 'rate_limit' ? 'YouTube is limiting requests. Wait before trying again.' : 'YouTube needs your confirmation.'; this.running = false }
       else if (code !== 0 || !summary || failure) { job.status = 'failed'; job.message = failure || 'Interrupted. You can resume this download.' }
@@ -128,7 +130,7 @@ export class DownloadQueue extends EventEmitter {
   }
   cancel(id) {
     const job = this.jobs.find(item => item.id === id)
-    if (!job || !['queued', 'running'].includes(job.status)) return
+    if (!job || job.cancelled || !['queued', 'running'].includes(job.status)) return
     job.cancelled = true
     if (this.active?.job.id === id) { job.message = 'Pausing…'; this.active.stop() }
     else { job.status = 'paused'; job.message = 'Paused. Ready to resume.' }

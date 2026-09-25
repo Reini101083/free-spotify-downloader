@@ -194,5 +194,6 @@
   "Audio provider error": "Hapa kaiwhakarato ororongo",
   "Cookie session cleared.": "Kua whakawāteatia te wātū pihikete.",
   "Download list": "Rarangi tikiake",
-  "Version": "Putanga"
+  "Version": "Putanga",
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Ka iti ake pea ngā CAPTCHA mā te takiuru kōwhiringa, engari ka aukatihia pea te pūkete mō tētahi wā, mō ake tonu rānei. Kaua e whakamahi i tō pūkete matua; he tūraru anō ki ngā pūkete motuhake."
 }

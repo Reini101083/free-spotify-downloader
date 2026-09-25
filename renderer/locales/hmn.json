@@ -194,5 +194,6 @@
   "Audio provider error": "Audio provider yuam kev",
   "Cookie session cleared.": "Khob noom cookie session cleared.",
   "Download list": "Download list",
-  "Version": "Kev"
+  "Version": "Kev",
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Kev nkag mus yog xaiv tau thiab tej zaum yuav txo CAPTCHA, tiam sis kev siv tus as khauj yuav ua rau raug ncua ib ntus lossis tas mus li. Tsis txhob siv koj tus as khauj tseem ceeb; lwm tus as khauj kuj muaj kev pheej hmoo."
 }

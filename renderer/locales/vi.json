@@ -194,5 +194,6 @@
   "Audio provider error": "Lỗi nhà cung cấp âm thanh",
   "Cookie session cleared.": "Đã xóa phiên cookie.",
   "Download list": "Danh sách tải xuống",
-  "Version": "Phiên bản"
+  "Version": "Phiên bản",
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Đăng nhập tùy chọn có thể giảm CAPTCHA, nhưng việc dùng tài khoản có thể dẫn đến đình chỉ tạm thời hoặc vĩnh viễn. Tránh dùng tài khoản chính; tài khoản riêng cũng có rủi ro."
 }

@@ -194,5 +194,6 @@
   "Audio provider error": "خطأ في موفر الصوت",
   "Cookie session cleared.": "تم مسح جلسة ملفات تعريف الارتباط.",
   "Download list": "قائمة التحميل",
-  "Version": "النسخة"
+  "Version": "النسخة",
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "قد يقلل تسجيل الدخول الاختياري اختبارات CAPTCHA، لكن استخدام الحساب قد يؤدي إلى تعليقه مؤقتًا أو دائمًا. تجنب حسابك الرئيسي؛ الحسابات المنفصلة معرضة للخطر أيضًا."
 }

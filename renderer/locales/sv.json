@@ -194,5 +194,6 @@
   "Audio provider error": "Ljudleverantörsfel",
   "Cookie session cleared.": "Cookiesession rensad.",
   "Download list": "Nedladdningslista",
-  "Version": "Version"
+  "Version": "Version",
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Valfri inloggning kan minska CAPTCHA-kontroller, men kontoanvändning kan leda till tillfällig eller permanent avstängning. Undvik ditt huvudkonto; separata konton löper också risk."
 }

@@ -194,5 +194,6 @@
   "Audio provider error": "Eraro de sonprovizanto",
   "Cookie session cleared.": "Kuketo-sesio malbariĝis.",
   "Download list": "Elŝuta listo",
-  "Version": "Versio"
+  "Version": "Versio",
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "La nedeviga ensaluto povas malpliigi CAPTCHA-kontrolojn, sed kontouzo povas kaŭzi provizoran aŭ konstantan suspendon. Evitu vian ĉefan konton; apartaj kontoj ankaŭ riskas suspendon."
 }

@@ -194,5 +194,6 @@
   "Audio provider error": "ශ්‍රව්‍ය සැපයුම්කරුගේ දෝෂයකි",
   "Cookie session cleared.": "කුකී සැසිය හිස් කරන ලදී.",
   "Download list": "බාගත කිරීමේ ලැයිස්තුව",
-  "Version": "අනුවාදය"
+  "Version": "අනුවාදය",
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "විකල්ප පිවිසීමෙන් CAPTCHA අඩු විය හැකි නමුත් ගිණුම භාවිතය නිසා තාවකාලික හෝ ස්ථිර අත්හිටුවීමක් විය හැක. ප්‍රධාන ගිණුම භාවිත නොකරන්න; වෙනම ගිණුම්ද අවදානමට ලක් වේ."
 }

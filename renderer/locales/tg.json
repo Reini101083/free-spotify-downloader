@@ -194,5 +194,6 @@
   "Audio provider error": "Хатои провайдери аудио",
   "Cookie session cleared.": "Сеанси куки тоза карда шуд.",
   "Download list": "Рӯйхати зеркашӣ",
-  "Version": "Версия"
+  "Version": "Версия",
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Воридшавии ихтиёрӣ метавонад CAPTCHA-ро кам кунад, аммо истифодаи ҳисоб метавонад боиси басташавии муваққатӣ ё доимӣ гардад. Ҳисоби асосиро истифода набаред; ҳисобҳои ҷудогона низ зери хатаранд."
 }

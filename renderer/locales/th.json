@@ -194,5 +194,6 @@
   "Audio provider error": "ข้อผิดพลาดของผู้ให้บริการเสียง",
   "Cookie session cleared.": "ล้างเซสชันคุกกี้แล้ว",
   "Download list": "รายการดาวน์โหลด",
-  "Version": "เวอร์ชัน"
+  "Version": "เวอร์ชัน",
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "การเข้าสู่ระบบเป็นทางเลือกและอาจลด CAPTCHA แต่การใช้บัญชีอาจทำให้ถูกระงับชั่วคราวหรือถาวร ควรหลีกเลี่ยงบัญชีหลัก แม้แต่บัญชีแยกก็มีความเสี่ยง"
 }

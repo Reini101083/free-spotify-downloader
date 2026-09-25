@@ -194,5 +194,6 @@
   "Audio provider error": "Kesalahan penyedia audio",
   "Cookie session cleared.": "Sesi cookie dihapus.",
   "Download list": "Unduh daftar",
-  "Version": "Versi"
+  "Version": "Versi",
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Login opsional dapat mengurangi CAPTCHA, tetapi penggunaan akun berisiko menyebabkan penangguhan sementara atau permanen. Hindari akun utama; akun terpisah juga berisiko."
 }

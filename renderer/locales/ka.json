@@ -194,5 +194,6 @@
   "Audio provider error": "აუდიო პროვაიდერის შეცდომა",
   "Cookie session cleared.": "ქუქიების სესია გასუფთავდა.",
   "Download list": "ჩამოტვირთვის სია",
-  "Version": "ვერსია"
+  "Version": "ვერსია",
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "არასავალდებულო შესვლამ შეიძლება შეამციროს CAPTCHA, მაგრამ ანგარიშის გამოყენებამ შეიძლება გამოიწვიოს დროებითი ან მუდმივი დაბლოკვა. მოერიდეთ მთავარ ანგარიშს; ცალკე ანგარიშებიც რისკის ქვეშაა."
 }

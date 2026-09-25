@@ -194,5 +194,6 @@
   "Audio provider error": "Audio provider flater",
   "Cookie session cleared.": "Koekje sesje wiske.",
   "Download list": "Download list",
-  "Version": "Ferzje"
+  "Version": "Ferzje",
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Opsjoneel oanmelden kin CAPTCHA's ferminderje, mar it brûken fan in akkount kin ta tydlike of permaninte blokkearring liede. Mijd dyn haadakkount; aparte akkounts rinne ek risiko."
 }

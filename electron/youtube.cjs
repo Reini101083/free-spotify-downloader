@@ -18,7 +18,7 @@ module.exports = function youtubeAccess(parent, onReady) {
   function guard(event) {
     if (!window || event.sender !== window.webContents || event.senderFrame !== window.webContents.mainFrame) throw new Error('Invalid confirmation window')
   }
-  ipcMain.on('youtube-layout', (event, height) => { if (!window || event.sender !== window.webContents) return; guard(event); if (Number.isFinite(height)) { toolbarHeight = Math.max(80, Math.min(350, Math.ceil(height))); fit?.() } })
+  ipcMain.on('youtube-layout', (event, height) => { if (!window || event.sender !== window.webContents) return; guard(event); if (Number.isFinite(height)) { toolbarHeight = Math.max(80, Math.min(1200, Math.ceil(height))); fit?.() } })
   ipcMain.handle('youtube-confirm', async event => {
     guard(event)
     approved = true

@@ -194,5 +194,6 @@
   "Audio provider error": "Impazamo yomboneleli womsindo",
   "Cookie session cleared.": "Iseshini yecookie isusiwe.",
   "Download list": "Khuphela uluhlu",
-  "Version": "Inguqulelo"
+  "Version": "Inguqulelo",
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Ukungena ngokuzithandela kunokunciphisa ii-CAPTCHA, kodwa ukusetyenziswa kweakhawunti kunokubangela ukuvalwa okwethutyana okanye okusisigxina. Kuphephe ukusebenzisa eyona akhawunti yakho; nezahlukileyo zisengozini."
 }

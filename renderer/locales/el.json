@@ -194,5 +194,6 @@
   "Audio provider error": "Audio provider error",
   "Cookie session cleared.": "Cookie session cleared.",
   "Download list": "Λίστα λήψης",
-  "Version": "Έκδοση"
+  "Version": "Έκδοση",
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Η προαιρετική σύνδεση μπορεί να μειώσει τα CAPTCHA, αλλά η χρήση λογαριασμού ενέχει κίνδυνο προσωρινής ή μόνιμης αναστολής. Απόφυγε τον κύριο λογαριασμό σου· κινδυνεύουν και οι ξεχωριστοί λογαριασμοί."
 }

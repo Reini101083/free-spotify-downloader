@@ -194,5 +194,6 @@
   "Audio provider error": "Sese mea e maua ai leo",
   "Cookie session cleared.": "Ua kilia le sauniga kuki.",
   "Download list": "Lisi lisi",
-  "Version": "Fa'aliliuga"
+  "Version": "Fa'aliliuga",
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "O le saini e filifili ai e ono faaitiitia CAPTCHA, ae o le faaaogāina o le teugatupe e ono taofia ai mo se taimi pe tumau. Aloese mai lau teugatupe autū; e lamatia foʻi teugatupe ese."
 }

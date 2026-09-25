@@ -194,5 +194,6 @@
   "Audio provider error": "Hitilafu ya mtoa huduma wa sauti",
   "Cookie session cleared.": "Kipindi cha vidakuzi kimefutwa.",
   "Download list": "Orodha ya upakuaji",
-  "Version": "Toleo"
+  "Version": "Toleo",
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Kuingia kwa hiari kunaweza kupunguza CAPTCHA, lakini kutumia akaunti kunaweza kusababisha kusimamishwa kwa muda au kudumu. Epuka akaunti yako kuu; akaunti tofauti pia ziko hatarini."
 }

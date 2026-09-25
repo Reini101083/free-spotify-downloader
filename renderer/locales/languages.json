@@ -314,5 +314,17 @@
   {
     "code": "es",
     "name": "Spanish"
+  },
+  {
+    "code": "ro",
+    "name": "Romanian"
+  },
+  {
+    "code": "tr",
+    "name": "Turkish"
+  },
+  {
+    "code": "sr-Latn",
+    "name": "Serbian (Latin)"
   }
 ]

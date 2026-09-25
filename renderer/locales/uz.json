@@ -194,5 +194,6 @@
   "Audio provider error": "Audio provayder xatosi",
   "Cookie session cleared.": "Cookie seansi tozalandi.",
   "Download list": "Yuklab olish roʻyxati",
-  "Version": "Versiya"
+  "Version": "Versiya",
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Ixtiyoriy kirish CAPTCHA sonini kamaytirishi mumkin, ammo hisobdan foydalanish vaqtinchalik yoki doimiy bloklanishga olib kelishi mumkin. Asosiy hisobingizni ishlatmang; alohida hisoblar ham xavf ostida."
 }

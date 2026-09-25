@@ -16,7 +16,7 @@ export function languageName(code, native = true) {
 }
 export async function setLanguage(value) {
   const request = ++generation
-  const item = languages.find(item => item.code.toLowerCase() === String(value).toLowerCase()) || languages.find(item => item.code === String(value).split('-')[0])
+  const item = languages.find(item => item.code.toLowerCase() === String(value).toLowerCase()) || languages.find(item => item.code === String(value).split('-')[0]) || languages.find(item => item.code.split('-')[0] === String(value).split('-')[0])
   const code = item?.code || 'en'
   const next = code === 'en' ? english : (await import(`./locales/${code}.mjs`)).default
   if (request !== generation) return

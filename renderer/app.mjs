@@ -3,7 +3,7 @@ import { preferences, spotifyLink } from './domain.mjs'
 import { initializeDownloads } from './downloads.mjs'
 const $ = selector => document.querySelector(selector)
 const bridge = window.desktop
-let view = 'queue', selectedId = null, detailId = null, pendingClipboardLink = null, limit = 50, toastTimer, embedId = null, previousRunning = false, refreshTimer
+let view = 'queue', selectedId = null, detailId = null, pendingClipboardLink = null, limit = 50, toastTimer, embedId = null, previousRunning = false, refreshTimer, previewSequence = 0
 let state = { jobs: [], settings: preferences(), running: false, folder: '', health: {}, library: { files: [], loading: false, error: '', revision: 0 } }
 const statuses = { queued:'Ready', running:'Downloading', completed:'Saved', failed:'Failed', partial:'Some songs missing', paused:'Paused', blocked:'Confirmation needed', preview:'Preview' }
 const node = (tag, className, text) => { const result = document.createElement(tag); if (className) result.className = className; if (text !== undefined) result.textContent = text; return result }
@@ -24,7 +24,20 @@ function button(label, symbol, callback) {
 }
 function missingSongs() { return state.jobs.flatMap(job => (job.tracks || []).filter(track => ['skipped','blocked'].includes(track.status)).map(track => ({ ...track, job }))) }
 function updateView(next) { view = next; limit = 50; $('#song-search').value = ''; render(); if (view === 'saved' && bridge) void action(async () => update(await bridge.library())) }
-function setSelected(job) { if (!job) return; selectedId = job.id; if (embedId !== job.id) { $('#embed-container').replaceChildren(); embedId = null }; renderPreview() }
+function markSelected() {
+  for (const row of document.querySelectorAll('.job-row')) {
+    const selected=row.dataset.job===selectedId
+    row.classList.toggle('preview-selected',selected)
+    row.querySelector('.row-title')?.setAttribute('aria-pressed',String(selected))
+  }
+}
+function setSelected(job, { load = state.settings.preview } = {}) {
+  if (!job) return
+  selectedId = job.id
+  if (embedId !== job.id) { $('#embed-container').replaceChildren(); embedId = null }
+  markSelected(); renderPreview()
+  if (load) loadPreview()
+}
 function renderPreview() {
   const job = state.jobs.find(job => job.id === selectedId)
   $('#preview-button').disabled = !job
@@ -34,9 +47,9 @@ function renderPreview() {
   $('#spotify-link').hidden = !job
   if (job) $('#spotify-link').href = job.url
 }
-function loadPreview() {
+function loadPreview({ force = false } = {}) {
   const job = state.jobs.find(job => job.id === selectedId)
-  if (!job || embedId === job.id) return
+  if (!job || (!force && embedId === job.id)) return
   const frame = document.createElement('iframe'); frame.src = spotifyLink(job.url).embed; frame.title = t('Spotify preview'); frame.allow = 'encrypted-media; fullscreen; picture-in-picture'; frame.referrerPolicy = 'no-referrer'
   $('#embed-container').replaceChildren(frame); embedId = job.id; renderPreview()
 }
@@ -45,8 +58,8 @@ async function addLink() {
   const link = validInput()
   if (!link) { $('#input-error').textContent = t('Please paste a valid Spotify link.'); $('#input-error').hidden = false; $('#spotify-url').setAttribute('aria-invalid','true'); $('#spotify-url').focus(); return null }
   let job
-  if (bridge) { update(await bridge.enqueue(link.url)); job = state.jobs.find(job => job.url === link.url && job.status === 'queued') }
-  else { job = state.jobs.find(job => job.url === link.url); if (!job) { job = { id: crypto.randomUUID(), url: link.url, type: link.type, title: `Spotify ${t(link.label)}`, status:'preview', settings:{...state.settings}, tracks:[], logs:[], saved:0 }; state.jobs.unshift(job) } }
+  if (bridge) { update(await bridge.enqueue(link.url)); job = state.jobs.find(job => job.url === link.url && ['queued','running'].includes(job.status)) }
+  else { job = state.jobs.find(job => job.url === link.url); if (!job) { job = { id: `preview-${++previewSequence}`, url: link.url, type: link.type, title: `Spotify ${t(link.label)}`, status:'preview', settings:{...state.settings}, tracks:[], logs:[], saved:0 }; state.jobs.unshift(job) } }
   $('#spotify-url').value = ''; $('#input-error').hidden = true; $('#spotify-url').removeAttribute('aria-invalid'); updateView('queue'); setSelected(job); toast('Added to your queue.'); return job
 }
 async function start() {
@@ -54,10 +67,10 @@ async function start() {
   if (state.running) { update(await bridge.pauseAll()); return }
   if (validInput()) await addLink()
   const first = [...state.jobs].reverse().find(job => job.status === 'queued')
-  if (first) { setSelected(first); if (state.settings.preview) loadPreview() }
+  if (first) setSelected(first)
   update(await bridge.start())
 }
-async function retry(job, trackId = null) { setSelected(job); if (state.settings.preview) loadPreview(); update(await bridge.resume(job.id, trackId)); update(await bridge.start()) }
+async function retry(job, trackId = null) { setSelected(job); update(await bridge.resume(job.id, trackId)); update(await bridge.start()) }
 function rowShell(title, symbol, failed = false) {
   const item = node('li', 'song-row'); const art = node('span', 'row-symbol' + (failed ? ' failed' : '')); art.append(icon(symbol)); const copy = node('div','row-copy'); copy.append(node('strong','', title)); const controls = node('div','row-actions'); item.append(art,copy,controls); return {item,copy,controls}
 }
@@ -65,10 +78,12 @@ function renderJobs(list) {
   for (const job of state.jobs.slice(0,limit)) {
     const {item,copy,controls} = rowShell(job.title, job.type === 'track' ? 'music-2' : 'list-music', job.status === 'failed')
     item.className = 'job-row'; item.dataset.job = job.id
-    const select = node('button','row-title'); select.append(copy.firstChild); copy.prepend(select); select.addEventListener('click', () => setSelected(job))
+    const select = node('button','row-title'); select.append(copy.firstChild); copy.prepend(select); select.setAttribute('aria-pressed',String(selectedId===job.id)); select.addEventListener('click', () => setSelected(job,{load:true})); item.classList.toggle('preview-selected',selectedId===job.id); item.addEventListener('click',event=>{if(!event.target.closest('button,a,input,select'))setSelected(job,{load:true})})
     copy.append(node('span','subtle', `${t(spotifyLink(job.url).label)} · ${job.settings.format.toUpperCase()}`), node('span',`row-status ${job.status}`, t(statuses[job.status] || 'Ready')))
-    if (bridge && ['queued','running'].includes(job.status)) controls.append(button('Pause downloads','pause', async () => update(await bridge.cancel(job.id))))
-    else if (bridge) controls.append(button('Retry','rotate-ccw', () => retry(job)))
+    if (bridge && ['queued','running'].includes(job.status)) {
+      const pause=button(job.cancelled?'Pausing…':'Pause downloads','pause',async()=>update(await bridge.cancel(job.id)))
+      pause.disabled=!!job.cancelled; pause.setAttribute('aria-label',`${t(job.cancelled?'Pausing…':'Pause downloads')}: ${job.title}`); pause.title=pause.getAttribute('aria-label'); controls.append(pause)
+    } else if (bridge) controls.append(button(job.status==='paused'?'Resume':'Retry',job.status==='paused'?'play':'rotate-ccw', () => retry(job)))
     controls.append(button('Details','more-horizontal', () => { detailId = job.id; renderDetails(); $('#details-dialog').showModal() }))
     if (job.status !== 'running') controls.append(button('Remove','x', async () => { if (bridge) update(await bridge.remove(job.id)); else { state.jobs = state.jobs.filter(item => item.id !== job.id); render() } }))
     if (job.message) item.append(node('p','row-message'+(job.status === 'failed' ? ' error' : ''), translateMessage(job.message)))
@@ -126,7 +141,7 @@ function render() {
   $('#collection-title').removeAttribute('data-i18n'); $('#collection-title').textContent = t(titles[view])
   $('#collection-subtitle').textContent = view==='queue' ? state.running ? t('Working on your music') : t('{count} downloads',{count:number(state.jobs.length)}) : view==='saved' ? t('Only complete, verified audio files appear here.') : t('Downloads continue when a song fails. You can retry these songs individually or together.')
   $('#start-button').hidden = view!=='queue'; $('#refresh-library').hidden = view!=='saved'; $('#retry-failed').hidden = view!=='failed'
-  $('#start-button span').removeAttribute('data-i18n'); $('#start-button span').textContent = t(!bridge ? 'Download app' : state.running ? 'Pause downloads' : 'Start downloads')
+  $('#start-button span').removeAttribute('data-i18n'); $('#start-button span').textContent = t(!bridge ? 'Download app' : state.running ? 'Pause downloads' : 'Start downloads') + (bridge && state.running ? ' · '+t('All downloads') : '')
   $('#start-button').disabled = !!bridge && !state.running && ((!state.jobs.some(job=>job.status==='queued') && !validInput()) || !state.health.engine || !state.health.ffmpeg || !state.health.deno || !!state.health.error || !state.health.checked)
   $('#refresh-library').disabled = !bridge || state.library.loading; $('#retry-failed').disabled = !bridge || !missing || state.running; $('#song-search').hidden = view!=='saved'
   const list = $('#collection-list'); const focused = document.activeElement?.closest('[data-job]')?.dataset.job; const focusedLabel = document.activeElement?.getAttribute('aria-label'); list.replaceChildren()
@@ -180,7 +195,7 @@ $('#import-form').addEventListener('submit',event=>{event.preventDefault();void 
 $('#spotify-url').addEventListener('input',()=>{$('#input-error').hidden=true;if($('#spotify-url').value.trim()===pendingClipboardLink){pendingClipboardLink=null;$('#clipboard-prompt').hidden=true}render()})
 $('#clipboard-accept').addEventListener('click',()=>{if(pendingClipboardLink)acceptClipboard(pendingClipboardLink)})
 $('#start-button').addEventListener('click',()=>void action(start))
-$('#preview-button').addEventListener('click',loadPreview)
+$('#preview-button').addEventListener('click',()=>loadPreview({force:true}))
 $('#refresh-library').addEventListener('click',()=>void action(async()=>update(await bridge.library())))
 $('#song-search').addEventListener('input',()=>{limit=50;render()})
 $('#show-more').addEventListener('click',()=>{limit+=50;render()})

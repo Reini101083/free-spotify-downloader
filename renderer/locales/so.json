@@ -194,5 +194,6 @@
   "Audio provider error": "Qaladka bixiyaha maqalka",
   "Cookie session cleared.": "Fadhiga kukiyada waa la nadiifiyay.",
   "Download list": "Liiska soo dejiso",
-  "Version": "Nooca"
+  "Version": "Nooca",
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Gelitaanka ikhtiyaariga ahi wuxuu yarayn karaa CAPTCHA, laakiin isticmaalka akoonku wuxuu keeni karaa xannibaad ku meel gaar ah ama joogto ah. Ka fogow akoonkaaga ugu weyn; akoonnada goonida ahna khatar bay ku jiraan."
 }

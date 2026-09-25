@@ -194,5 +194,6 @@
   "Audio provider error": "ऑडियो प्रदाता त्रुटि",
   "Cookie session cleared.": "कुकी सत्र साफ़ हो गया।",
   "Download list": "डाउनलोड सूची",
-  "Version": "संस्करण"
+  "Version": "संस्करण",
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "वैकल्पिक साइन-इन से CAPTCHA कम हो सकते हैं, लेकिन खाते के उपयोग से अस्थायी या स्थायी निलंबन हो सकता है। अपना मुख्य खाता न इस्तेमाल करें; अलग खाते भी जोखिम में हैं।"
 }

@@ -194,5 +194,6 @@
   "Audio provider error": "Памылка пастаўшчыка аўдыя",
   "Cookie session cleared.": "Сеанс файлаў cookie выдалены.",
   "Download list": "Спампаваць спіс",
-  "Version": "Версія"
+  "Version": "Версія",
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Неабавязковы ўваход можа скараціць праверкі CAPTCHA, але выкарыстанне ўліковага запісу пагражае часовай або пастаяннай блакіроўкай. Не выкарыстоўвайце асноўны запіс; асобныя запісы таксама пад пагрозай."
 }

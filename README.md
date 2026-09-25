@@ -2,18 +2,18 @@
 
 A desktop music workspace by **Jedi Meister**. Original application code licensed under **MIT**.
 
-Windows · macOS · Linux · 79 bundled interface languages
+Windows · macOS · Linux · 82 bundled interface languages
 
 ## Download
 
 [**Choose your operating system on the latest release page**](https://github.com/Reini101083/free-spotify-downloader/releases/latest)
 
-| Operating system | Download version 0.2.2 |
+| Operating system | Download version 0.2.3 |
 | --- | --- |
-| Windows · Intel / AMD 64-bit | [Installer](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.2/Free-Spotify-Downloader-0.2.2-windows-x64-setup.exe) · [Portable](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.2/Free-Spotify-Downloader-0.2.2-windows-x64-portable.exe) |
-| Mac · Apple Silicon | [DMG](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.2/Free-Spotify-Downloader-0.2.2-mac-arm64.dmg) |
-| Mac · Intel | [DMG](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.2/Free-Spotify-Downloader-0.2.2-mac-x64.dmg) |
-| Linux · x86_64 | [AppImage](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.2/Free-Spotify-Downloader-0.2.2-linux-x86_64.AppImage) · [DEB](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.2/Free-Spotify-Downloader-0.2.2-linux-amd64.deb) |
+| Windows · Intel / AMD 64-bit | [Installer](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.3/Free-Spotify-Downloader-0.2.3-windows-x64-setup.exe) · [Portable](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.3/Free-Spotify-Downloader-0.2.3-windows-x64-portable.exe) |
+| Mac · Apple Silicon | [DMG](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.3/Free-Spotify-Downloader-0.2.3-mac-arm64.dmg) |
+| Mac · Intel | [DMG](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.3/Free-Spotify-Downloader-0.2.3-mac-x64.dmg) |
+| Linux · x86_64 | [AppImage](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.3/Free-Spotify-Downloader-0.2.3-linux-x86_64.AppImage) · [DEB](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.3/Free-Spotify-Downloader-0.2.3-linux-amd64.deb) |
 
 No GitHub account is required. [Older versions](https://github.com/Reini101083/free-spotify-downloader/releases) remain available separately. **Source code (zip)** contains source code, not an installer. Each release includes SHA-256 checksums. Python, FFmpeg and Deno are included.
 
@@ -57,9 +57,15 @@ No CAPTCHA is solved automatically. The remote YouTube page has no Node access o
 
 Spotify supplies metadata. The spotDL engine matches audio from YouTube/YouTube Music; this app does not export Spotify's audio stream. Availability, matching and source quality vary. A higher bitrate or FLAC/WAV conversion cannot restore quality absent from the source. Download content you own or have permission to save.
 
+The labeled **Settings** button is directly below the format/bitrate display. Adding a playlist loads its preview when automatic previews are enabled; selecting a queue item loads that item. **Load preview** remains available to reload Spotify. Playback never starts automatically.
+
+A playlist’s pause button affects only that playlist. The header pause command explicitly targets **All downloads**. Already completed files remain available when resuming.
+
+Optional YouTube sign-in may reduce CAPTCHA checks but is not guaranteed to do so. Using an account with the download provider may lead to temporary or permanent suspension. Avoid a main account; separate accounts are also at risk. This warning appears in every bundled language before session approval.
+
 ### Languages
 
-This release bundles **79 complete interface catalogs**, available offline. English is the source language and German has been editorially reviewed. Other catalogs are machine translated and may contain mistakes. Native operating-system dialogs and provider diagnostics can use the system language or English.
+This release bundles **82 complete interface catalogs**, available offline. English is the source language and German has been editorially reviewed. Other catalogs are machine translated and may contain mistakes. Native operating-system dialogs and provider diagnostics can use the system language or English.
 
 The requested target of 160 languages is not yet reached. Incomplete catalogs are excluded from the selector. Translations are generated during development; using the app does not send song titles, links or other user data to a translation service. See `renderer/locales/languages.json` for the exact list.
 

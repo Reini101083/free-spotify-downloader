@@ -194,5 +194,6 @@
   "Audio provider error": "Error sa provider ng audio",
   "Cookie session cleared.": "Na-clear ang session ng cookie.",
   "Download list": "Listahan ng pag-download",
-  "Version": "Bersyon"
+  "Version": "Bersyon",
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Maaaring mabawasan ang CAPTCHA sa opsyonal na pag-sign in, pero maaaring pansamantala o permanenteng masuspinde ang account. Iwasang gamitin ang pangunahing account; may panganib din sa hiwalay na account."
 }

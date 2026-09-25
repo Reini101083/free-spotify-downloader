@@ -194,5 +194,6 @@
   "Audio provider error": "Gwall darparwr sain",
   "Cookie session cleared.": "Sesiwn cwci wedi'i glirio.",
   "Download list": "Rhestr llwytho i lawr",
-  "Version": "Fersiwn"
+  "Version": "Fersiwn",
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Gall mewngofnodi dewisol leihau CAPTCHA, ond gall defnyddio cyfrif arwain at atal dros dro neu barhaol. Osgoi dy brif gyfrif; mae cyfrifon ar wahân hefyd mewn perygl."
 }

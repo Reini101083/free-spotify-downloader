@@ -194,5 +194,6 @@
   "Audio provider error": "ଅଡିଓ ପ୍ରଦାନକାରୀ ତ୍ରୁଟି |",
   "Cookie session cleared.": "କୁକି ଅଧିବେଶନ ସଫା ହେଲା |",
   "Download list": "ଡାଉନଲୋଡ୍ ତାଲିକା |",
-  "Version": "ସଂସ୍କରଣ |"
+  "Version": "ସଂସ୍କରଣ |",
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "ଇଚ୍ଛାଧୀନ ସାଇନ୍-ଇନ୍ CAPTCHA କମାଇପାରେ, କିନ୍ତୁ ଖାତା ବ୍ୟବହାରରେ ଅସ୍ଥାୟୀ କିମ୍ବା ସ୍ଥାୟୀ ନିଲମ୍ବନ ହୋଇପାରେ। ମୁଖ୍ୟ ଖାତା ବ୍ୟବହାର କରନ୍ତୁ ନାହିଁ; ଅଲଗା ଖାତା ମଧ୍ୟ ବିପଦରେ ଅଛି।"
 }

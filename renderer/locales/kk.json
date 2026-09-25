@@ -194,5 +194,6 @@
   "Audio provider error": "Аудио провайдер қатесі",
   "Cookie session cleared.": "Cookie сеансы тазартылды.",
   "Download list": "Жүктеп алу тізімі",
-  "Version": "Нұсқа"
+  "Version": "Нұсқа",
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Қалауыңызша кіру CAPTCHA санын азайтуы мүмкін, бірақ есептік жазбаны пайдалану уақытша не тұрақты бұғаттауға әкелуі мүмкін. Негізгі жазбаңызды қолданбаңыз; бөлек жазбаларға да қауіп бар."
 }
