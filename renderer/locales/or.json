@@ -195,5 +195,10 @@
   "Cookie session cleared.": "କୁକି ଅଧିବେଶନ ସଫା ହେଲା |",
   "Download list": "ଡାଉନଲୋଡ୍ ତାଲିକା |",
   "Version": "ସଂସ୍କରଣ |",
-  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "ଇଚ୍ଛାଧୀନ ସାଇନ୍-ଇନ୍ CAPTCHA କମାଇପାରେ, କିନ୍ତୁ ଖାତା ବ୍ୟବହାରରେ ଅସ୍ଥାୟୀ କିମ୍ବା ସ୍ଥାୟୀ ନିଲମ୍ବନ ହୋଇପାରେ। ମୁଖ୍ୟ ଖାତା ବ୍ୟବହାର କରନ୍ତୁ ନାହିଁ; ଅଲଗା ଖାତା ମଧ୍ୟ ବିପଦରେ ଅଛି।"
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "ଇଚ୍ଛାଧୀନ ସାଇନ୍-ଇନ୍ CAPTCHA କମାଇପାରେ, କିନ୍ତୁ ଖାତା ବ୍ୟବହାରରେ ଅସ୍ଥାୟୀ କିମ୍ବା ସ୍ଥାୟୀ ନିଲମ୍ବନ ହୋଇପାରେ। ମୁଖ୍ୟ ଖାତା ବ୍ୟବହାର କରନ୍ତୁ ନାହିଁ; ଅଲଗା ଖାତା ମଧ୍ୟ ବିପଦରେ ଅଛି।",
+  "One at a time. The next download starts automatically.": "ଏକ ସମୟରେ ଗୋଟିଏ ଡାଉନଲୋଡ୍। ପରବର୍ତ୍ତୀ ଡାଉନଲୋଡ୍ ଆପେଆପେ ଆରମ୍ଭ ହେବ।",
+  "Up next": "ପରବର୍ତ୍ତୀ",
+  "Waiting": "ଅପେକ୍ଷାରେ",
+  "Queue position {position}": "ଧାଡ଼ିରେ ସ୍ଥାନ: {position}",
+  "Maximum 100 open downloads.": "ସର୍ବାଧିକ 100ଟି ଅସମ୍ପୂର୍ଣ୍ଣ ଡାଉନଲୋଡ୍।"
 }

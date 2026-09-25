@@ -195,5 +195,10 @@
   "Cookie session cleared.": "Kua whakawāteatia te wātū pihikete.",
   "Download list": "Rarangi tikiake",
   "Version": "Putanga",
-  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Ka iti ake pea ngā CAPTCHA mā te takiuru kōwhiringa, engari ka aukatihia pea te pūkete mō tētahi wā, mō ake tonu rānei. Kaua e whakamahi i tō pūkete matua; he tūraru anō ki ngā pūkete motuhake."
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Ka iti ake pea ngā CAPTCHA mā te takiuru kōwhiringa, engari ka aukatihia pea te pūkete mō tētahi wā, mō ake tonu rānei. Kaua e whakamahi i tō pūkete matua; he tūraru anō ki ngā pūkete motuhake.",
+  "One at a time. The next download starts automatically.": "Kotahi i ia wā. Ka tīmata aunoa te tikiake e whai ake nei.",
+  "Up next": "E whai ake nei",
+  "Waiting": "E tatari ana",
+  "Queue position {position}": "Tūranga i te rārangi: {position}",
+  "Maximum 100 open downloads.": "Kia 100 te mōrahi o ngā tikiake e tuwhera ana."
 }

@@ -195,5 +195,10 @@
   "Cookie session cleared.": "Sesiwn cwci wedi'i glirio.",
   "Download list": "Rhestr llwytho i lawr",
   "Version": "Fersiwn",
-  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Gall mewngofnodi dewisol leihau CAPTCHA, ond gall defnyddio cyfrif arwain at atal dros dro neu barhaol. Osgoi dy brif gyfrif; mae cyfrifon ar wahân hefyd mewn perygl."
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Gall mewngofnodi dewisol leihau CAPTCHA, ond gall defnyddio cyfrif arwain at atal dros dro neu barhaol. Osgoi dy brif gyfrif; mae cyfrifon ar wahân hefyd mewn perygl.",
+  "One at a time. The next download starts automatically.": "Un ar y tro. Bydd y lawrlwythiad nesaf yn dechrau'n awtomatig.",
+  "Up next": "Nesaf",
+  "Waiting": "Yn aros",
+  "Queue position {position}": "Safle yn y ciw: {position}",
+  "Maximum 100 open downloads.": "Uchafswm o 100 o lawrlwythiadau heb eu cwblhau."
 }

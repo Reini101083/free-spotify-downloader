@@ -195,5 +195,10 @@
   "Cookie session cleared.": "جلسه کوکی پاک شد.",
   "Download list": "لیست دانلود",
   "Version": "نسخه",
-  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "ورود اختیاری ممکن است کپچاها را کاهش دهد، اما استفاده از حساب می‌تواند باعث مسدودشدن موقت یا دائمی آن شود. از حساب اصلی استفاده نکنید؛ حساب‌های جداگانه هم در خطرند."
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "ورود اختیاری ممکن است کپچاها را کاهش دهد، اما استفاده از حساب می‌تواند باعث مسدودشدن موقت یا دائمی آن شود. از حساب اصلی استفاده نکنید؛ حساب‌های جداگانه هم در خطرند.",
+  "One at a time. The next download starts automatically.": "هر بار یک دانلود. دانلود بعدی خودکار شروع می‌شود.",
+  "Up next": "بعدی",
+  "Waiting": "در انتظار",
+  "Queue position {position}": "جایگاه در صف: {position}",
+  "Maximum 100 open downloads.": "حداکثر 100 دانلود ناتمام."
 }

@@ -195,5 +195,10 @@
   "Cookie session cleared.": "Сесијата за колачиња е исчистена.",
   "Download list": "Список за преземање",
   "Version": "Верзија",
-  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Незадолжителното најавување може да ги намали CAPTCHA проверките, но користењето сметка може да доведе до привремена или трајна блокада. Избегнувај ја главната сметка; и посебните сметки се изложени на ризик."
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Незадолжителното најавување може да ги намали CAPTCHA проверките, но користењето сметка може да доведе до привремена или трајна блокада. Избегнувај ја главната сметка; и посебните сметки се изложени на ризик.",
+  "One at a time. The next download starts automatically.": "Едно преземање во исто време. Следното започнува автоматски.",
+  "Up next": "Следно",
+  "Waiting": "На чекање",
+  "Queue position {position}": "Место во редицата: {position}",
+  "Maximum 100 open downloads.": "Најмногу 100 незавршени преземања."
 }

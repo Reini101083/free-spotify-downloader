@@ -6,7 +6,7 @@ import os from 'node:os'
 import path from 'node:path'
 import { DownloadQueue } from '../shared/queue.mjs'
 import { AtomicStore } from '../shared/store.mjs'
-import { spotifyLink } from '../shared/domain.mjs'
+import { spotifyLink, MAX_OPEN_DOWNLOADS, queuedDownloads } from '../shared/domain.mjs'
 const link = 'https://open.spotify.com/track/1234567890123456789012'
 const other = 'https://open.spotify.com/track/abcdefghijklmnopqrstuv'
 const flush = () => new Promise(resolve => setImmediate(resolve))
@@ -126,13 +126,130 @@ test('pausing a waiting playlist leaves the active playlist alone', async () => 
   output(children[0],{type:'summary',saved:1,existing:0,skipped:0});children[0].emit('close',0);await flush()
   assert.equal(first.status,'completed');assert.equal(second.status,'paused');assert.equal(children.length,1)
 })
-test('global pause stops active and waiting playlists without launching another worker',async()=>{
+test('global pause stops every playlist and resume retains FIFO order and the original session',async()=>{
   const {queue,children}=setup();const first=queue.enqueue(link);const second=queue.enqueue(other)
   queue.start();await flush();queue.stopAll();children[0].emit('close',1);await flush()
   assert.equal(first.status,'paused');assert.equal(second.status,'paused');assert.equal(queue.running,false);assert.equal(children.length,1)
+  for(const job of queue.jobs.filter(job=>job.status==='paused'))queue.resume(job.id)
+  queue.start();await flush();assert.equal(queue.active.job.id,first.id);assert.equal(children.length,2)
+  assert.equal(children[1].args[children[1].args.indexOf('--session')+1],children[0].args[children[0].args.indexOf('--session')+1])
+  output(children[1],{type:'summary',saved:0,existing:1,skipped:0});children[1].emit('close',0);await flush()
+  assert.equal(first.status,'completed');assert.equal(queue.active.job.id,second.id);assert.equal(children.length,3)
+  children[2].emit('close',1)
 })
 test('a final summary without a newline is processed before closing',async()=>{
   const {queue,children}=setup();const job=queue.enqueue(link);queue.start();await flush()
   children[0].stdout.emit('data',Buffer.from('FSD_EVENT '+JSON.stringify({type:'summary',saved:1,existing:0,skipped:0})))
   children[0].emit('close',0);assert.equal(job.status,'completed')
+})
+
+const playlist = index => `https://open.spotify.com/playlist/${String(index).padStart(22, '0')}`
+
+test('100 playlists run in FIFO order with exactly one worker, even after repeated start requests', async () => {
+  const { queue, children } = setup()
+  const jobs = Array.from({ length: MAX_OPEN_DOWNLOADS }, (_, index) => queue.enqueue(playlist(index)))
+  assert.equal(jobs.length, 100)
+  assert.deepEqual(queuedDownloads(queue.jobs).map(job => job.id), jobs.map(job => job.id))
+  assert.throws(() => queue.enqueue(playlist(100)), /Maximum 100 open downloads\./)
+  queue.start(); queue.start(); void queue.next()
+  for (let index = 0; index < jobs.length; index++) {
+    await flush()
+    assert.equal(children.length, index + 1)
+    assert.equal(queue.active.job.id, jobs[index].id)
+    assert.equal(queue.jobs.filter(job => job.status === 'running').length, 1)
+    assert.equal(children[index].args[children[index].args.indexOf('--url') + 1], playlist(index))
+    queue.start(); void queue.next(); await flush()
+    assert.equal(children.length, index + 1)
+    output(children[index], { type: 'summary', saved: 1, existing: 0, skipped: 0 })
+    children[index].emit('close', 0)
+  }
+  await flush()
+  assert.ok(jobs.every(job => job.status === 'completed'))
+  assert.equal(queue.active, null)
+  assert.equal(queue.running, false)
+  assert.equal(children.length, 100)
+})
+
+test('restoring history never discards any of the 100 waiting playlists', () => {
+  const { queue } = setup()
+  const open = Array.from({ length: 100 }, (_, index) => queue.enqueue(playlist(index)))
+  const history = Array.from({ length: 100 }, (_, index) => {
+    const historical = setup().queue.enqueue(playlist(index + 100))
+    historical.status = 'completed'
+    return historical
+  })
+  const restored = setup({ jobs: [...history, ...queue.jobs] }).queue
+  assert.equal(restored.jobs.filter(job => job.status === 'paused').length, 100)
+  assert.equal(restored.jobs.filter(job => job.status === 'completed').length, 100)
+  for (const job of restored.jobs.filter(job => job.status === 'paused')) restored.resume(job.id)
+  assert.deepEqual(queuedDownloads(restored.jobs).map(job => job.id), open.map(job => job.id))
+})
+
+test('paused and blocked playlists reserve capacity and retries cannot exceed 100 open downloads', () => {
+  const { queue } = setup()
+  const historical = queue.enqueue(playlist(100)); historical.status = 'failed'
+  const jobs = Array.from({ length: 100 }, (_, index) => queue.enqueue(playlist(index)))
+  queue.cancel(jobs[0].id); jobs[1].status = 'blocked'
+  assert.throws(() => queue.enqueue(playlist(101)), /Maximum 100 open downloads\./)
+  assert.throws(() => queue.resume(historical.id), /Maximum 100 open downloads\./)
+  queue.resume(jobs[0].id); queue.resume(jobs[1].id)
+  assert.equal(queuedDownloads(queue.jobs).length, 100)
+  queue.remove(jobs[2].id); queue.resume(historical.id)
+  assert.equal(queuedDownloads(queue.jobs).length, 100)
+})
+
+test('a blocked playlist cannot be enqueued again while waiting for confirmation', () => {
+  const { queue } = setup(); const job = queue.enqueue(link); job.status = 'blocked'
+  assert.throws(() => queue.enqueue(link), /already in your queue/)
+})
+
+test('pause and immediate resume cannot revive a stale launch while cookies are being prepared', async () => {
+  let releasePreparation, released = 0, preparations = 0
+  const waiting = new Promise(resolve => { releasePreparation = resolve })
+  const { queue, children } = setup({ prepareCookies: async () => {
+    if (++preparations === 1) { await waiting; return { file: '/private/stale.txt', release: async () => { released++ } } }
+    return null
+  } })
+  const first = queue.enqueue(link); const second = queue.enqueue(other)
+  queue.start(); await flush(); queue.cancel(first.id); queue.resume(first.id); queue.start()
+  releasePreparation(); await flush(); await flush()
+  assert.equal(released, 1)
+  assert.equal(preparations, 2)
+  assert.equal(children.length, 1)
+  assert.equal(queue.active.job.id, first.id)
+  assert.equal(children[0].args.includes('/private/stale.txt'), false)
+  output(children[0], { type: 'summary', saved: 1, existing: 0, skipped: 0 }); children[0].emit('close', 0); await flush()
+  assert.equal(queue.active.job.id, second.id); assert.equal(children.length, 2)
+  children[1].emit('close', 1)
+})
+
+test('a paused launch with a failed pending write stays paused and advances to the next playlist', async () => {
+  let rejectWrite, writes = 0
+  const waiting = new Promise((_resolve, reject) => { rejectWrite = reject })
+  const { queue, children } = setup({ persist: () => ++writes === 1 ? waiting : Promise.resolve() })
+  const first = queue.enqueue(link); const second = queue.enqueue(other)
+  queue.start(); queue.cancel(first.id); rejectWrite(new Error('pending write failed')); await flush()
+  assert.equal(first.status, 'paused'); assert.equal(second.status, 'running'); assert.equal(children.length, 1)
+  children[0].emit('close', 1)
+})
+
+test('worker errors wait for process close before the next playlist starts', async () => {
+  const { queue, children } = setup(); const first = queue.enqueue(link); const second = queue.enqueue(other)
+  queue.start(); await flush(); children[0].emit('error', new Error('worker error')); await flush()
+  assert.equal(children.length, 1); assert.equal(queue.active.job.id, first.id)
+  children[0].emit('close', 1); await flush()
+  assert.equal(first.status, 'failed'); assert.equal(second.status, 'running'); assert.equal(children.length, 2)
+  children[1].emit('close', 1)
+})
+
+test('global pause during session preparation cannot start a worker or fail cookie cleanup', async () => {
+  let releasePreparation
+  const waiting = new Promise(resolve => { releasePreparation = resolve })
+  const { queue, children } = setup({ prepareCookies: async () => {
+    await waiting; return { file: '/private/unused.txt', release: async () => { throw new Error('cleanup failed') } }
+  } })
+  const first = queue.enqueue(link); const second = queue.enqueue(other)
+  queue.start(); await flush(); queue.stopAll(); releasePreparation(); await flush()
+  assert.equal(first.status, 'paused'); assert.equal(second.status, 'paused'); assert.equal(children.length, 0)
+  assert.equal(queue.running, false); assert.equal(queue.launching, false)
 })

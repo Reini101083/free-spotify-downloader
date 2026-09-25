@@ -1,7 +1,7 @@
 {
   "name": "free-spotify-downloader",
   "productName": "Free Spotify Downloader",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "private": true,
   "description": "Your music, your collection. A desktop music workspace by Jedi Meister.",
   "author": {

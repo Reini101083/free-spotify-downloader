@@ -195,5 +195,10 @@
   "Cookie session cleared.": "Kukiler sessiýasy arassalandy.",
   "Download list": "Göçürip almagyň sanawy",
   "Version": "Wersiýa",
-  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Islege görä giriş CAPTCHA-lary azaldyp biler, ýöne hasaby ulanmak wagtlaýyn ýa-da hemişelik petiklenmä sebäp bolup biler. Esasy hasabyňyzy ulanmaň; aýratyn hasaplar hem töwekgelçilikde."
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Islege görä giriş CAPTCHA-lary azaldyp biler, ýöne hasaby ulanmak wagtlaýyn ýa-da hemişelik petiklenmä sebäp bolup biler. Esasy hasabyňyzy ulanmaň; aýratyn hasaplar hem töwekgelçilikde.",
+  "One at a time. The next download starts automatically.": "Bir gezekde biri. Indiki göçürip alma awtomatik başlanýar.",
+  "Up next": "Indiki",
+  "Waiting": "Garaşýar",
+  "Queue position {position}": "Nobatdaky orun: {position}",
+  "Maximum 100 open downloads.": "Iň köp 100 tamamlanmadyk göçürip alma."
 }

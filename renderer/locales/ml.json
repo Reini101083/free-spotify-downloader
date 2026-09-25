@@ -195,5 +195,10 @@
   "Cookie session cleared.": "കുക്കി സെഷൻ മായ്‌ച്ചു.",
   "Download list": "ഡൗൺലോഡ് ലിസ്റ്റ്",
   "Version": "പതിപ്പ്",
-  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "ഐച്ഛിക സൈൻ-ഇൻ CAPTCHA കുറച്ചേക്കാം, എന്നാൽ അക്കൗണ്ട് ഉപയോഗിക്കുന്നത് താൽക്കാലികമോ സ്ഥിരമോ ആയ വിലക്കിന് കാരണമാകാം. പ്രധാന അക്കൗണ്ട് ഒഴിവാക്കുക; വേറിട്ട അക്കൗണ്ടുകൾക്കും അപകടസാധ്യതയുണ്ട്."
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "ഐച്ഛിക സൈൻ-ഇൻ CAPTCHA കുറച്ചേക്കാം, എന്നാൽ അക്കൗണ്ട് ഉപയോഗിക്കുന്നത് താൽക്കാലികമോ സ്ഥിരമോ ആയ വിലക്കിന് കാരണമാകാം. പ്രധാന അക്കൗണ്ട് ഒഴിവാക്കുക; വേറിട്ട അക്കൗണ്ടുകൾക്കും അപകടസാധ്യതയുണ്ട്.",
+  "One at a time. The next download starts automatically.": "ഒരേസമയം ഒരു ഡൗൺലോഡ്. അടുത്ത ഡൗൺലോഡ് സ്വയമേവ ആരംഭിക്കും.",
+  "Up next": "അടുത്തത്",
+  "Waiting": "കാത്തിരിക്കുന്നു",
+  "Queue position {position}": "ക്യൂവിലെ സ്ഥാനം: {position}",
+  "Maximum 100 open downloads.": "പരമാവധി 100 പൂർത്തിയാകാത്ത ഡൗൺലോഡുകൾ."
 }

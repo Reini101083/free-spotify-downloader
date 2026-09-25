@@ -195,5 +195,10 @@
   "Cookie session cleared.": "Voafafa ny session cookie.",
   "Download list": "Download lisitra",
   "Version": "Version",
-  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Mety hampihena CAPTCHA ny fidirana an-tsitrapo, saingy mety hampiato vonjimaika na mandrakizay ny kaonty ny fampiasana azy. Aza mampiasa ny kaonty fototra; tandindomin-doza koa ny kaonty misaraka."
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Mety hampihena CAPTCHA ny fidirana an-tsitrapo, saingy mety hampiato vonjimaika na mandrakizay ny kaonty ny fampiasana azy. Aza mampiasa ny kaonty fototra; tandindomin-doza koa ny kaonty misaraka.",
+  "One at a time. The next download starts automatically.": "Iray isaky ny mandeha. Manomboka ho azy ny fampidinana manaraka.",
+  "Up next": "Manaraka",
+  "Waiting": "Miandry",
+  "Queue position {position}": "Laharana amin'ny filaharana: {position}",
+  "Maximum 100 open downloads.": "Fampidinana misokatra 100 raha be indrindra."
 }

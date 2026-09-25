@@ -195,5 +195,10 @@
   "Cookie session cleared.": "Hoʻopau ʻia ke kau kuki.",
   "Download list": "Hoʻoiho i ka papa inoa",
   "Version": "Manao",
-  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Hiki i ke komo koho ke hoʻēmi i nā CAPTCHA, akā hiki ke kāpae ʻia ka moʻokāki no kekahi manawa a mau loa paha. Mai hoʻohana i kāu moʻokāki nui; pilikia pū nā moʻokāki kaʻawale."
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Hiki i ke komo koho ke hoʻēmi i nā CAPTCHA, akā hiki ke kāpae ʻia ka moʻokāki no kekahi manawa a mau loa paha. Mai hoʻohana i kāu moʻokāki nui; pilikia pū nā moʻokāki kaʻawale.",
+  "One at a time. The next download starts automatically.": "Hoʻokahi i ka manawa. E hoʻomaka ʻakomi ka hoʻoiho aʻe.",
+  "Up next": "Aʻe",
+  "Waiting": "Ke kali nei",
+  "Queue position {position}": "Kūlana ma ka lālani: {position}",
+  "Maximum 100 open downloads.": "He 100 hoʻoiho hāmama ka palena kiʻekiʻe."
 }

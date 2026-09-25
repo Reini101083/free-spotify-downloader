@@ -195,5 +195,10 @@
   "Cookie session cleared.": "Сеанси куки тоза карда шуд.",
   "Download list": "Рӯйхати зеркашӣ",
   "Version": "Версия",
-  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Воридшавии ихтиёрӣ метавонад CAPTCHA-ро кам кунад, аммо истифодаи ҳисоб метавонад боиси басташавии муваққатӣ ё доимӣ гардад. Ҳисоби асосиро истифода набаред; ҳисобҳои ҷудогона низ зери хатаранд."
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Воридшавии ихтиёрӣ метавонад CAPTCHA-ро кам кунад, аммо истифодаи ҳисоб метавонад боиси басташавии муваққатӣ ё доимӣ гардад. Ҳисоби асосиро истифода набаред; ҳисобҳои ҷудогона низ зери хатаранд.",
+  "One at a time. The next download starts automatically.": "Яктоӣ. Боргирии навбатӣ ба таври худкор оғоз мешавад.",
+  "Up next": "Навбатӣ",
+  "Waiting": "Дар интизорӣ",
+  "Queue position {position}": "Ҷой дар навбат: {position}",
+  "Maximum 100 open downloads.": "Ҳадди аксар 100 боргирии нотамом."
 }

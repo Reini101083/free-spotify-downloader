@@ -195,5 +195,10 @@
   "Cookie session cleared.": "Seisean briosgaid air fhuadach.",
   "Download list": "Liosta luchdachadh sìos",
   "Version": "Tionndadh",
-  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Dh’fhaodadh clàradh a-steach roghainneil CAPTCHA a lùghdachadh, ach dh’fhaodadh cleachdadh cunntais bacadh sealach no maireannach adhbharachadh. Seachain do phrìomh chunntas; tha cunntasan fa leth ann an cunnart cuideachd."
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Dh’fhaodadh clàradh a-steach roghainneil CAPTCHA a lùghdachadh, ach dh’fhaodadh cleachdadh cunntais bacadh sealach no maireannach adhbharachadh. Seachain do phrìomh chunntas; tha cunntasan fa leth ann an cunnart cuideachd.",
+  "One at a time. The next download starts automatically.": "Aon mu seach. Tòisichidh an ath luchdadh a-nuas gu fèin-obrachail.",
+  "Up next": "An ath fhear",
+  "Waiting": "A' feitheamh",
+  "Queue position {position}": "Ionad sa chiudha: {position}",
+  "Maximum 100 open downloads.": "100 luchdadh a-nuas fosgailte aig a' char as motha."
 }

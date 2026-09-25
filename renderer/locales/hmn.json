@@ -195,5 +195,10 @@
   "Cookie session cleared.": "Khob noom cookie session cleared.",
   "Download list": "Download list",
   "Version": "Kev",
-  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Kev nkag mus yog xaiv tau thiab tej zaum yuav txo CAPTCHA, tiam sis kev siv tus as khauj yuav ua rau raug ncua ib ntus lossis tas mus li. Tsis txhob siv koj tus as khauj tseem ceeb; lwm tus as khauj kuj muaj kev pheej hmoo."
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Kev nkag mus yog xaiv tau thiab tej zaum yuav txo CAPTCHA, tiam sis kev siv tus as khauj yuav ua rau raug ncua ib ntus lossis tas mus li. Tsis txhob siv koj tus as khauj tseem ceeb; lwm tus as khauj kuj muaj kev pheej hmoo.",
+  "One at a time. The next download starts automatically.": "Ib qho zuj zus. Qhov rub tawm tom ntej yuav pib nws tus kheej.",
+  "Up next": "Tom ntej",
+  "Waiting": "Tos",
+  "Queue position {position}": "Chaw nyob hauv kab: {position}",
+  "Maximum 100 open downloads.": "Tso cai rau ntau kawg 100 qhov rub tawm uas tseem qhib."
 }

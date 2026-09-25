@@ -195,5 +195,10 @@
   "Cookie session cleared.": "Sesioni i kukive u pastrua.",
   "Download list": "Lista e shkarkimeve",
   "Version": "Versioni",
-  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Hyrja opsionale mund të pakësojë CAPTCHA-t, por përdorimi i llogarisë mund të sjellë pezullim të përkohshëm ose të përhershëm. Shmang llogarinë kryesore; edhe llogaritë e veçanta rrezikohen."
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Hyrja opsionale mund të pakësojë CAPTCHA-t, por përdorimi i llogarisë mund të sjellë pezullim të përkohshëm ose të përhershëm. Shmang llogarinë kryesore; edhe llogaritë e veçanta rrezikohen.",
+  "One at a time. The next download starts automatically.": "Një shkarkim në të njëjtën kohë. Tjetri fillon automatikisht.",
+  "Up next": "Në vijim",
+  "Waiting": "Në pritje",
+  "Queue position {position}": "Pozicioni në radhë: {position}",
+  "Maximum 100 open downloads.": "Maksimumi 100 shkarkime të papërfunduara."
 }

@@ -195,5 +195,10 @@
   "Cookie session cleared.": "Cookie session cleared.",
   "Download list": "Λίστα λήψης",
   "Version": "Έκδοση",
-  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Η προαιρετική σύνδεση μπορεί να μειώσει τα CAPTCHA, αλλά η χρήση λογαριασμού ενέχει κίνδυνο προσωρινής ή μόνιμης αναστολής. Απόφυγε τον κύριο λογαριασμό σου· κινδυνεύουν και οι ξεχωριστοί λογαριασμοί."
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Η προαιρετική σύνδεση μπορεί να μειώσει τα CAPTCHA, αλλά η χρήση λογαριασμού ενέχει κίνδυνο προσωρινής ή μόνιμης αναστολής. Απόφυγε τον κύριο λογαριασμό σου· κινδυνεύουν και οι ξεχωριστοί λογαριασμοί.",
+  "One at a time. The next download starts automatically.": "Μία λήψη κάθε φορά. Η επόμενη ξεκινά αυτόματα.",
+  "Up next": "Επόμενη",
+  "Waiting": "Σε αναμονή",
+  "Queue position {position}": "Θέση στην ουρά: {position}",
+  "Maximum 100 open downloads.": "Έως 100 μη ολοκληρωμένες λήψεις."
 }

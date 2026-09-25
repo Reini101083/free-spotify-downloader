@@ -195,5 +195,10 @@
   "Cookie session cleared.": "Күүки сесс арилсан.",
   "Download list": "Татаж авах жагсаалт",
   "Version": "Хувилбар",
-  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Сонголтоор нэвтрэх нь CAPTCHA-г багасгаж болох ч бүртгэл ашигласнаар түр эсвэл бүрмөсөн хаалгаж болзошгүй. Үндсэн бүртгэлээ бүү ашигла; тусдаа бүртгэл ч эрсдэлтэй."
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Сонголтоор нэвтрэх нь CAPTCHA-г багасгаж болох ч бүртгэл ашигласнаар түр эсвэл бүрмөсөн хаалгаж болзошгүй. Үндсэн бүртгэлээ бүү ашигла; тусдаа бүртгэл ч эрсдэлтэй.",
+  "One at a time. The next download starts automatically.": "Нэг удаад нэгийг. Дараагийн таталт автоматаар эхэлнэ.",
+  "Up next": "Дараагийнх",
+  "Waiting": "Хүлээж байна",
+  "Queue position {position}": "Дарааллын байрлал: {position}",
+  "Maximum 100 open downloads.": "Хамгийн ихдээ 100 дуусаагүй таталт."
 }

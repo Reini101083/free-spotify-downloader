@@ -195,5 +195,10 @@
   "Cookie session cleared.": "Сеанс файлів cookie очищено.",
   "Download list": "Список завантажень",
   "Version": "Версія",
-  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Необов’язковий вхід може зменшити кількість CAPTCHA, але використання облікового запису загрожує тимчасовим або постійним блокуванням. Уникайте основного запису; окремі записи також під загрозою."
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Необов’язковий вхід може зменшити кількість CAPTCHA, але використання облікового запису загрожує тимчасовим або постійним блокуванням. Уникайте основного запису; окремі записи також під загрозою.",
+  "One at a time. The next download starts automatically.": "Одне завантаження за раз. Наступне почнеться автоматично.",
+  "Up next": "Наступне",
+  "Waiting": "Очікує",
+  "Queue position {position}": "Місце в черзі: {position}",
+  "Maximum 100 open downloads.": "Не більше ніж 100 незавершених завантажень."
 }

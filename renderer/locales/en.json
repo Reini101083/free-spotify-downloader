@@ -195,5 +195,10 @@
   "Cookie session cleared.": "Cookie session cleared.",
   "Download list": "Download list",
   "Version": "Version",
-  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk."
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.",
+  "One at a time. The next download starts automatically.": "One at a time. The next download starts automatically.",
+  "Up next": "Up next",
+  "Waiting": "Waiting",
+  "Queue position {position}": "Queue position {position}",
+  "Maximum 100 open downloads.": "Maximum 100 open downloads."
 }

@@ -2,21 +2,32 @@ import { EventEmitter } from 'node:events'
 import { spawn } from 'node:child_process'
 import { randomUUID } from 'node:crypto'
 import path from 'node:path'
-import { cleanOutput, preferences, spotifyLink } from './domain.mjs'
+import { cleanOutput, preferences, spotifyLink, MAX_OPEN_DOWNLOADS, OPEN_DOWNLOAD_STATUSES, queuedDownloads } from './domain.mjs'
+
+const isOpen = job => OPEN_DOWNLOAD_STATUSES.includes(job.status)
+function retainJobs(jobs) {
+  let history = 0
+  return jobs.filter(job => isOpen(job) || history++ < 100)
+}
+async function releaseCookies(lease) {
+  try { await lease?.release() } catch { /* Cleanup cannot leave the queue locked. */ }
+}
 
 export class DownloadQueue extends EventEmitter {
   constructor({ engine, engineArgs = [], ffmpeg, deno, folder, settings, stateDirectory, jobs = [], persist = async () => {}, prepareCookies = async () => null, spawnProcess = spawn }) {
     super()
     Object.assign(this, { engine, engineArgs, ffmpeg, deno, folder, stateDirectory, prepareCookies, settings: preferences(settings), persist, spawnProcess })
-    this.jobs = jobs.slice(0, 100).flatMap(job => {
+    const restoredIds = new Set()
+    this.jobs = retainJobs(jobs.flatMap(job => {
       try {
         const link = spotifyLink(job.url)
-        if (!/^[a-f0-9-]{36}$/.test(job.id)) return []
+        if (!/^[a-f0-9-]{36}$/.test(job.id) || restoredIds.has(job.id)) return []
+        restoredIds.add(job.id)
         const interrupted = ['queued', 'running'].includes(job.status)
         const status = interrupted ? 'paused' : job.status === 'partial' && !(job.saved || job.existing) ? 'failed' : job.status
         return [{ ...job, url: link.url, type: link.type, tracks: Array.isArray(job.tracks) ? job.tracks : [], settings: preferences(job.settings), logs: Array.isArray(job.logs) ? job.logs.slice(-80) : [], status, message: interrupted ? 'Session restored. Ready to resume.' : status === 'failed' && job.status === 'partial' ? 'No audio files were saved. Retry the failed songs.' : job.message }]
       } catch { return [] }
-    })
+    }))
     this.active = null
     this.running = false
     this.launching = false
@@ -24,11 +35,11 @@ export class DownloadQueue extends EventEmitter {
   changed() { this.emit('change') }
   enqueue(value) {
     const link = spotifyLink(value)
-    if (this.jobs.filter(job => ['queued', 'running', 'paused'].includes(job.status)).length >= 50) throw new Error('Maximum 50 open downloads.')
-    if (this.jobs.some(job => job.url === link.url && ['queued', 'running', 'paused'].includes(job.status))) throw new Error('This link is already in your queue.')
+    if (this.jobs.filter(isOpen).length >= MAX_OPEN_DOWNLOADS) throw new Error(`Maximum ${MAX_OPEN_DOWNLOADS} open downloads.`)
+    if (this.jobs.some(job => job.url === link.url && isOpen(job))) throw new Error('This link is already in your queue.')
     const job = { id: randomUUID(), url: link.url, type: link.type, title: `Spotify ${link.label}`, status: 'queued', message: 'Ready to start', tracks: [], logs: [], saved: 0, settings: { ...this.settings }, createdAt: new Date().toISOString() }
     this.jobs.unshift(job)
-    this.jobs = this.jobs.filter((item, index) => index < 100 || ['queued', 'running', 'paused'].includes(item.status))
+    this.jobs = retainJobs(this.jobs)
     this.changed()
     return job
   }
@@ -36,36 +47,42 @@ export class DownloadQueue extends EventEmitter {
   resume(id, trackId = null) {
     const job = this.jobs.find(item => item.id === id)
     if (!job || ['queued', 'running'].includes(job.status)) return
-    if (this.jobs.some(item => item.id !== id && item.url === job.url && ['queued', 'running'].includes(item.status))) throw new Error('This link is already being processed.')
+    if (!isOpen(job) && this.jobs.filter(isOpen).length >= MAX_OPEN_DOWNLOADS) throw new Error(`Maximum ${MAX_OPEN_DOWNLOADS} open downloads.`)
+    if (this.jobs.some(item => item.id !== id && item.url === job.url && isOpen(item))) throw new Error('This link is already being processed.')
     job.retryTrack = /^[a-zA-Z0-9]{22}$/.test(trackId || '') ? trackId : null
     job.status = 'queued'; job.cancelled = false; job.requiresAuth = false; job.message = 'Existing files will be checked when you start.'
     this.changed()
   }
   async next() {
     if (this.active || this.launching || !this.running) return
-    const job = [...this.jobs].reverse().find(item => item.status === 'queued')
+    const job = queuedDownloads(this.jobs)[0]
     if (!job) { this.running = false; this.changed(); return }
-    this.launching = true
+    const launch = { job, cancelled: false }
+    this.launching = launch
+    const stopped = () => launch.cancelled || !this.running || job.status !== 'running' || !this.jobs.includes(job)
+    const advance = () => { this.launching = false; void this.next() }
     job.status = 'running'; job.message = 'Checking existing files…'
     job.folder ||= this.folder
     job.saved = 0; job.existing = 0; job.skipped = 0
     this.changed()
     try { await this.persist() } catch {
+      if (stopped()) { advance(); return }
       job.status = 'failed'; job.message = 'Your queue could not be saved.'
       this.launching = false; this.running = false; this.changed(); return
     }
-    if (job.cancelled) { this.launching = false; void this.next(); return }
+    if (stopped()) { advance(); return }
     const args = [...this.engineArgs, '--session', path.join(this.stateDirectory, `${job.id}.json`), '--url', job.url, '--folder', job.folder, '--format', job.settings.format, '--bitrate', job.settings.bitrate, '--ffmpeg', this.ffmpeg]
     if (this.deno) args.push('--deno', this.deno)
     if (job.retryTrack) args.push('--only-track', job.retryTrack)
     let child, cookieLease
     try {
       cookieLease = await this.prepareCookies()
-      if (job.cancelled) { await cookieLease?.release(); this.launching = false; void this.next(); return }
+      if (stopped()) { await releaseCookies(cookieLease); advance(); return }
       if (cookieLease) args.push('--cookie-file', cookieLease.file)
       child = this.spawnProcess(this.engine, args, { shell: false, windowsHide: true, detached: process.platform !== 'win32', env: { ...process.env, PYTHONUNBUFFERED: '1', NO_COLOR: '1' }, stdio: ['pipe', 'pipe', 'pipe'] })
     } catch (error) {
-      await cookieLease?.release()
+      await releaseCookies(cookieLease)
+      if (stopped()) { advance(); return }
       job.status = 'failed'; job.message = 'The download engine could not start.'; job.logs.push(cleanOutput(error.message))
       this.launching = false; this.changed(); void this.next(); return
     }
@@ -107,7 +124,7 @@ export class DownloadQueue extends EventEmitter {
       if (settled) return
       if (pending) { const last = pending; pending = ''; line(last) }
       settled = true; clearTimeout(killTimer)
-      void cookieLease?.release().catch(() => {})
+      void releaseCookies(cookieLease)
       if (job.cancelled) { job.status = 'paused'; job.message = 'Paused. Completed songs are kept.' }
       else if (job.requiresAuth) { job.status = 'blocked'; job.message = job.blockReason === 'rate_limit' ? 'YouTube is limiting requests. Wait before trying again.' : 'YouTube needs your confirmation.'; this.running = false }
       else if (code !== 0 || !summary || failure) { job.status = 'failed'; job.message = failure || 'Interrupted. You can resume this download.' }
@@ -118,9 +135,12 @@ export class DownloadQueue extends EventEmitter {
         job.message = !saved && summary.skipped ? 'No audio files were saved. Retry the failed songs.' : `${summary.saved} saved · ${summary.existing} existing · ${summary.skipped} not downloaded`
       }
       delete job.progress
+      this.jobs = retainJobs(this.jobs)
       this.active = null; this.changed(); void this.next()
     }
-    child.once('error', error => { job.logs.push(cleanOutput(error.message)); finish(1) })
+    // `error` can precede `close`: wait for the worker's actual termination
+    // before launching its successor, including failed-spawn errors.
+    child.once('error', error => { if (settled) return; failure = cleanOutput(error.message); job.logs.push(failure) })
     child.once('close', finish)
     this.active.stop = () => {
       this.stopProcess(child)
@@ -132,6 +152,7 @@ export class DownloadQueue extends EventEmitter {
     const job = this.jobs.find(item => item.id === id)
     if (!job || job.cancelled || !['queued', 'running'].includes(job.status)) return
     job.cancelled = true
+    if (this.launching?.job?.id === id) this.launching.cancelled = true
     if (this.active?.job.id === id) { job.message = 'Pausing…'; this.active.stop() }
     else { job.status = 'paused'; job.message = 'Paused. Ready to resume.' }
     this.changed()

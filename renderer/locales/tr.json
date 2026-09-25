@@ -195,5 +195,10 @@
   "Cookie session cleared.": "Çerez oturumu temizlendi.",
   "Download list": "İndirme listesi",
   "Version": "Sürüm",
-  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "İsteğe bağlı giriş CAPTCHA'ları azaltabilir, ancak hesap kullanımı geçici veya kalıcı askıya alınmaya yol açabilir. Ana hesabını kullanmaktan kaçın; ayrı hesaplar da risk altındadır."
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "İsteğe bağlı giriş CAPTCHA'ları azaltabilir, ancak hesap kullanımı geçici veya kalıcı askıya alınmaya yol açabilir. Ana hesabını kullanmaktan kaçın; ayrı hesaplar da risk altındadır.",
+  "One at a time. The next download starts automatically.": "Her seferinde bir indirme. Sonraki indirme otomatik olarak başlar.",
+  "Up next": "Sıradaki",
+  "Waiting": "Bekliyor",
+  "Queue position {position}": "Sıradaki konum: {position}",
+  "Maximum 100 open downloads.": "En fazla 100 tamamlanmamış indirme."
 }

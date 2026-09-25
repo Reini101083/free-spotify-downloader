@@ -195,5 +195,10 @@
   "Cookie session cleared.": "An share zaman kuki.",
   "Download list": "Zazzage lissafin",
   "Version": ".",
-  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Shiga na zaɓi na iya rage CAPTCHA, amma amfani da asusu na iya jawo dakatarwa na ɗan lokaci ko na dindindin. Guji babban asusunka; asusu na daban ma na cikin haɗari."
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Shiga na zaɓi na iya rage CAPTCHA, amma amfani da asusu na iya jawo dakatarwa na ɗan lokaci ko na dindindin. Guji babban asusunka; asusu na daban ma na cikin haɗari.",
+  "One at a time. The next download starts automatically.": "Ɗaya a lokaci guda. Zazzagewa ta gaba tana farawa da kanta.",
+  "Up next": "Na gaba",
+  "Waiting": "Ana jira",
+  "Queue position {position}": "Matsayi a layi: {position}",
+  "Maximum 100 open downloads.": "Ba fiye da zazzagewa 100 a buɗe ba."
 }

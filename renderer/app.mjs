@@ -1,5 +1,5 @@
 import { t, translatePage, getLanguage, setLanguage, LANGUAGES, languageName } from './i18n.mjs'
-import { preferences, spotifyLink } from './domain.mjs'
+import { preferences, spotifyLink, MAX_OPEN_DOWNLOADS, OPEN_DOWNLOAD_STATUSES, queuedDownloads } from './domain.mjs'
 import { initializeDownloads } from './downloads.mjs'
 const $ = selector => document.querySelector(selector)
 const bridge = window.desktop
@@ -20,9 +20,15 @@ function update(value) {
   if (finished && bridge) { clearTimeout(refreshTimer); refreshTimer = setTimeout(() => void action(async () => update(await bridge.library())), 400) }
 }
 function button(label, symbol, callback) {
-  const result = node('button', 'button icon'); result.type = 'button'; result.title = t(label); result.setAttribute('aria-label', t(label)); result.append(icon(symbol)); result.addEventListener('click', () => void action(callback)); return result
+  const result = node('button', 'button icon'); result.type = 'button'; result.dataset.action = label; result.title = t(label); result.setAttribute('aria-label', t(label)); result.append(icon(symbol)); result.addEventListener('click', () => void action(callback)); return result
 }
 function missingSongs() { return state.jobs.flatMap(job => (job.tracks || []).filter(track => ['skipped','blocked'].includes(track.status)).map(track => ({ ...track, job }))) }
+function openJobs() { return state.jobs.filter(job => OPEN_DOWNLOAD_STATUSES.includes(job.status) || job.status === 'preview') }
+function displayJobs() {
+  return [...state.jobs.filter(job => job.status === 'running'), ...queuedDownloads(state.jobs),
+    ...state.jobs.filter(job => ['paused','blocked','preview'].includes(job.status)).reverse(),
+    ...state.jobs.filter(job => !OPEN_DOWNLOAD_STATUSES.includes(job.status) && job.status !== 'preview')]
+}
 function updateView(next) { view = next; limit = 50; $('#song-search').value = ''; render(); if (view === 'saved' && bridge) void action(async () => update(await bridge.library())) }
 function markSelected() {
   for (const row of document.querySelectorAll('.job-row')) {
@@ -59,14 +65,20 @@ async function addLink() {
   if (!link) { $('#input-error').textContent = t('Please paste a valid Spotify link.'); $('#input-error').hidden = false; $('#spotify-url').setAttribute('aria-invalid','true'); $('#spotify-url').focus(); return null }
   let job
   if (bridge) { update(await bridge.enqueue(link.url)); job = state.jobs.find(job => job.url === link.url && ['queued','running'].includes(job.status)) }
-  else { job = state.jobs.find(job => job.url === link.url); if (!job) { job = { id: `preview-${++previewSequence}`, url: link.url, type: link.type, title: `Spotify ${t(link.label)}`, status:'preview', settings:{...state.settings}, tracks:[], logs:[], saved:0 }; state.jobs.unshift(job) } }
+  else { job = state.jobs.find(job => job.url === link.url); if (!job) { if (openJobs().length >= MAX_OPEN_DOWNLOADS) throw new Error('Maximum 100 open downloads.'); job = { id: `preview-${++previewSequence}`, url: link.url, type: link.type, title: `Spotify ${t(link.label)}`, status:'preview', settings:{...state.settings}, tracks:[], logs:[], saved:0 }; state.jobs.unshift(job) } }
   $('#spotify-url').value = ''; $('#input-error').hidden = true; $('#spotify-url').removeAttribute('aria-invalid'); updateView('queue'); setSelected(job); toast('Added to your queue.'); return job
 }
 async function start() {
   if (!bridge) { $('#desktop-card').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block:'center' }); $('#desktop-card').focus({preventScroll:true}); return }
   if (state.running) { update(await bridge.pauseAll()); return }
-  if (validInput()) await addLink()
-  const first = [...state.jobs].reverse().find(job => job.status === 'queued')
+  if (state.jobs.some(job => job.status === 'running' && job.cancelled)) return
+  const resumeAll = !state.jobs.some(job => job.status === 'queued') && state.jobs.some(job => job.status === 'paused')
+  const input = validInput()
+  if (input && openJobs().length < MAX_OPEN_DOWNLOADS && !openJobs().some(job => job.url === input.url)) await addLink()
+  if (resumeAll) {
+    for (const job of state.jobs.filter(job => job.status === 'paused')) update(await bridge.resume(job.id))
+  }
+  const first = queuedDownloads(state.jobs)[0]
   if (first) setSelected(first)
   update(await bridge.start())
 }
@@ -74,20 +86,56 @@ async function retry(job, trackId = null) { setSelected(job); update(await bridg
 function rowShell(title, symbol, failed = false) {
   const item = node('li', 'song-row'); const art = node('span', 'row-symbol' + (failed ? ' failed' : '')); art.append(icon(symbol)); const copy = node('div','row-copy'); copy.append(node('strong','', title)); const controls = node('div','row-actions'); item.append(art,copy,controls); return {item,copy,controls}
 }
+function queueSymbol(job) {
+  const active = job.status === 'running', paused = job.status === 'paused'
+  const control = active || paused ? button(active ? job.cancelled ? 'Pausing…' : 'Pause downloads' : 'Resume', active ? 'pause' : 'play', async () => {
+    if (active) update(await bridge.cancel(job.id)); else await retry(job)
+  }) : node('span')
+  control.className = 'queue-symbol ' + job.status
+  if (active || paused) {
+    control.dataset.action = 'queue-toggle'
+    control.disabled = !bridge || (active && !!job.cancelled)
+    control.setAttribute('aria-label', `${t(active ? job.cancelled ? 'Pausing…' : 'Pause downloads' : 'Resume')}: ${job.title}`)
+    control.title = control.getAttribute('aria-label')
+  } else control.append(icon(job.status === 'completed' ? 'check' : ['failed','partial','blocked'].includes(job.status) ? 'circle-alert' : 'clock-3'))
+  if (active) {
+    const svg = document.createElementNS('http://www.w3.org/2000/svg','svg')
+    svg.setAttribute('viewBox','0 0 44 44'); svg.setAttribute('aria-hidden','true'); svg.classList.add('queue-ring')
+    for (const kind of ['track','fill']) {
+      const circle = document.createElementNS(svg.namespaceURI,'circle')
+      for (const [key,value] of Object.entries({cx:22,cy:22,r:19,fill:'none','stroke-width':2.5,'pathLength':100})) circle.setAttribute(key,String(value))
+      circle.classList.add('ring-'+kind)
+      if (kind === 'fill') { circle.setAttribute('stroke-dasharray','100'); circle.setAttribute('stroke-dashoffset',String(100-(Number.isFinite(job.progress)?Math.max(0,Math.min(100,job.progress)):25))) }
+      svg.append(circle)
+    }
+    svg.classList.toggle('indeterminate',!Number.isFinite(job.progress)); control.prepend(svg)
+  }
+  return control
+}
 function renderJobs(list) {
-  for (const job of state.jobs.slice(0,limit)) {
+  const queued = queuedDownloads(state.jobs), activeCount = state.jobs.some(job => job.status === 'running') ? 1 : 0
+  for (const job of displayJobs().slice(0,limit)) {
     const {item,copy,controls} = rowShell(job.title, job.type === 'track' ? 'music-2' : 'list-music', job.status === 'failed')
-    item.className = 'job-row'; item.dataset.job = job.id
-    const select = node('button','row-title'); select.append(copy.firstChild); copy.prepend(select); select.setAttribute('aria-pressed',String(selectedId===job.id)); select.addEventListener('click', () => setSelected(job,{load:true})); item.classList.toggle('preview-selected',selectedId===job.id); item.addEventListener('click',event=>{if(!event.target.closest('button,a,input,select'))setSelected(job,{load:true})})
-    copy.append(node('span','subtle', `${t(spotifyLink(job.url).label)} · ${job.settings.format.toUpperCase()}`), node('span',`row-status ${job.status}`, t(statuses[job.status] || 'Ready')))
-    if (bridge && ['queued','running'].includes(job.status)) {
+    item.className = 'job-row state-'+job.status; item.dataset.job = job.id
+    item.firstElementChild.replaceWith(queueSymbol(job))
+    const select = node('button','row-title'); select.dataset.action = 'preview'; select.append(copy.firstChild); copy.prepend(select); select.setAttribute('aria-pressed',String(selectedId===job.id)); select.addEventListener('click', () => setSelected(job,{load:true})); item.classList.toggle('preview-selected',selectedId===job.id); item.addEventListener('click',event=>{if(!event.target.closest('button,a,input,select'))setSelected(job,{load:true})})
+    const position = queued.findIndex(item => item.id === job.id)
+    const status = job.status === 'queued' ? position === 0 ? 'Up next' : 'Waiting' : statuses[job.status] || 'Ready'
+    copy.append(node('span','subtle', `${t(spotifyLink(job.url).label)} · ${job.settings.format.toUpperCase()}`))
+    const statusLine = node('div','row-status-line')
+    statusLine.append(node('span',`row-status ${job.status}`+(position===0?' next':''),t(status)))
+    if (position >= 0) statusLine.append(node('span','queue-position',t('Queue position {position}',{position:number(position+activeCount+1)})))
+    if (job.status === 'running' && Number.isFinite(job.progress)) statusLine.append(node('span','queue-percent',new Intl.NumberFormat(getLanguage(),{style:'percent',maximumFractionDigits:0}).format(Math.max(0,Math.min(100,job.progress))/100)))
+    copy.append(statusLine)
+    if (bridge && job.status === 'queued') {
       const pause=button(job.cancelled?'Pausing…':'Pause downloads','pause',async()=>update(await bridge.cancel(job.id)))
+      pause.dataset.action = 'queue-toggle'
       pause.disabled=!!job.cancelled; pause.setAttribute('aria-label',`${t(job.cancelled?'Pausing…':'Pause downloads')}: ${job.title}`); pause.title=pause.getAttribute('aria-label'); controls.append(pause)
-    } else if (bridge) controls.append(button(job.status==='paused'?'Resume':'Retry',job.status==='paused'?'play':'rotate-ccw', () => retry(job)))
+    } else if (bridge && !['running','paused'].includes(job.status)) controls.append(button('Retry','rotate-ccw', () => retry(job)))
     controls.append(button('Details','more-horizontal', () => { detailId = job.id; renderDetails(); $('#details-dialog').showModal() }))
     if (job.status !== 'running') controls.append(button('Remove','x', async () => { if (bridge) update(await bridge.remove(job.id)); else { state.jobs = state.jobs.filter(item => item.id !== job.id); render() } }))
-    if (job.message) item.append(node('p','row-message'+(job.status === 'failed' ? ' error' : ''), translateMessage(job.message)))
-    if (job.status === 'running') { const progress = node('progress'); progress.max = 100; if (Number.isFinite(job.progress)) progress.value = job.progress; progress.setAttribute('aria-label', t('Download progress')); item.append(progress) }
+    if (job.message && job.status !== 'queued') item.append(node('p','row-message'+(job.status === 'failed' ? ' error' : ''), translateMessage(job.message)))
+    if (job.status === 'running') { const progress = node('progress','visually-hidden'); progress.max = 100; if (Number.isFinite(job.progress)) progress.value = job.progress; progress.setAttribute('aria-label', t('Download progress')+': '+job.title); item.append(progress) }
     list.append(item)
   }
 }
@@ -135,19 +183,29 @@ function renderDetails() {
 function render() {
   $('#mode').removeAttribute('data-i18n'); $('#mode').textContent=t(bridge?'Desktop app':'Web preview')
   const missing = missingSongs().length
-  $('#nav-queue-count').textContent = number(state.jobs.length); $('#nav-saved-count').textContent = state.library.revision ? number(state.library.files.length) : '—'; $('#nav-failed-count').textContent = number(missing)
+  const openCount = openJobs().length
+  $('#nav-queue-count').textContent = number(openCount); $('#nav-saved-count').textContent = state.library.revision ? number(state.library.files.length) : '—'; $('#nav-failed-count').textContent = number(missing)
+  $('#queue-capacity-count').textContent = `${number(openCount)} / ${number(MAX_OPEN_DOWNLOADS)}`
+  $('#queue-capacity').classList.toggle('full',openCount >= MAX_OPEN_DOWNLOADS)
+  $('#add-button').disabled = openCount >= MAX_OPEN_DOWNLOADS
+  $('#add-button').title = openCount >= MAX_OPEN_DOWNLOADS ? t('Maximum 100 open downloads.') : t('Add to queue')
+  $('#queue-guide').hidden = view !== 'queue'
   for (const control of document.querySelectorAll('[data-view]')) { control.classList.toggle('selected',control.dataset.view===view); control.setAttribute('aria-pressed',String(control.dataset.view===view)) }
   const titles = {queue:'Download queue',saved:'Your saved songs',failed:'Songs to try again'}
   $('#collection-title').removeAttribute('data-i18n'); $('#collection-title').textContent = t(titles[view])
   $('#collection-subtitle').textContent = view==='queue' ? state.running ? t('Working on your music') : t('{count} downloads',{count:number(state.jobs.length)}) : view==='saved' ? t('Only complete, verified audio files appear here.') : t('Downloads continue when a song fails. You can retry these songs individually or together.')
   $('#start-button').hidden = view!=='queue'; $('#refresh-library').hidden = view!=='saved'; $('#retry-failed').hidden = view!=='failed'
-  $('#start-button span').removeAttribute('data-i18n'); $('#start-button span').textContent = t(!bridge ? 'Download app' : state.running ? 'Pause downloads' : 'Start downloads') + (bridge && state.running ? ' · '+t('All downloads') : '')
-  $('#start-button').disabled = !!bridge && !state.running && ((!state.jobs.some(job=>job.status==='queued') && !validInput()) || !state.health.engine || !state.health.ffmpeg || !state.health.deno || !!state.health.error || !state.health.checked)
+  const canResume = !state.jobs.some(job=>job.status==='queued') && state.jobs.some(job=>job.status==='paused')
+  const pausing = state.jobs.some(job=>job.status==='running' && job.cancelled)
+  $('#start-button span').removeAttribute('data-i18n'); $('#start-button span').textContent = t(!bridge ? 'Download app' : pausing && !state.running ? 'Pausing…' : state.running ? 'Pause downloads' : canResume ? 'Resume' : 'Start downloads') + (bridge && !pausing && (state.running || canResume) ? ' · '+t('All downloads') : '')
+  $('#start-button').firstElementChild.replaceWith(icon(!bridge?'download':state.running?'pause':'play'))
+  $('#start-button').disabled = !!bridge && !state.running && (pausing || (!state.jobs.some(job=>job.status==='queued') && !canResume && !validInput()) || !state.health.engine || !state.health.ffmpeg || !state.health.deno || !!state.health.error || !state.health.checked)
+  $('#resume-all').disabled = pausing
   $('#refresh-library').disabled = !bridge || state.library.loading; $('#retry-failed').disabled = !bridge || !missing || state.running; $('#song-search').hidden = view!=='saved'
-  const list = $('#collection-list'); const focused = document.activeElement?.closest('[data-job]')?.dataset.job; const focusedLabel = document.activeElement?.getAttribute('aria-label'); list.replaceChildren()
+  const list = $('#collection-list'); const focused = document.activeElement?.closest('[data-job]')?.dataset.job; const focusedAction = document.activeElement?.dataset.action; list.replaceChildren()
   let count = view==='queue' ? state.jobs.length : view==='saved' ? renderSaved(list) : renderFailed(list)
   if (view==='queue') renderJobs(list)
-  if (focused && focusedLabel) [...list.querySelectorAll('[data-job]')].find(item=>item.dataset.job===focused)?.querySelectorAll('button').forEach(button=>{if(button.getAttribute('aria-label')===focusedLabel)button.focus({preventScroll:true})})
+  if (focused && focusedAction) [...list.querySelectorAll('[data-job]')].find(item=>item.dataset.job===focused)?.querySelectorAll('button').forEach(button=>{if(button.dataset.action===focusedAction&&!button.disabled)button.focus({preventScroll:true})})
   $('#empty-state').hidden = count>0
   const emptyTitle = view==='queue' ? 'Your queue is empty' : view==='saved' ? state.library.loading ? 'Checking your files…' : $('#song-search').value ? 'No songs match your search' : 'No songs saved yet' : 'Everything is up to date'
   const emptyDescription = view==='queue' ? 'Copy a Spotify link or paste it here to get started.' : view==='saved' ? $('#song-search').value ? 'Change your search and try again.' : 'Completed audio files will appear here. Temporary files never count as saved songs.' : 'Songs that could not be downloaded will appear here with a reason.'
@@ -200,8 +258,8 @@ $('#refresh-library').addEventListener('click',()=>void action(async()=>update(a
 $('#song-search').addEventListener('input',()=>{limit=50;render()})
 $('#show-more').addEventListener('click',()=>{limit+=50;render()})
 $('#retry-failed').addEventListener('click',()=>void action(async()=>{for(const job of [...new Set(missingSongs().map(track=>track.job))])update(await bridge.resume(job.id));await start()}))
-$('#resume-all').addEventListener('click',()=>void action(async()=>{for(const job of state.jobs.filter(job=>job.status==='paused'))update(await bridge.resume(job.id));await start()}))
-$('#auth-resume').addEventListener('click',()=>void action(async()=>{for(const job of state.jobs.filter(job=>job.status==='blocked'))update(await bridge.resume(job.id));await start()}))
+$('#resume-all').addEventListener('click',()=>void action(async()=>{for(const job of state.jobs.filter(job=>job.status==='paused'))update(await bridge.resume(job.id));update(await bridge.start())}))
+$('#auth-resume').addEventListener('click',()=>void action(async()=>{for(const job of state.jobs.filter(job=>job.status==='blocked'))update(await bridge.resume(job.id));update(await bridge.start())}))
 for(const button of document.querySelectorAll('[data-youtube]'))button.addEventListener('click',()=>void action(async()=>{if(bridge)update(await bridge.youtubeOpen(getLanguage()));else toast('This website is a preview. Audio downloads run in the desktop app.')}))
 $('#youtube-clear').addEventListener('click',()=>void action(async()=>{update(await bridge.youtubeClear());toast('Cookie session cleared.')}))
 const chooseFolder=()=>action(async()=>{if(bridge){update(await bridge.chooseFolder());if(view==='saved')update(await bridge.library())}else toast('This website is a preview. Audio downloads run in the desktop app.')})

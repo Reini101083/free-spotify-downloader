@@ -195,5 +195,10 @@
   "Cookie session cleared.": "הפעלת קובצי Cookie נוקתה.",
   "Download list": "רשימת הורדות",
   "Version": "גרסה",
-  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "התחברות אופציונלית עשויה לצמצם בדיקות CAPTCHA, אך שימוש בחשבון עלול לגרום לחסימה זמנית או קבועה. עדיף להימנע מהחשבון הראשי; גם חשבונות נפרדים נמצאים בסיכון."
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "התחברות אופציונלית עשויה לצמצם בדיקות CAPTCHA, אך שימוש בחשבון עלול לגרום לחסימה זמנית או קבועה. עדיף להימנע מהחשבון הראשי; גם חשבונות נפרדים נמצאים בסיכון.",
+  "One at a time. The next download starts automatically.": "הורדה אחת בכל פעם. ההורדה הבאה מתחילה אוטומטית.",
+  "Up next": "הבאה בתור",
+  "Waiting": "בהמתנה",
+  "Queue position {position}": "מיקום בתור: {position}",
+  "Maximum 100 open downloads.": "עד 100 הורדות שלא הושלמו."
 }

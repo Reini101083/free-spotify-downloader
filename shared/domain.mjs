@@ -3,6 +3,13 @@ export const BITRATES = ['auto', '128k', '192k', '256k', '320k']
 export const PUBLISHER = 'Jedi Meister'
 export const APP_NAME = 'Free Spotify Downloader'
 export const REPOSITORY = 'https://github.com/Reini101083/free-spotify-downloader'
+export const MAX_OPEN_DOWNLOADS = 100
+export const OPEN_DOWNLOAD_STATUSES = ['queued', 'running', 'paused', 'blocked']
+
+// Jobs are stored newest first; execution and the waiting list use FIFO order.
+export function queuedDownloads(jobs) {
+  return [...jobs].reverse().filter(job => job.status === 'queued')
+}
 
 export function spotifyLink(value) {
   if (typeof value !== 'string' || value.length > 2048) throw new Error('Please paste a valid Spotify link.')

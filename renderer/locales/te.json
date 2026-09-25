@@ -195,5 +195,10 @@
   "Cookie session cleared.": "కుక్కీ సెషన్ క్లియర్ చేయబడింది.",
   "Download list": "Download list",
   "Version": "Version",
-  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "ఐచ్ఛిక సైన్-ఇన్ వల్ల CAPTCHAలు తగ్గవచ్చు, కానీ ఖాతా వాడకంతో తాత్కాలిక లేదా శాశ్వత నిషేధం రావచ్చు. ప్రధాన ఖాతాను వాడకండి; ప్రత్యేక ఖాతాలకూ ప్రమాదం ఉంది."
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "ఐచ్ఛిక సైన్-ఇన్ వల్ల CAPTCHAలు తగ్గవచ్చు, కానీ ఖాతా వాడకంతో తాత్కాలిక లేదా శాశ్వత నిషేధం రావచ్చు. ప్రధాన ఖాతాను వాడకండి; ప్రత్యేక ఖాతాలకూ ప్రమాదం ఉంది.",
+  "One at a time. The next download starts automatically.": "ఒకేసారి ఒక డౌన్‌లోడ్. తదుపరి డౌన్‌లోడ్ స్వయంచాలకంగా ప్రారంభమవుతుంది.",
+  "Up next": "తదుపరిది",
+  "Waiting": "వేచి ఉంది",
+  "Queue position {position}": "వరుసలో స్థానం: {position}",
+  "Maximum 100 open downloads.": "గరిష్ఠంగా 100 అసంపూర్తి డౌన్‌లోడ్‌లు."
 }

@@ -195,5 +195,10 @@
   "Cookie session cleared.": "Cookie seansi tozalandi.",
   "Download list": "Yuklab olish roʻyxati",
   "Version": "Versiya",
-  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Ixtiyoriy kirish CAPTCHA sonini kamaytirishi mumkin, ammo hisobdan foydalanish vaqtinchalik yoki doimiy bloklanishga olib kelishi mumkin. Asosiy hisobingizni ishlatmang; alohida hisoblar ham xavf ostida."
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Ixtiyoriy kirish CAPTCHA sonini kamaytirishi mumkin, ammo hisobdan foydalanish vaqtinchalik yoki doimiy bloklanishga olib kelishi mumkin. Asosiy hisobingizni ishlatmang; alohida hisoblar ham xavf ostida.",
+  "One at a time. The next download starts automatically.": "Bir vaqtda bittadan. Keyingi yuklab olish avtomatik boshlanadi.",
+  "Up next": "Keyingisi",
+  "Waiting": "Kutilmoqda",
+  "Queue position {position}": "Navbatdagi o‘rin: {position}",
+  "Maximum 100 open downloads.": "Ko‘pi bilan 100 ta tugallanmagan yuklab olish."
 }

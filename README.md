@@ -8,12 +8,12 @@ Windows · macOS · Linux · 82 bundled interface languages
 
 [**Choose your operating system on the latest release page**](https://github.com/Reini101083/free-spotify-downloader/releases/latest)
 
-| Operating system | Download version 0.2.4 |
+| Operating system | Download version 0.2.5 |
 | --- | --- |
-| Windows · Intel / AMD 64-bit | [Installer](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.4/Free-Spotify-Downloader-0.2.4-windows-x64-setup.exe) · [Portable](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.4/Free-Spotify-Downloader-0.2.4-windows-x64-portable.exe) |
-| Mac · Apple Silicon | [DMG](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.4/Free-Spotify-Downloader-0.2.4-mac-arm64.dmg) |
-| Mac · Intel | [DMG](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.4/Free-Spotify-Downloader-0.2.4-mac-x64.dmg) |
-| Linux · x86_64 | [AppImage](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.4/Free-Spotify-Downloader-0.2.4-linux-x86_64.AppImage) · [DEB](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.4/Free-Spotify-Downloader-0.2.4-linux-amd64.deb) |
+| Windows · Intel / AMD 64-bit | [Installer](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.5/Free-Spotify-Downloader-0.2.5-windows-x64-setup.exe) · [Portable](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.5/Free-Spotify-Downloader-0.2.5-windows-x64-portable.exe) |
+| Mac · Apple Silicon | [DMG](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.5/Free-Spotify-Downloader-0.2.5-mac-arm64.dmg) |
+| Mac · Intel | [DMG](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.5/Free-Spotify-Downloader-0.2.5-mac-x64.dmg) |
+| Linux · x86_64 | [AppImage](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.5/Free-Spotify-Downloader-0.2.5-linux-x86_64.AppImage) · [DEB](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.5/Free-Spotify-Downloader-0.2.5-linux-amd64.deb) |
 
 No GitHub account is required. [Older versions](https://github.com/Reini101083/free-spotify-downloader/releases) remain available separately. **Source code (zip)** contains source code, not an installer. Each release includes SHA-256 checksums. Python, FFmpeg and Deno are included.
 
@@ -38,6 +38,12 @@ The default folder is **Downloads/Free Spotify Downloader**. You can select a di
 The clipboard feature fills only an empty field while the app is in the foreground. It preserves existing input and never starts downloads automatically. Disable it in Settings. Unrelated clipboard text is not stored or sent.
 
 The responsive interface supports small windows, light/dark/system appearance and keyboard navigation. Language selection is at the top; Settings stays accessible at the bottom on desktop and in the top bar in narrow windows.
+
+### Playlist queue
+
+Add up to **100 open playlists, albums or tracks**. The app downloads **exactly one at a time**, in the order you added them. The next starts automatically after the current worker finishes. The visible list follows the same order: active download, **Up next**, then **Waiting** with queue positions. Completed history does not use an open queue slot; paused and confirmation-blocked entries do.
+
+The circular control pauses only its playlist and lets the next queued playlist run. **Pause downloads · All downloads** pauses the whole queue; **Resume · All downloads** resumes it. Restored sessions remain paused until you resume. Ordinary failures continue to the next entry, while a detected provider verification request stops automatic advancement until you act.
 
 ### Saved files and recovery
 

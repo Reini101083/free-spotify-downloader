@@ -195,5 +195,10 @@
   "Cookie session cleared.": "A kpochapụrụ nnọkọ kuki.",
   "Download list": "Ndepụta nbudata",
   "Version": "Ụdị",
-  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Ịbanye n’onwe gị nwere ike ibelata CAPTCHA, mana iji akaụntụ nwere ike ibute nkwụsị nwa oge ma ọ bụ nke na-adịgide adịgide. Zere akaụntụ isi gị; akaụntụ ọzọ nọkwa n’ihe ize ndụ."
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Ịbanye n’onwe gị nwere ike ibelata CAPTCHA, mana iji akaụntụ nwere ike ibute nkwụsị nwa oge ma ọ bụ nke na-adịgide adịgide. Zere akaụntụ isi gị; akaụntụ ọzọ nọkwa n’ihe ize ndụ.",
+  "One at a time. The next download starts automatically.": "Otu n'otu oge. Nbudata na-esote na-amalite na-akpaghị aka.",
+  "Up next": "Nke na-esote",
+  "Waiting": "Na-eche",
+  "Queue position {position}": "Ọnọdụ n'ahịrị: {position}",
+  "Maximum 100 open downloads.": "Oke nbudata mepere emepe bụ 100."
 }

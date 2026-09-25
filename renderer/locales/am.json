@@ -195,5 +195,10 @@
   "Cookie session cleared.": "የኩኪ ክፍለ ጊዜ ጸድቷል።",
   "Download list": "የማውረድ ዝርዝር",
   "Version": "ስሪት",
-  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "አማራጭ መግባት CAPTCHAን ሊቀንስ ይችላል፣ ግን መለያ መጠቀም ጊዜያዊ ወይም ቋሚ እገዳ ሊያስከትል ይችላል። ዋና መለያዎን አይጠቀሙ፤ የተለየ መለያም አደጋ አለበት።"
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "አማራጭ መግባት CAPTCHAን ሊቀንስ ይችላል፣ ግን መለያ መጠቀም ጊዜያዊ ወይም ቋሚ እገዳ ሊያስከትል ይችላል። ዋና መለያዎን አይጠቀሙ፤ የተለየ መለያም አደጋ አለበት።",
+  "One at a time. The next download starts automatically.": "በአንድ ጊዜ አንድ ማውረድ። ቀጣዩ ማውረድ በራስ-ሰር ይጀምራል።",
+  "Up next": "ቀጣይ",
+  "Waiting": "በመጠባበቅ ላይ",
+  "Queue position {position}": "በተራ ውስጥ ያለው ቦታ፦ {position}",
+  "Maximum 100 open downloads.": "ከፍተኛው 100 ያልተጠናቀቁ ማውረዶች።"
 }

@@ -195,5 +195,10 @@
   "Cookie session cleared.": "Cookie сеансы тазартылды.",
   "Download list": "Жүктеп алу тізімі",
   "Version": "Нұсқа",
-  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Қалауыңызша кіру CAPTCHA санын азайтуы мүмкін, бірақ есептік жазбаны пайдалану уақытша не тұрақты бұғаттауға әкелуі мүмкін. Негізгі жазбаңызды қолданбаңыз; бөлек жазбаларға да қауіп бар."
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Қалауыңызша кіру CAPTCHA санын азайтуы мүмкін, бірақ есептік жазбаны пайдалану уақытша не тұрақты бұғаттауға әкелуі мүмкін. Негізгі жазбаңызды қолданбаңыз; бөлек жазбаларға да қауіп бар.",
+  "One at a time. The next download starts automatically.": "Бір уақытта бір жүктеу. Келесі жүктеу автоматты түрде басталады.",
+  "Up next": "Келесі",
+  "Waiting": "Күтуде",
+  "Queue position {position}": "Кезектегі орын: {position}",
+  "Maximum 100 open downloads.": "Ең көбі 100 аяқталмаған жүктеу."
 }

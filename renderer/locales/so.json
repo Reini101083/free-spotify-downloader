@@ -195,5 +195,10 @@
   "Cookie session cleared.": "Fadhiga kukiyada waa la nadiifiyay.",
   "Download list": "Liiska soo dejiso",
   "Version": "Nooca",
-  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Gelitaanka ikhtiyaariga ahi wuxuu yarayn karaa CAPTCHA, laakiin isticmaalka akoonku wuxuu keeni karaa xannibaad ku meel gaar ah ama joogto ah. Ka fogow akoonkaaga ugu weyn; akoonnada goonida ahna khatar bay ku jiraan."
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Gelitaanka ikhtiyaariga ahi wuxuu yarayn karaa CAPTCHA, laakiin isticmaalka akoonku wuxuu keeni karaa xannibaad ku meel gaar ah ama joogto ah. Ka fogow akoonkaaga ugu weyn; akoonnada goonida ahna khatar bay ku jiraan.",
+  "One at a time. The next download starts automatically.": "Midba mar. Soo dejinta xigta si toos ah ayay u bilaabmaysaa.",
+  "Up next": "Kan xiga",
+  "Waiting": "Sugaya",
+  "Queue position {position}": "Booska safka: {position}",
+  "Maximum 100 open downloads.": "Ugu badnaan 100 soo dejin oo aan dhammaystirmin."
 }

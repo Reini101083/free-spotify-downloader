@@ -195,5 +195,10 @@
   "Cookie session cleared.": "Seboka sa cookie se hlakotsoe.",
   "Download list": "Lenane la ho khoasolla",
   "Version": "Phetolelo",
-  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Ho kena ka boikhethelo ho ka fokotsa CAPTCHA, empa tšebeliso ea ak'haonte e ka baka ho emisoa ha nakoana kapa ka ho sa feleng. Qoba ak'haonte ea hao e ka sehloohong; tse arohaneng le tsona li kotsing."
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Ho kena ka boikhethelo ho ka fokotsa CAPTCHA, empa tšebeliso ea ak'haonte e ka baka ho emisoa ha nakoana kapa ka ho sa feleng. Qoba ak'haonte ea hao e ka sehloohong; tse arohaneng le tsona li kotsing.",
+  "One at a time. The next download starts automatically.": "E le 'ngoe ka nako. Ho jarolla ho latelang ho qala ka bohona.",
+  "Up next": "Ho latelang",
+  "Waiting": "E emetse",
+  "Queue position {position}": "Sebaka moleng: {position}",
+  "Maximum 100 open downloads.": "Ho jarolla ho butsoeng ho sa feteng 100."
 }

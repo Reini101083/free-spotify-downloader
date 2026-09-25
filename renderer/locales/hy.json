@@ -195,5 +195,10 @@
   "Cookie session cleared.": "Թխուկների աշխատաշրջանը մաքրվեց:",
   "Download list": "Ներբեռնման ցուցակ",
   "Version": "Տարբերակ",
-  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Ընտրովի մուտքը կարող է նվազեցնել CAPTCHA ստուգումները, բայց հաշվի օգտագործումը կարող է հանգեցնել ժամանակավոր կամ մշտական արգելափակման։ Խուսափեք հիմնական հաշվից․ առանձին հաշիվները նույնպես վտանգված են։"
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Ընտրովի մուտքը կարող է նվազեցնել CAPTCHA ստուգումները, բայց հաշվի օգտագործումը կարող է հանգեցնել ժամանակավոր կամ մշտական արգելափակման։ Խուսափեք հիմնական հաշվից․ առանձին հաշիվները նույնպես վտանգված են։",
+  "One at a time. The next download starts automatically.": "Միաժամանակ մեկ ներբեռնում։ Հաջորդը կսկսվի ինքնաբերաբար։",
+  "Up next": "Հաջորդը",
+  "Waiting": "Սպասում է",
+  "Queue position {position}": "Դիրքը հերթում՝ {position}",
+  "Maximum 100 open downloads.": "Առավելագույնը 100 չավարտված ներբեռնում։"
 }

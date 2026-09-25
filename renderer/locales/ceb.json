@@ -195,5 +195,10 @@
   "Cookie session cleared.": "Ang sesyon sa cookie natangtang.",
   "Download list": "Listahan sa pag-download",
   "Version": "Bersyon",
-  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Ang opsyonal nga pag-sign in mahimong makapamenos sa CAPTCHA, apan ang paggamit sa account mahimong mosangpot sa temporaryo o permanenteng suspensyon. Likayi ang pangunang account; ang lahi nga account nameligro usab."
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Ang opsyonal nga pag-sign in mahimong makapamenos sa CAPTCHA, apan ang paggamit sa account mahimong mosangpot sa temporaryo o permanenteng suspensyon. Likayi ang pangunang account; ang lahi nga account nameligro usab.",
+  "One at a time. The next download starts automatically.": "Usa matag higayon. Awtomatikong magsugod ang sunod nga pag-download.",
+  "Up next": "Sunod",
+  "Waiting": "Naghulat",
+  "Queue position {position}": "Posisyon sa pila: {position}",
+  "Maximum 100 open downloads.": "Labing daghan 100 ka bukas nga pag-download."
 }

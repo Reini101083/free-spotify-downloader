@@ -195,5 +195,10 @@
   "Cookie session cleared.": "ล้างเซสชันคุกกี้แล้ว",
   "Download list": "รายการดาวน์โหลด",
   "Version": "เวอร์ชัน",
-  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "การเข้าสู่ระบบเป็นทางเลือกและอาจลด CAPTCHA แต่การใช้บัญชีอาจทำให้ถูกระงับชั่วคราวหรือถาวร ควรหลีกเลี่ยงบัญชีหลัก แม้แต่บัญชีแยกก็มีความเสี่ยง"
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "การเข้าสู่ระบบเป็นทางเลือกและอาจลด CAPTCHA แต่การใช้บัญชีอาจทำให้ถูกระงับชั่วคราวหรือถาวร ควรหลีกเลี่ยงบัญชีหลัก แม้แต่บัญชีแยกก็มีความเสี่ยง",
+  "One at a time. The next download starts automatically.": "ดาวน์โหลดทีละรายการ รายการถัดไปจะเริ่มโดยอัตโนมัติ",
+  "Up next": "รายการถัดไป",
+  "Waiting": "กำลังรอ",
+  "Queue position {position}": "ตำแหน่งในคิว: {position}",
+  "Maximum 100 open downloads.": "ดาวน์โหลดที่ยังไม่เสร็จได้สูงสุด 100 รายการ"
 }

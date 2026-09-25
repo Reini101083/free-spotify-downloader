@@ -195,5 +195,10 @@
   "Cookie session cleared.": "Sesiunea de cookie-uri a fost ștearsă.",
   "Download list": "Lista descărcărilor",
   "Version": "Versiune",
-  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Autentificarea opțională poate reduce CAPTCHA, dar folosirea contului poate duce la suspendare temporară sau permanentă. Evită contul principal; și conturile separate sunt expuse riscului."
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Autentificarea opțională poate reduce CAPTCHA, dar folosirea contului poate duce la suspendare temporară sau permanentă. Evită contul principal; și conturile separate sunt expuse riscului.",
+  "One at a time. The next download starts automatically.": "Câte una pe rând. Următoarea descărcare începe automat.",
+  "Up next": "Urmează",
+  "Waiting": "În așteptare",
+  "Queue position {position}": "Poziție în coadă: {position}",
+  "Maximum 100 open downloads.": "Maximum 100 de descărcări nefinalizate."
 }

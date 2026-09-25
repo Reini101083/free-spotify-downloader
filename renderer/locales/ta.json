@@ -195,5 +195,10 @@
   "Cookie session cleared.": "குக்கீ அமர்வு அழிக்கப்பட்டது.",
   "Download list": "பதிவிறக்க பட்டியல்",
   "Version": "பதிப்பு",
-  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "விருப்ப உள்நுழைவு CAPTCHA சோதனைகளைக் குறைக்கலாம்; ஆனால் கணக்கைப் பயன்படுத்துவதால் தற்காலிக அல்லது நிரந்தரத் தடை ஏற்படலாம். முதன்மைக் கணக்கைத் தவிர்க்கவும்; தனிக் கணக்குகளுக்கும் ஆபத்து உண்டு."
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "விருப்ப உள்நுழைவு CAPTCHA சோதனைகளைக் குறைக்கலாம்; ஆனால் கணக்கைப் பயன்படுத்துவதால் தற்காலிக அல்லது நிரந்தரத் தடை ஏற்படலாம். முதன்மைக் கணக்கைத் தவிர்க்கவும்; தனிக் கணக்குகளுக்கும் ஆபத்து உண்டு.",
+  "One at a time. The next download starts automatically.": "ஒரு நேரத்தில் ஒரு பதிவிறக்கம். அடுத்த பதிவிறக்கம் தானாகவே தொடங்கும்.",
+  "Up next": "அடுத்து",
+  "Waiting": "காத்திருக்கிறது",
+  "Queue position {position}": "வரிசையில் இடம்: {position}",
+  "Maximum 100 open downloads.": "அதிகபட்சம் 100 முடிவடையாத பதிவிறக்கங்கள்."
 }

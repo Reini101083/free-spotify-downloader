@@ -195,5 +195,10 @@
   "Cookie session cleared.": "Sesi cookie dihapus.",
   "Download list": "Unduh daftar",
   "Version": "Versi",
-  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Login opsional dapat mengurangi CAPTCHA, tetapi penggunaan akun berisiko menyebabkan penangguhan sementara atau permanen. Hindari akun utama; akun terpisah juga berisiko."
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Login opsional dapat mengurangi CAPTCHA, tetapi penggunaan akun berisiko menyebabkan penangguhan sementara atau permanen. Hindari akun utama; akun terpisah juga berisiko.",
+  "One at a time. The next download starts automatically.": "Satu unduhan setiap kali. Unduhan berikutnya dimulai secara otomatis.",
+  "Up next": "Berikutnya",
+  "Waiting": "Menunggu",
+  "Queue position {position}": "Posisi antrean: {position}",
+  "Maximum 100 open downloads.": "Maksimal 100 unduhan yang belum selesai."
 }

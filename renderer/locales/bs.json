@@ -195,5 +195,10 @@
   "Cookie session cleared.": "Sesija kolačića je obrisana.",
   "Download list": "Lista za preuzimanje",
   "Version": "Verzija",
-  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Dobrovoljna prijava može smanjiti CAPTCHA provjere, ali korištenje računa može dovesti do privremene ili trajne blokade. Izbjegavaj glavni račun; i odvojeni računi su u opasnosti."
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Dobrovoljna prijava može smanjiti CAPTCHA provjere, ali korištenje računa može dovesti do privremene ili trajne blokade. Izbjegavaj glavni račun; i odvojeni računi su u opasnosti.",
+  "One at a time. The next download starts automatically.": "Jedno preuzimanje odjednom. Sljedeće počinje automatski.",
+  "Up next": "Sljedeće",
+  "Waiting": "Na čekanju",
+  "Queue position {position}": "Položaj u redu: {position}",
+  "Maximum 100 open downloads.": "Najviše 100 nedovršenih preuzimanja."
 }

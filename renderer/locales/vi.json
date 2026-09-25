@@ -195,5 +195,10 @@
   "Cookie session cleared.": "Đã xóa phiên cookie.",
   "Download list": "Danh sách tải xuống",
   "Version": "Phiên bản",
-  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Đăng nhập tùy chọn có thể giảm CAPTCHA, nhưng việc dùng tài khoản có thể dẫn đến đình chỉ tạm thời hoặc vĩnh viễn. Tránh dùng tài khoản chính; tài khoản riêng cũng có rủi ro."
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Đăng nhập tùy chọn có thể giảm CAPTCHA, nhưng việc dùng tài khoản có thể dẫn đến đình chỉ tạm thời hoặc vĩnh viễn. Tránh dùng tài khoản chính; tài khoản riêng cũng có rủi ro.",
+  "One at a time. The next download starts automatically.": "Mỗi lần một lượt tải. Lượt tải tiếp theo sẽ tự động bắt đầu.",
+  "Up next": "Tiếp theo",
+  "Waiting": "Đang chờ",
+  "Queue position {position}": "Vị trí trong hàng đợi: {position}",
+  "Maximum 100 open downloads.": "Tối đa 100 lượt tải chưa hoàn tất."
 }

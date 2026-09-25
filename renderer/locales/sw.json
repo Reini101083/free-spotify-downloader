@@ -195,5 +195,10 @@
   "Cookie session cleared.": "Kipindi cha vidakuzi kimefutwa.",
   "Download list": "Orodha ya upakuaji",
   "Version": "Toleo",
-  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Kuingia kwa hiari kunaweza kupunguza CAPTCHA, lakini kutumia akaunti kunaweza kusababisha kusimamishwa kwa muda au kudumu. Epuka akaunti yako kuu; akaunti tofauti pia ziko hatarini."
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Kuingia kwa hiari kunaweza kupunguza CAPTCHA, lakini kutumia akaunti kunaweza kusababisha kusimamishwa kwa muda au kudumu. Epuka akaunti yako kuu; akaunti tofauti pia ziko hatarini.",
+  "One at a time. The next download starts automatically.": "Upakuaji mmoja kwa wakati. Upakuaji unaofuata utaanza kiotomatiki.",
+  "Up next": "Unaofuata",
+  "Waiting": "Unasubiri",
+  "Queue position {position}": "Nafasi kwenye foleni: {position}",
+  "Maximum 100 open downloads.": "Kiwango cha juu ni vipakuzi 100 ambavyo havijakamilika."
 }

@@ -195,5 +195,10 @@
   "Cookie session cleared.": "សម័យខូគីត្រូវបានសម្អាត។",
   "Download list": "បញ្ជីទាញយក",
   "Version": "កំណែ",
-  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "ការចូលគណនីតាមជម្រើសអាចកាត់បន្ថយ CAPTCHA ប៉ុន្តែការប្រើគណនីអាចបណ្តាលឱ្យផ្អាកបណ្តោះអាសន្ន ឬជាអចិន្ត្រៃយ៍។ ជៀសវាងគណនីចម្បងរបស់អ្នក។ គណនីដាច់ដោយឡែកក៏មានហានិភ័យដែរ។"
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "ការចូលគណនីតាមជម្រើសអាចកាត់បន្ថយ CAPTCHA ប៉ុន្តែការប្រើគណនីអាចបណ្តាលឱ្យផ្អាកបណ្តោះអាសន្ន ឬជាអចិន្ត្រៃយ៍។ ជៀសវាងគណនីចម្បងរបស់អ្នក។ គណនីដាច់ដោយឡែកក៏មានហានិភ័យដែរ។",
+  "One at a time. The next download starts automatically.": "ទាញយកម្តងមួយ។ ការទាញយកបន្ទាប់នឹងចាប់ផ្តើមដោយស្វ័យប្រវត្តិ។",
+  "Up next": "បន្ទាប់",
+  "Waiting": "កំពុងរង់ចាំ",
+  "Queue position {position}": "ទីតាំងក្នុងជួរ៖ {position}",
+  "Maximum 100 open downloads.": "ការទាញយកដែលមិនទាន់បញ្ចប់ច្រើនបំផុត 100។"
 }

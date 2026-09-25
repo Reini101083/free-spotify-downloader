@@ -195,5 +195,10 @@
   "Cookie session cleared.": "Koekiesessie is skoongemaak.",
   "Download list": "Aflaai lys",
   "Version": "Weergawe",
-  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Opsionele aanmelding kan CAPTCHA's verminder, maar rekeninggebruik kan tot tydelike of permanente opskorting lei. Vermy jou hoofrekening; aparte rekeninge loop ook gevaar."
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Opsionele aanmelding kan CAPTCHA's verminder, maar rekeninggebruik kan tot tydelike of permanente opskorting lei. Vermy jou hoofrekening; aparte rekeninge loop ook gevaar.",
+  "One at a time. The next download starts automatically.": "Een aflaai op 'n slag. Die volgende begin outomaties.",
+  "Up next": "Volgende",
+  "Waiting": "Wag",
+  "Queue position {position}": "Posisie in die tou: {position}",
+  "Maximum 100 open downloads.": "Hoogstens 100 onvoltooide aflaaie."
 }

@@ -195,5 +195,10 @@
   "Cookie session cleared.": "Sessjoni tal-cookies ikklerjata.",
   "Download list": "Niżżel il-lista",
   "Version": "Verżjoni",
-  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Id-dħul fakultattiv jista’ jnaqqas il-CAPTCHA, iżda l-użu tal-kont jista’ jwassal għal sospensjoni temporanja jew permanenti. Evita l-kont ewlieni; kontijiet separati huma wkoll f’riskju."
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Id-dħul fakultattiv jista’ jnaqqas il-CAPTCHA, iżda l-użu tal-kont jista’ jwassal għal sospensjoni temporanja jew permanenti. Evita l-kont ewlieni; kontijiet separati huma wkoll f’riskju.",
+  "One at a time. The next download starts automatically.": "Wieħed kull darba. It-tniżżil li jmiss jibda awtomatikament.",
+  "Up next": "Li jmiss",
+  "Waiting": "Qed jistenna",
+  "Queue position {position}": "Pożizzjoni fil-kju: {position}",
+  "Maximum 100 open downloads.": "Massimu ta’ 100 tniżżil mhux lest."
 }

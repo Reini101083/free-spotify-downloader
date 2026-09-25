@@ -195,5 +195,10 @@
   "Cookie session cleared.": "Sīkfailu sesija ir notīrīta.",
   "Download list": "Lejupielādes saraksts",
   "Version": "Versija",
-  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Izvēles pieteikšanās var samazināt CAPTCHA pārbaudes, taču konta izmantošana var izraisīt īslaicīgu vai pastāvīgu bloķēšanu. Neizmanto galveno kontu; arī atsevišķi konti ir apdraudēti."
+  "Optional sign-in may reduce CAPTCHAs, but account use can cause temporary or permanent suspension. Avoid your main account; separate accounts are also at risk.": "Izvēles pieteikšanās var samazināt CAPTCHA pārbaudes, taču konta izmantošana var izraisīt īslaicīgu vai pastāvīgu bloķēšanu. Neizmanto galveno kontu; arī atsevišķi konti ir apdraudēti.",
+  "One at a time. The next download starts automatically.": "Pa vienai. Nākamā lejupielāde sākas automātiski.",
+  "Up next": "Nākamā",
+  "Waiting": "Gaida",
+  "Queue position {position}": "Vieta rindā: {position}",
+  "Maximum 100 open downloads.": "Ne vairāk kā 100 nepabeigtas lejupielādes."
 }
