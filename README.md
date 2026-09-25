@@ -8,12 +8,12 @@ Windows · macOS · Linux · 79 bundled interface languages
 
 [**Choose your operating system on the latest release page**](https://github.com/Reini101083/free-spotify-downloader/releases/latest)
 
-| Operating system | Download version 0.2.1 |
+| Operating system | Download version 0.2.2 |
 | --- | --- |
-| Windows · Intel / AMD 64-bit | [Installer](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.1/Free-Spotify-Downloader-0.2.1-windows-x64-setup.exe) · [Portable](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.1/Free-Spotify-Downloader-0.2.1-windows-x64-portable.exe) |
-| Mac · Apple Silicon | [DMG](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.1/Free-Spotify-Downloader-0.2.1-mac-arm64.dmg) |
-| Mac · Intel | [DMG](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.1/Free-Spotify-Downloader-0.2.1-mac-x64.dmg) |
-| Linux · x86_64 | [AppImage](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.1/Free-Spotify-Downloader-0.2.1-linux-x86_64.AppImage) · [DEB](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.1/Free-Spotify-Downloader-0.2.1-linux-amd64.deb) |
+| Windows · Intel / AMD 64-bit | [Installer](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.2/Free-Spotify-Downloader-0.2.2-windows-x64-setup.exe) · [Portable](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.2/Free-Spotify-Downloader-0.2.2-windows-x64-portable.exe) |
+| Mac · Apple Silicon | [DMG](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.2/Free-Spotify-Downloader-0.2.2-mac-arm64.dmg) |
+| Mac · Intel | [DMG](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.2/Free-Spotify-Downloader-0.2.2-mac-x64.dmg) |
+| Linux · x86_64 | [AppImage](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.2/Free-Spotify-Downloader-0.2.2-linux-x86_64.AppImage) · [DEB](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.2.2/Free-Spotify-Downloader-0.2.2-linux-amd64.deb) |
 
 No GitHub account is required. [Older versions](https://github.com/Reini101083/free-spotify-downloader/releases) remain available separately. **Source code (zip)** contains source code, not an installer. Each release includes SHA-256 checksums. Python, FFmpeg and Deno are included.
 

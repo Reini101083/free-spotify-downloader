@@ -155,10 +155,18 @@ function render() {
   renderPreview(); if ($('#details-dialog').open) renderDetails(); translatePage(); icons()
 }
 function acceptClipboard(link) { $('#spotify-url').value=link;$('#input-error').hidden=true;$('#spotify-url').removeAttribute('aria-invalid');pendingClipboardLink=null;$('#clipboard-prompt').hidden=true;toast('Spotify link pasted. Ready to add.');render() }
-function applyTheme(value) { const dark=value==='dark'||value==='system'&&matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.dataset.theme=dark?'dark':'light';try{localStorage.setItem('fsd-theme',value)}catch{} }
-let theme='system';try{theme=localStorage.getItem('fsd-theme')||theme}catch{};$('#theme').value=theme;applyTheme(theme)
+function applyTheme(value) {
+  const mode=['system','light','dark'].includes(value)?value:'system'
+  const dark=mode==='dark'||mode==='system'&&matchMedia('(prefers-color-scheme: dark)').matches
+  document.documentElement.dataset.theme=dark?'dark':'light'
+  $('#theme').value=mode
+  $('#theme-toggle').setAttribute('aria-checked',String(dark))
+  try{localStorage.setItem('fsd-theme',mode)}catch{}
+}
+let theme='system';try{theme=localStorage.getItem('fsd-theme')||theme}catch{};applyTheme(theme)
 matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>applyTheme($('#theme').value))
 $('#theme').addEventListener('change',()=>applyTheme($('#theme').value))
+$('#theme-toggle').addEventListener('click',()=>applyTheme(document.documentElement.dataset.theme==='dark'?'light':'dark'))
 function renderLanguages() {
   const search=$('#language-search').value.toLocaleLowerCase();const list=$('#language-list');list.replaceChildren()
   for(const language of LANGUAGES){const native=languageName(language.code);if(!`${native} ${language.name} ${language.code}`.toLocaleLowerCase().includes(search))continue;const item=node('button','language-option'+(getLanguage()===language.code?' selected':''));const copy=node('span');copy.append(node('strong','',native),node('small','',language.name));item.append(copy);item.lang=language.code;if(getLanguage()===language.code)item.append(icon('check'));item.addEventListener('click',()=>void action(async()=>{await setLanguage(language.code);if(bridge)await bridge.language(language.code);$('#language-dialog').close();render()}));list.append(item)}icons()
