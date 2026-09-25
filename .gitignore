@@ -1,0 +1,13 @@
+node_modules/
+web/
+release/
+engine-dist/
+engine-build/
+__pycache__/
+.venv/
+*.pyc
+*.log
+.DS_Store
+.sites-runtime/
+
+dist/

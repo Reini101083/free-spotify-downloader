@@ -1,0 +1,689 @@
+{
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "packages": [
+    {
+      "name": "altgraph",
+      "version": "0.17.5",
+      "license": "MIT",
+      "urls": [
+        "Documentation, https://altgraph.readthedocs.io/en/latest/",
+        "Issue tracker, https://github.com/ronaldoussoren/altgraph/issues",
+        "Repository, https://github.com/ronaldoussoren/altgraph"
+      ]
+    },
+    {
+      "name": "annotated-types",
+      "version": "0.8.0",
+      "license": "MIT",
+      "urls": [
+        "Homepage, https://github.com/annotated-types/annotated-types",
+        "Source, https://github.com/annotated-types/annotated-types",
+        "Changelog, https://github.com/annotated-types/annotated-types/releases"
+      ]
+    },
+    {
+      "name": "anyio",
+      "version": "3.7.1",
+      "license": "MIT",
+      "urls": [
+        "Documentation, https://anyio.readthedocs.io/en/latest/",
+        "Changelog, https://anyio.readthedocs.io/en/stable/versionhistory.html",
+        "Source code, https://github.com/agronholm/anyio",
+        "Issue tracker, https://github.com/agronholm/anyio/issues"
+      ]
+    },
+    {
+      "name": "beautifulsoup4",
+      "version": "4.15.0",
+      "license": "MIT License",
+      "urls": [
+        "Download, https://www.crummy.com/software/BeautifulSoup/bs4/download/",
+        "Homepage, https://www.crummy.com/software/BeautifulSoup/bs4/"
+      ]
+    },
+    {
+      "name": "brotli",
+      "version": "1.2.0",
+      "license": "MIT",
+      "urls": [
+        "https://github.com/google/brotli"
+      ]
+    },
+    {
+      "name": "certifi",
+      "version": "2026.7.22",
+      "license": "MPL-2.0",
+      "urls": [
+        "Source, https://github.com/certifi/python-certifi"
+      ]
+    },
+    {
+      "name": "cffi",
+      "version": "2.1.1",
+      "license": "MIT-0",
+      "urls": [
+        "Documentation, https://cffi.readthedocs.io/",
+        "Changelog, https://cffi.readthedocs.io/en/latest/whatsnew.html",
+        "Download, https://github.com/python-cffi/cffi/releases",
+        "Contact, https://groups.google.com/forum/#!forum/python-cffi",
+        "Source Code, https://github.com/python-cffi/cffi",
+        "Issue Tracker, https://github.com/python-cffi/cffi/issues"
+      ]
+    },
+    {
+      "name": "charset-normalizer",
+      "version": "3.5.1",
+      "license": "MIT",
+      "urls": [
+        "Changelog, https://github.com/jawah/charset_normalizer/blob/master/CHANGELOG.md",
+        "Documentation, https://charset-normalizer.readthedocs.io/",
+        "Code, https://github.com/jawah/charset_normalizer",
+        "Issue tracker, https://github.com/jawah/charset_normalizer/issues"
+      ]
+    },
+    {
+      "name": "click",
+      "version": "8.5.0",
+      "license": "BSD-3-Clause",
+      "urls": [
+        "Changes, https://click.palletsprojects.com/page/changes/",
+        "Chat, https://discord.gg/pallets",
+        "Documentation, https://click.palletsprojects.com/",
+        "Donate, https://palletsprojects.com/donate",
+        "Source, https://github.com/pallets/click/"
+      ]
+    },
+    {
+      "name": "colorama",
+      "version": "0.4.6",
+      "license": "",
+      "urls": [
+        "Homepage, https://github.com/tartley/colorama"
+      ]
+    },
+    {
+      "name": "curl_cffi",
+      "version": "0.15.0",
+      "license": "MIT",
+      "urls": [
+        "repository, https://github.com/lexiforest/curl_cffi"
+      ]
+    },
+    {
+      "name": "dacite",
+      "version": "1.9.2",
+      "license": "MIT",
+      "urls": [
+        "https://github.com/konradhalas/dacite"
+      ]
+    },
+    {
+      "name": "datastar-py",
+      "version": "1.0.2",
+      "license": "MIT",
+      "urls": [
+        "Documentation, https://github.com/starfederation/datastar-python/blob/develop/README.md",
+        "GitHub, https://github.com/starfederation/datastar-python"
+      ]
+    },
+    {
+      "name": "Deprecated",
+      "version": "1.3.1",
+      "license": "MIT",
+      "urls": [
+        "Documentation, https://deprecated.readthedocs.io/en/latest/",
+        "Source, https://github.com/laurent-laporte-pro/deprecated",
+        "Bug Tracker, https://github.com/laurent-laporte-pro/deprecated/issues"
+      ]
+    },
+    {
+      "name": "dnspython",
+      "version": "2.8.0",
+      "license": "ISC",
+      "urls": [
+        "homepage, https://www.dnspython.org",
+        "repository, https://github.com/rthalley/dnspython.git",
+        "documentation, https://dnspython.readthedocs.io/en/stable/",
+        "issues, https://github.com/rthalley/dnspython/issues"
+      ]
+    },
+    {
+      "name": "fastapi",
+      "version": "0.103.2",
+      "license": "MIT",
+      "urls": [
+        "Homepage, https://github.com/tiangolo/fastapi",
+        "Documentation, https://fastapi.tiangolo.com/",
+        "Repository, https://github.com/tiangolo/fastapi"
+      ]
+    },
+    {
+      "name": "h11",
+      "version": "0.16.0",
+      "license": "MIT",
+      "urls": [
+        "https://github.com/python-hyper/h11"
+      ]
+    },
+    {
+      "name": "idna",
+      "version": "3.20",
+      "license": "BSD-3-Clause",
+      "urls": [
+        "Changelog, https://github.com/kjd/idna/blob/master/HISTORY.md",
+        "Issue tracker, https://github.com/kjd/idna/issues",
+        "Source, https://github.com/kjd/idna"
+      ]
+    },
+    {
+      "name": "jaconv",
+      "version": "0.5.0",
+      "license": "MIT License",
+      "urls": [
+        "https://github.com/ikegami-yukino/jaconv"
+      ]
+    },
+    {
+      "name": "Jinja2",
+      "version": "3.1.6",
+      "license": "",
+      "urls": [
+        "Changes, https://jinja.palletsprojects.com/changes/",
+        "Chat, https://discord.gg/pallets",
+        "Documentation, https://jinja.palletsprojects.com/",
+        "Donate, https://palletsprojects.com/donate",
+        "Source, https://github.com/pallets/jinja/"
+      ]
+    },
+    {
+      "name": "markdown-it-py",
+      "version": "4.2.0",
+      "license": "",
+      "urls": [
+        "Documentation, https://markdown-it-py.readthedocs.io",
+        "Homepage, https://github.com/executablebooks/markdown-it-py"
+      ]
+    },
+    {
+      "name": "MarkupSafe",
+      "version": "3.0.3",
+      "license": "BSD-3-Clause",
+      "urls": [
+        "Donate, https://palletsprojects.com/donate",
+        "Documentation, https://markupsafe.palletsprojects.com/",
+        "Changes, https://markupsafe.palletsprojects.com/page/changes/",
+        "Source, https://github.com/pallets/markupsafe/",
+        "Chat, https://discord.gg/pallets"
+      ]
+    },
+    {
+      "name": "mdurl",
+      "version": "0.1.2",
+      "license": "",
+      "urls": [
+        "Homepage, https://github.com/executablebooks/mdurl"
+      ]
+    },
+    {
+      "name": "mutagen",
+      "version": "1.48.1",
+      "license": "GPL-2.0-or-later",
+      "urls": [
+        "Homepage, https://mutagen.readthedocs.io",
+        "Repository, https://github.com/quodlibet/mutagen"
+      ]
+    },
+    {
+      "name": "packaging",
+      "version": "26.3",
+      "license": "Apache-2.0 OR BSD-2-Clause",
+      "urls": [
+        "Documentation, https://packaging.pypa.io/",
+        "Source, https://github.com/pypa/packaging"
+      ]
+    },
+    {
+      "name": "pillow",
+      "version": "12.3.0",
+      "license": "MIT-CMU",
+      "urls": [
+        "Release notes, https://pillow.readthedocs.io/en/stable/releasenotes/index.html",
+        "Changelog, https://github.com/python-pillow/Pillow/releases",
+        "Documentation, https://pillow.readthedocs.io",
+        "Funding, https://tidelift.com/subscription/pkg/pypi-pillow?utm_source=pypi-pillow&utm_medium=pypi",
+        "Homepage, https://python-pillow.github.io",
+        "Mastodon, https://fosstodon.org/@pillow",
+        "Source, https://github.com/python-pillow/Pillow"
+      ]
+    },
+    {
+      "name": "pip",
+      "version": "25.0.1",
+      "license": "MIT",
+      "urls": [
+        "Homepage, https://pip.pypa.io/",
+        "Documentation, https://pip.pypa.io",
+        "Source, https://github.com/pypa/pip",
+        "Changelog, https://pip.pypa.io/en/stable/news/"
+      ]
+    },
+    {
+      "name": "platformdirs",
+      "version": "4.11.13",
+      "license": "MIT",
+      "urls": [
+        "Changelog, https://platformdirs.readthedocs.io/en/latest/changelog.html",
+        "Documentation, https://platformdirs.readthedocs.io",
+        "Homepage, https://github.com/tox-dev/platformdirs",
+        "Source, https://github.com/tox-dev/platformdirs",
+        "Tracker, https://github.com/tox-dev/platformdirs/issues"
+      ]
+    },
+    {
+      "name": "pycparser",
+      "version": "3.0",
+      "license": "BSD-3-Clause",
+      "urls": [
+        "Homepage, https://github.com/eliben/pycparser"
+      ]
+    },
+    {
+      "name": "pycryptodomex",
+      "version": "3.23.0",
+      "license": "BSD, Public Domain",
+      "urls": [
+        "Source, https://github.com/Legrandin/pycryptodome/",
+        "Changelog, https://www.pycryptodome.org/src/changelog"
+      ]
+    },
+    {
+      "name": "pydantic",
+      "version": "2.13.5",
+      "license": "MIT",
+      "urls": [
+        "Homepage, https://github.com/pydantic/pydantic",
+        "Documentation, https://docs.pydantic.dev",
+        "Funding, https://github.com/sponsors/samuelcolvin",
+        "Source, https://github.com/pydantic/pydantic",
+        "Changelog, https://docs.pydantic.dev/latest/changelog/"
+      ]
+    },
+    {
+      "name": "pydantic_core",
+      "version": "2.46.5",
+      "license": "MIT",
+      "urls": [
+        "Funding, https://github.com/sponsors/samuelcolvin",
+        "Homepage, https://github.com/pydantic",
+        "Source, https://github.com/pydantic/pydantic/tree/main/pydantic-core"
+      ]
+    },
+    {
+      "name": "Pygments",
+      "version": "2.21.0",
+      "license": "BSD-2-Clause",
+      "urls": [
+        "Homepage, https://pygments.org",
+        "Documentation, https://pygments.org/docs",
+        "Source, https://github.com/pygments/pygments",
+        "Bug Tracker, https://github.com/pygments/pygments/issues",
+        "Changelog, https://github.com/pygments/pygments/blob/master/CHANGES"
+      ]
+    },
+    {
+      "name": "pyinstaller",
+      "version": "6.22.3",
+      "license": "GPLv2-or-later with a special exception which allows to use PyInstaller to build and distribute non-free programs (including commercial ones)",
+      "urls": [
+        "Homepage, https://pyinstaller.org",
+        "Documentation, https://pyinstaller.org",
+        "Source Code, https://github.com/pyinstaller/pyinstaller",
+        "Release Notes, https://pyinstaller.org/en/stable/CHANGES.html"
+      ]
+    },
+    {
+      "name": "pyinstaller-hooks-contrib",
+      "version": "2026.7",
+      "license": "",
+      "urls": [
+        "https://github.com/pyinstaller/pyinstaller-hooks-contrib"
+      ]
+    },
+    {
+      "name": "pykakasi",
+      "version": "2.3.0",
+      "license": "GPL-3.0-or-later",
+      "urls": [
+        "Source, https://codeberg.org/miurahr/pykakasi"
+      ]
+    },
+    {
+      "name": "pymongo",
+      "version": "4.18.2",
+      "license": "Apache-2.0",
+      "urls": [
+        "Homepage, https://www.mongodb.org",
+        "Documentation, https://www.mongodb.com/docs/languages/python/pymongo-driver/current/",
+        "Source, https://github.com/mongodb/mongo-python-driver",
+        "Tracker, https://jira.mongodb.org/projects/PYTHON/issues"
+      ]
+    },
+    {
+      "name": "PyOTP",
+      "version": "2.10.0",
+      "license": "MIT",
+      "urls": [
+        "Homepage, https://github.com/pyauth/pyotp",
+        "Documentation, https://github.com/pyauth/pyotp",
+        "Source Code, https://github.com/pyauth/pyotp",
+        "Issue Tracker, https://github.com/pyauth/pyotp/issues",
+        "Change Log, https://github.com/pyauth/pyotp/blob/main/Changes.rst"
+      ]
+    },
+    {
+      "name": "python-dateutil",
+      "version": "2.9.0.post0",
+      "license": "Dual License",
+      "urls": [
+        "Documentation, https://dateutil.readthedocs.io/en/stable/",
+        "Source, https://github.com/dateutil/dateutil"
+      ]
+    },
+    {
+      "name": "python-multipart",
+      "version": "0.0.32",
+      "license": "Apache-2.0",
+      "urls": [
+        "Homepage, https://github.com/Kludex/python-multipart",
+        "Documentation, https://kludex.github.io/python-multipart/",
+        "Changelog, https://github.com/Kludex/python-multipart/blob/master/CHANGELOG.md",
+        "Source, https://github.com/Kludex/python-multipart"
+      ]
+    },
+    {
+      "name": "python-slugify",
+      "version": "8.0.4",
+      "license": "MIT",
+      "urls": [
+        "https://github.com/un33k/python-slugify"
+      ]
+    },
+    {
+      "name": "RapidFuzz",
+      "version": "3.14.6",
+      "license": "MIT",
+      "urls": [
+        "Homepage, https://github.com/rapidfuzz/RapidFuzz",
+        "Documentation, https://rapidfuzz.github.io/RapidFuzz/",
+        "Repository, https://github.com/rapidfuzz/RapidFuzz.git",
+        "Issues, https://github.com/rapidfuzz/RapidFuzz/issues",
+        "Changelog, https://github.com/rapidfuzz/RapidFuzz/blob/main/CHANGELOG.rst"
+      ]
+    },
+    {
+      "name": "readerwriterlock",
+      "version": "1.0.9",
+      "license": "MIT",
+      "urls": [
+        "Source, https://github.com/elarivie/pyReaderWriterLock",
+        "Tracker, https://github.com/elarivie/pyReaderWriterLock/issues"
+      ]
+    },
+    {
+      "name": "redis",
+      "version": "8.1.0",
+      "license": "MIT",
+      "urls": [
+        "Changes, https://github.com/redis/redis-py/releases",
+        "Code, https://github.com/redis/redis-py",
+        "Documentation, https://redis.readthedocs.io/en/latest/",
+        "Homepage, https://github.com/redis/redis-py",
+        "Issue tracker, https://github.com/redis/redis-py/issues"
+      ]
+    },
+    {
+      "name": "requests",
+      "version": "2.34.2",
+      "license": "Apache-2.0",
+      "urls": [
+        "Documentation, https://requests.readthedocs.io",
+        "Source, https://github.com/psf/requests"
+      ]
+    },
+    {
+      "name": "rich",
+      "version": "13.9.4",
+      "license": "MIT",
+      "urls": [
+        "Documentation, https://rich.readthedocs.io/en/latest/"
+      ]
+    },
+    {
+      "name": "setuptools",
+      "version": "84.0.0",
+      "license": "MIT",
+      "urls": [
+        "Source, https://github.com/pypa/setuptools",
+        "Documentation, https://setuptools.pypa.io/",
+        "Changelog, https://setuptools.pypa.io/en/stable/history.html"
+      ]
+    },
+    {
+      "name": "six",
+      "version": "1.17.0",
+      "license": "MIT",
+      "urls": [
+        "https://github.com/benjaminp/six"
+      ]
+    },
+    {
+      "name": "sniffio",
+      "version": "1.3.1",
+      "license": "MIT OR Apache-2.0",
+      "urls": [
+        "Homepage, https://github.com/python-trio/sniffio",
+        "Documentation, https://sniffio.readthedocs.io/",
+        "Changelog, https://sniffio.readthedocs.io/en/latest/history.html"
+      ]
+    },
+    {
+      "name": "soundcloud-v2",
+      "version": "1.7.0",
+      "license": "",
+      "urls": [
+        "Bug Tracker, https://github.com/7x11x13/soundcloud.py/issues"
+      ]
+    },
+    {
+      "name": "soupsieve",
+      "version": "2.10",
+      "license": "MIT",
+      "urls": [
+        "Homepage, https://github.com/facelessuser/soupsieve"
+      ]
+    },
+    {
+      "name": "spotapi",
+      "version": "1.2.8",
+      "license": "",
+      "urls": [
+        ""
+      ]
+    },
+    {
+      "name": "spotdl",
+      "version": "4.5.2",
+      "license": "MIT",
+      "urls": [
+        "Homepage, https://github.com/spotDL/spotify-downloader/",
+        "Repository, https://github.com/spotDL/spotify-downloader.git",
+        "Documentation, https://spotdl.rtfd.io/en/latest/"
+      ]
+    },
+    {
+      "name": "spotipy",
+      "version": "2.26.0",
+      "license": "MIT",
+      "urls": [
+        "Source, https://github.com/plamere/spotipy"
+      ]
+    },
+    {
+      "name": "spotipyFree",
+      "version": "1.9.14",
+      "license": "Copyright (c) <2026> <Tzur Soffer>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.",
+      "urls": [
+        ""
+      ]
+    },
+    {
+      "name": "starlette",
+      "version": "0.27.0",
+      "license": "BSD-3-Clause",
+      "urls": [
+        "Homepage, https://github.com/encode/starlette",
+        "Documentation, https://www.starlette.io/",
+        "Changelog, https://www.starlette.io/release-notes/",
+        "Funding, https://github.com/sponsors/encode",
+        "Source, https://github.com/encode/starlette"
+      ]
+    },
+    {
+      "name": "syncedlyrics",
+      "version": "1.0.1",
+      "license": "MIT",
+      "urls": [
+        "Bug Tracker, https://github.com/rtcq/syncedlyrics/issues",
+        "Repository, https://github.com/rtcq/syncedlyrics"
+      ]
+    },
+    {
+      "name": "text-unidecode",
+      "version": "1.3",
+      "license": "Artistic License",
+      "urls": [
+        "https://github.com/kmike/text-unidecode/"
+      ]
+    },
+    {
+      "name": "typing-inspection",
+      "version": "0.4.4",
+      "license": "MIT",
+      "urls": [
+        "Homepage, https://github.com/pydantic/typing-inspection",
+        "Documentation, https://pydantic.github.io/typing-inspection/dev/",
+        "Source, https://github.com/pydantic/typing-inspection",
+        "Changelog, https://github.com/pydantic/typing-inspection/blob/main/HISTORY.md"
+      ]
+    },
+    {
+      "name": "typing_extensions",
+      "version": "4.16.0",
+      "license": "PSF-2.0",
+      "urls": [
+        "Bug Tracker, https://github.com/python/typing_extensions/issues",
+        "Changes, https://github.com/python/typing_extensions/blob/main/CHANGELOG.md",
+        "Documentation, https://typing-extensions.readthedocs.io/",
+        "Home, https://github.com/python/typing_extensions",
+        "Q & A, https://github.com/python/typing/discussions",
+        "Repository, https://github.com/python/typing_extensions"
+      ]
+    },
+    {
+      "name": "Unidecode",
+      "version": "1.4.0",
+      "license": "GPL",
+      "urls": [
+        "UNKNOWN"
+      ]
+    },
+    {
+      "name": "urllib3",
+      "version": "2.8.0",
+      "license": "MIT",
+      "urls": [
+        "Changelog, https://github.com/urllib3/urllib3/blob/main/CHANGES.rst",
+        "Documentation, https://urllib3.readthedocs.io",
+        "Code, https://github.com/urllib3/urllib3",
+        "Issue tracker, https://github.com/urllib3/urllib3/issues",
+        "Security policy, https://urllib3.readthedocs.io/en/latest/security.html"
+      ]
+    },
+    {
+      "name": "uvicorn",
+      "version": "0.23.2",
+      "license": "BSD-3-Clause",
+      "urls": [
+        "Changelog, https://github.com/encode/uvicorn/blob/master/CHANGELOG.md",
+        "Funding, https://github.com/sponsors/encode",
+        "Homepage, https://www.uvicorn.org/",
+        "Source, https://github.com/encode/uvicorn"
+      ]
+    },
+    {
+      "name": "validators",
+      "version": "0.35.0",
+      "license": "MIT",
+      "urls": [
+        "Homepage, https://python-validators.github.io/validators",
+        "Documentation, https://yozachar.github.io/pyvalidators",
+        "Repository, https://github.com/python-validators/validators",
+        "Changelog, https://github.com/python-validators/validators/blob/master/CHANGES.md"
+      ]
+    },
+    {
+      "name": "websockets",
+      "version": "14.2",
+      "license": "BSD-3-Clause",
+      "urls": [
+        "Homepage, https://github.com/python-websockets/websockets",
+        "Changelog, https://websockets.readthedocs.io/en/stable/project/changelog.html",
+        "Documentation, https://websockets.readthedocs.io/",
+        "Funding, https://tidelift.com/subscription/pkg/pypi-websockets?utm_source=pypi-websockets&utm_medium=referral&utm_campaign=readme",
+        "Tracker, https://github.com/python-websockets/websockets/issues"
+      ]
+    },
+    {
+      "name": "wrapt",
+      "version": "2.4.1",
+      "license": "BSD-2-Clause",
+      "urls": [
+        "Homepage, https://github.com/GrahamDumpleton/wrapt",
+        "Bug Tracker, https://github.com/GrahamDumpleton/wrapt/issues/",
+        "Changelog, https://wrapt.readthedocs.io/en/latest/changes.html",
+        "Documentation, https://wrapt.readthedocs.io/"
+      ]
+    },
+    {
+      "name": "yt-dlp",
+      "version": "2026.8.19",
+      "license": "Unlicense",
+      "urls": [
+        "Documentation, https://github.com/yt-dlp/yt-dlp#readme",
+        "Repository, https://github.com/yt-dlp/yt-dlp",
+        "Tracker, https://github.com/yt-dlp/yt-dlp/issues",
+        "Funding, https://github.com/yt-dlp/yt-dlp/blob/master/Maintainers.md#maintainers"
+      ]
+    },
+    {
+      "name": "yt-dlp-ejs",
+      "version": "0.8.0",
+      "license": "Unlicense AND MIT AND ISC",
+      "urls": [
+        "Documentation, https://github.com/yt-dlp/ejs#readme",
+        "Issues, https://github.com/yt-dlp/ejs/issues",
+        "Source, https://github.com/yt-dlp/ejs"
+      ]
+    },
+    {
+      "name": "ytmusicapi",
+      "version": "1.12.3",
+      "license": "MIT",
+      "urls": [
+        "homepage, https://github.com/sigma67/ytmusicapi",
+        "documentation, https://ytmusicapi.readthedocs.io",
+        "repository, https://github.com/sigma67/ytmusicapi"
+      ]
+    }
+  ]
+}
