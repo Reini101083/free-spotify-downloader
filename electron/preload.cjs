@@ -1,5 +1,12 @@
 const { contextBridge, ipcRenderer } = require('electron')
 contextBridge.exposeInMainWorld('desktop', {
+  ready: language => ipcRenderer.invoke('ui-ready', language),
+  language: language => ipcRenderer.invoke('ui-language', language),
+  onClipboardLink: callback => {
+    const listener = (_event, link) => callback(link)
+    ipcRenderer.on('clipboard-link', listener)
+    return () => ipcRenderer.removeListener('clipboard-link', listener)
+  },
   youtubeOpen: language => ipcRenderer.invoke('youtube-open', language),
   youtubeClear: () => ipcRenderer.invoke('youtube-clear'),
   state: () => ipcRenderer.invoke('state'),

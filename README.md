@@ -10,12 +10,13 @@ Deutsch / English · Windows · macOS · Linux
 
 | Betriebssystem | Paket |
 | --- | --- |
-| Windows · Intel / AMD 64-Bit | Installer `.exe` oder Portable `.exe` |
-| Mac · Apple Silicon | `.dmg` für M-Chips |
-| Mac · Intel | `.dmg` für Intel-Prozessoren |
-| Linux · x86_64 | `.AppImage` oder `.deb` für Debian / Ubuntu |
+| Windows · Intel / AMD 64-Bit | [Installer herunterladen](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.1.2/Free-Spotify-Downloader-0.1.2-windows-x64-setup.exe) · [Portable herunterladen](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.1.2/Free-Spotify-Downloader-0.1.2-windows-x64-portable.exe) |
+| Mac · Apple Silicon | [DMG herunterladen](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.1.2/Free-Spotify-Downloader-0.1.2-mac-arm64.dmg) |
+| Mac · Intel | [DMG herunterladen](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.1.2/Free-Spotify-Downloader-0.1.2-mac-x64.dmg) |
+| Linux · x86_64 | [AppImage herunterladen](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.1.2/Free-Spotify-Downloader-0.1.2-linux-x86_64.AppImage) · [DEB herunterladen](https://github.com/Reini101083/free-spotify-downloader/releases/download/v0.1.2/Free-Spotify-Downloader-0.1.2-linux-amd64.deb) |
 
-Die passende Datei steht direkt in der Tabelle der Release-Seite. Kein GitHub-Konto
+Die Direktlinks laden **Version 0.1.2**. Auf der Release-Seite kannst du ebenfalls
+dein System auswählen. Kein GitHub-Konto
 zum Download erforderlich. [Ältere Versionen](https://github.com/Reini101083/free-spotify-downloader/releases)
 bleiben separat auswählbar. **Source code (zip)** ist der Quellcode, kein Installer.
 
@@ -24,7 +25,11 @@ in der installierten Desktop-App. Python, FFmpeg und Deno sind enthalten.
 
 ## What it does
 
-- Paste a Spotify track, album or playlist link into a responsive desktop interface.
+- Paste a Spotify track, album or playlist link using **right-click → Paste** or the keyboard.
+- Automatically fill an empty link field when the desktop app is in the foreground.
+  Existing input is kept; use **Use copied link** to replace it. Downloads never
+  start automatically. Disable this in Settings. Only validated Spotify URLs
+  leave the main process; unrelated clipboard text is neither stored nor sent.
 - Queue multiple downloads and select MP3, M4A, FLAC, Opus or WAV.
 - Save queue state atomically. After an interruption, select **Fortsetzen / Resume**.
 - Check completed files by Spotify track ID, audio header and stored SHA-256 digest.
@@ -51,6 +56,15 @@ YouTube-domain cookies are exported temporarily to the local engine, with
 restricted file permissions; they are removed when the job finishes and stale
 exports are removed on startup. You can clear the session in Settings. Google
 may reject embedded sign-in, and confirmation may still not unblock downloads.
+
+## Wenn eine Playlist fehlschlägt
+
+Prüfe zuerst, ob die Playlist öffentlich erreichbar ist. Klicke auf den Auftrag:
+Die konkrete Meldung und **Download-Verlauf** zeigen, ob Spotify-Titelinformationen,
+YouTube oder der Dateizugriff betroffen sind. Vorübergehende Spotify-Verbindungsfehler
+werden einmal erneut versucht; Zugriffssperren und Anfragelimits nicht. Mit
+**Fortsetzen** werden bereits vollständig gespeicherte Titel geprüft und behalten.
+Für einen Fehlerbericht bitte App-Version und Fehlermeldung angeben.
 
 ## Build and run
 

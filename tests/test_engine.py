@@ -17,6 +17,45 @@ def wav(file):
         stream.setnchannels(1); stream.setsampwidth(2); stream.setframerate(8000); stream.writeframes(b'\0\0' * 8000)
 
 class ResumeTests(unittest.TestCase):
+    def test_first_playlist_resolution_retries_connection_and_persists_before_audio(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            folder = Path(temporary)
+            manifest = folder / 'session.json'
+            track = {'url': 'https://open.spotify.com/track/' + '1' * 22, 'id': '1' * 22, 'title': 'Fixture'}
+            resolves = 0
+            def worker(args, _timeout):
+                nonlocal resolves
+                if args[0] == '--resolve':
+                    resolves += 1
+                    if resolves == 1:
+                        return 1, 'Connection timed out'
+                    session.atomic_save(args[2], [track])
+                    return 0, ''
+                self.assertEqual(json.loads(manifest.read_text())['tracks'], [track])
+                self.assertIn('--max-filename-length', args)
+                wav(Path(args[args.index('--output') + 1]).parent / ('Very long title ' * 8 + '.wav'))
+                return 0, ''
+            argv = ['--session', str(manifest), '--url', 'playlist', '--folder', str(folder), '--format', 'wav', '--bitrate', 'auto', '--ffmpeg', 'ffmpeg']
+            with patch.object(session, 'run_worker', worker), patch.object(session.time, 'sleep'), contextlib.redirect_stdout(io.StringIO()) as output:
+                session.run_session(argv)
+            self.assertEqual(resolves, 2)
+            self.assertIn('"saved": 1', output.getvalue())
+            audio = Path(json.loads(manifest.read_text())['tracks'][0]['file'])
+            self.assertLessEqual(len(audio.name), 104)
+            self.assertTrue(audio.name.endswith('[' + track['id'] + '].wav'))
+
+    def test_playlist_denial_is_not_retried_and_emits_structured_failure(self):
+        with tempfile.TemporaryDirectory() as folder, patch.object(session, 'run_worker', return_value=(1, 'HTTP 429 Too many requests')) as worker:
+            with self.assertRaises(session.SessionError) as failure:
+                session.resolve_tracks('playlist', Path(folder) / 'tracks.json')
+            self.assertEqual(worker.call_count, 1)
+            with contextlib.redirect_stdout(io.StringIO()) as output:
+                session.report_error(failure.exception)
+            event = json.loads(output.getvalue().removeprefix(session.PREFIX))
+            self.assertEqual(event['code'], 'SPOTIFY_METADATA')
+            self.assertIn('429', event['detail'])
+            self.assertIn('begrenzt', event['message'])
+
     def test_resume_skips_completed_and_continues_after_missing_source(self):
         with tempfile.TemporaryDirectory() as folder:
             folder = Path(folder)

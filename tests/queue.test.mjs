@@ -58,6 +58,15 @@ test('zero exit without verified summary never reports success', async () => {
   const { queue, children } = setup(); const job = queue.enqueue(link); queue.start(); await flush(); children[0].emit('close', 0)
   assert.equal(job.status, 'failed')
 })
+test('metadata errors stay actionable in the queue and preserve provider details', async () => {
+  const { queue, children } = setup(); const job = queue.enqueue(link); queue.start(); await flush()
+  output(children[0], { type: 'status', message: 'Spotify-Titelliste wird geladen …' })
+  assert.equal(job.message, 'Spotify-Titelliste wird geladen …')
+  output(children[0], { type: 'error', code: 'SPOTIFY_METADATA', message: 'Playlist nicht erreichbar.', detail: 'HTTP 403' })
+  children[0].emit('close', 1)
+  assert.equal(job.status, 'failed'); assert.equal(job.message, 'Playlist nicht erreichbar.')
+  assert.match(job.logs.join('\n'), /HTTP 403/)
+})
 test('failed durable write prevents downloading and leaves a recoverable job', async () => {
   const { queue, children } = setup({ persist: async () => { throw new Error('disk full') } }); const job = queue.enqueue(link); queue.start(); await flush()
   assert.equal(children.length, 0); assert.equal(job.status, 'failed'); assert.equal(queue.running, false)

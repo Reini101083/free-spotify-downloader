@@ -11,8 +11,25 @@ import subprocess
 import sys
 import tempfile
 import threading
+import time
 
 PREFIX = 'FSD_EVENT '
+
+
+class SessionError(RuntimeError):
+    def __init__(self, code, message, detail=''):
+        super().__init__(message)
+        self.code, self.detail = code, detail
+
+
+def report_error(error):
+    if isinstance(error, SessionError):
+        code, message, detail = error.code, str(error), error.detail
+    elif isinstance(error, OSError):
+        code, message, detail = 'FILESYSTEM', 'Dateizugriff fehlgeschlagen. Prüfe den Musikordner und den freien Speicherplatz.', str(error)
+    else:
+        code, message, detail = 'ENGINE', 'Die Download-Engine wurde unterbrochen. Details stehen im Download-Verlauf.', f'{type(error).__name__}: {error}'
+    emit('error', code=code, message=message, detail=detail[-6000:])
 
 
 def emit(kind, **values):
@@ -63,7 +80,7 @@ def kill_tree(process):
 def run_worker(args, timeout):
     # Redirect into a temporary file so a noisy provider cannot fill RAM or block a pipe.
     with tempfile.TemporaryFile() as log:
-        process = subprocess.Popen(command(*args), stdin=subprocess.DEVNULL, stdout=log, stderr=subprocess.STDOUT, start_new_session=os.name != 'nt')
+        process = subprocess.Popen(command(*args), stdin=subprocess.DEVNULL, stdout=log, stderr=subprocess.STDOUT, start_new_session=os.name != 'nt', creationflags=subprocess.CREATE_NO_WINDOW if os.name == 'nt' else 0, env={**os.environ, 'PYTHONUTF8': '1', 'PYTHONIOENCODING': 'utf-8'})
         try:
             code = process.wait(timeout=timeout)
         finally:
@@ -84,6 +101,35 @@ def resolve(url, destination):
         if match:
             unique[song.url] = {'url': song.url, 'id': match[1], 'title': song.name or match[1]}
     atomic_save(destination, list(unique.values()))
+
+
+def resolve_tracks(url, result_file):
+    # Retry a temporary connection failure once, never retry access denial or rate limiting.
+    for attempt in range(2):
+        emit('status', message='Spotify-Titelliste wird geladen …' if not attempt else 'Spotify-Verbindung wird erneut versucht …')
+        try:
+            code, log = run_worker(['--resolve', url, str(result_file)], 120)
+        except subprocess.TimeoutExpired:
+            code, log = 1, 'Spotify metadata request timed out after 120 seconds'
+        if not code and result_file.exists():
+            tracks = json.loads(result_file.read_text(encoding='utf8'))
+            if not tracks:
+                raise SessionError('SPOTIFY_EMPTY', 'Spotify hat keine verfügbaren Titel geliefert. Prüfe den Link und die Freigabe der Playlist.')
+            return tracks
+        denied = re.search(r'\b(?:401|403|404|429)\b|too many requests|rate.?limit|private playlist|invalid playlist', log, re.I)
+        temporary = re.search(r'timed?\s*out|timeout|connection|resolve host|general hashes|\b50[234]\b', log, re.I)
+        if not attempt and temporary and not denied:
+            time.sleep(1)
+            continue
+        if re.search(r'\b429\b|too many requests|rate.?limit', log, re.I):
+            message = 'Spotify begrenzt gerade die Anfragen. Warte etwas und setze den Auftrag später fort.'
+        elif denied:
+            message = 'Spotify gibt die Titelliste nicht frei. Prüfe, ob die Playlist öffentlich und der Link gültig ist.'
+        elif temporary:
+            message = 'Die Verbindung zu Spotify ist fehlgeschlagen. Prüfe die Internetverbindung und versuche es später erneut.'
+        else:
+            message = 'Die Spotify-Titelliste konnte nicht geladen werden. Details stehen im Download-Verlauf.'
+        raise SessionError('SPOTIFY_METADATA', message, log)
 
 
 def run_session(argv):
@@ -112,12 +158,7 @@ def run_session(argv):
     if not data['tracks']:
         result_file = manifest.with_suffix('.tracks.json')
         result_file.parent.mkdir(parents=True, exist_ok=True)
-        code, log = run_worker(['--resolve', args.url, str(result_file)], 120)
-        if code or not result_file.exists():
-            raise RuntimeError('Track list unavailable: ' + log[-1000:])
-        data['tracks'] = json.loads(result_file.read_text(encoding='utf8'))
-        if not data['tracks']:
-            raise RuntimeError('No available tracks in this link')
+        data['tracks'] = resolve_tracks(args.url, result_file)
         atomic_save(manifest, data)
     tracks = data['tracks']
     saved = existing = skipped = 0
@@ -133,7 +174,7 @@ def run_session(argv):
             try:
                 # Staging is on the destination filesystem: final promotion is an atomic rename.
                 with tempfile.TemporaryDirectory(prefix=stage_prefix, dir=folder) as stage:
-                    arguments = ['download', track['url'], '--format', args.format, '--output', str(Path(stage) / '{artists} - {title} [{track-id}].{output-ext}'), '--overwrite', 'force', '--threads', '1', '--no-cache', '--ffmpeg', args.ffmpeg, '--log-level', 'ERROR']
+                    arguments = ['download', track['url'], '--format', args.format, '--output', str(Path(stage) / '{artists} - {title} [{track-id}].{output-ext}'), '--max-filename-length', '100', '--overwrite', 'force', '--threads', '1', '--no-cache', '--ffmpeg', args.ffmpeg, '--log-level', 'ERROR']
                     if args.format not in ['flac', 'wav']:
                         arguments += ['--bitrate', args.bitrate]
                     if args.cookie_file:
@@ -151,9 +192,7 @@ def run_session(argv):
                         raise RuntimeError(log[-1000:] or 'No matching audio source')
                     source = files[0]
                     # Ensure the stable Spotify ID is present even if a provider omitted it.
-                    name = source.stem
-                    if not name.endswith(f"[{track['id']}]"):
-                        name = name[:130] + f" [{track['id']}]"
+                    name = source.stem.removesuffix(f"[{track['id']}]").rstrip()[:75] + f" [{track['id']}]"
                     destination = folder / (name + source.suffix)
                     os.replace(source, destination)
                     saved += 1

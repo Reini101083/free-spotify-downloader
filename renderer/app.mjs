@@ -4,6 +4,7 @@ import { initializeDownloads } from './downloads.mjs'
 const $ = selector => document.querySelector(selector)
 const bridge = window.desktop
 let previewSequence = 0
+let pendingClipboardLink = null
 let filter = 'all', selectedId = null, toastTimer, state = { jobs: [], settings: preferences(), running: false, folder: '', health: {} }
 const statuses = { queued: 'Bereit', running: 'Läuft', completed: 'Gespeichert', failed: 'Fehlgeschlagen', cancelled: 'Abgebrochen', partial: 'Teilweise', preview: 'Vorschau', paused: 'Pausiert', blocked: 'Bestätigung nötig' }
 const icons = () => window.lucide?.createIcons({ attrs: { 'aria-hidden': 'true', 'stroke-width': 1.7 } })
@@ -42,7 +43,7 @@ function render() {
       item.append(retry)
     }
     item.append(button)
-    if (job.status === 'running') { const message = element('span', 'job-message', job.message); item.append(message); if (Number.isFinite(job.progress)) { const progress = element('progress', 'job-progress'); progress.max = 100; progress.value = job.progress; progress.setAttribute('aria-label', 'Fortschritt des aktuellen Titels'); item.append(progress) } }
+    if (['running', 'failed', 'blocked'].includes(job.status)) { const message = element('span', 'job-message', job.message); item.append(message); if (Number.isFinite(job.progress)) { const progress = element('progress', 'job-progress'); progress.max = 100; progress.value = job.progress; progress.setAttribute('aria-label', 'Fortschritt des aktuellen Titels'); item.append(progress) } }
     list.append(item)
   }
   if (focusedId && focusedAction) [...list.querySelectorAll('[data-job]')].find(node => node.dataset.job === focusedId)?.querySelector(`[data-action="${focusedAction}"]`)?.focus({ preventScroll: true })
@@ -57,6 +58,8 @@ function render() {
   const saved = state.jobs.reduce((sum, job) => sum + (job.saved || 0), 0)
   $('#saved-count').textContent = saved ? `${saved} ${saved === 1 ? 'Datei gespeichert' : 'Dateien gespeichert'}` : 'Noch keine Dateien gespeichert'
   $('#format').value = state.settings.format; $('#bitrate').value = state.settings.bitrate
+  $('#clipboard-enabled').checked = state.settings.clipboard
+  $('#clipboard-enabled').disabled = !bridge
   $('#bitrate').disabled = ['flac','wav'].includes(state.settings.format)
   $('#format-visual').textContent = state.settings.format.toUpperCase()
   $('#quality-visual').textContent = $('#bitrate').disabled ? 'Quellqualität bleibt entscheidend' : state.settings.bitrate === 'auto' ? 'Automatische Bitrate' : `${state.settings.bitrate.replace('k','')} kbps`
@@ -73,8 +76,22 @@ function selectJob(id) {
   selectedId = id
   $('#embed-container').replaceChildren(); $('#preview-button').disabled = false
   $('#details').hidden = false
+  $('#log-details').open = state.jobs.some(job => job.id === id && ['failed', 'partial'].includes(job.status))
   render()
 }
+
+function acceptClipboard(link) {
+  $('#spotify-url').value = link
+  $('#spotify-url').removeAttribute('aria-invalid')
+  $('#input-error').hidden = true
+  pendingClipboardLink = null
+  $('#clipboard-prompt').hidden = true
+  toast('Spotify-Link automatisch eingefügt. Bereit zum Hinzufügen.')
+}
+$('#clipboard-accept').addEventListener('click', () => { if (pendingClipboardLink) acceptClipboard(pendingClipboardLink) })
+$('#spotify-url').addEventListener('input', () => {
+  if ($('#spotify-url').value.trim() === pendingClipboardLink) { pendingClipboardLink = null; $('#clipboard-prompt').hidden = true }
+})
 
 $('#import-form').addEventListener('submit', event => {
   event.preventDefault(); $('#input-error').hidden = true; $('#spotify-url').removeAttribute('aria-invalid')
@@ -95,14 +112,15 @@ for (const button of document.querySelectorAll('[data-youtube]')) button.addEven
 $('#youtube-clear').addEventListener('click', () => action(async () => update(await bridge.youtubeClear())))
 $('#auth-resume').addEventListener('click', () => action(async () => { for (const job of state.jobs.filter(item => item.status === 'blocked')) update(await bridge.resume(job.id)); update(await bridge.start()) }))
 $('#language').value = getLanguage()
-$('#language').addEventListener('change', () => { setLanguage($('#language').value); render() })
+$('#language').addEventListener('change', () => { setLanguage($('#language').value); if (bridge) void action(() => bridge.language(getLanguage())); render() })
 $('#resume-all').addEventListener('click', () => action(async () => { for (const job of state.jobs.filter(item => item.status === 'paused')) update(await bridge.resume(job.id)); update(await bridge.start()) }))
 $('#start-button').addEventListener('click', () => {
   if (bridge) void action(async () => update(await bridge.start()))
   else { $('#desktop-card').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'center' }); $('#desktop-card').focus({ preventScroll: true }) }
 })
-for (const control of [$('#format'), $('#bitrate')]) control.addEventListener('change', () => action(async () => {
-  const value = preferences({ format: $('#format').value, bitrate: $('#bitrate').value })
+for (const control of [$('#format'), $('#bitrate'), $('#clipboard-enabled')]) control.addEventListener('change', () => action(async () => {
+  const value = preferences({ format: $('#format').value, bitrate: $('#bitrate').value, clipboard: $('#clipboard-enabled').checked })
+  if (!value.clipboard) { pendingClipboardLink = null; $('#clipboard-prompt').hidden = true }
   if (bridge) update(await bridge.savePreferences(value))
   else { state.settings = value; try { localStorage.setItem('fsd-preferences-v1', JSON.stringify(value)) } catch { /* storage may be disabled */ } render() }
 }))
@@ -124,6 +142,13 @@ if (bridge) {
   bridge.subscribe(update)
   bridge.onStorageError(() => toast('Warteschlange konnte nicht gespeichert werden.'))
   await action(async () => { update(await bridge.state()); $('#version').textContent = `v${state.version}` })
+  bridge.onClipboardLink(link => {
+    try { link = spotifyLink(link).url } catch { return }
+    if (!state.settings.clipboard || $('#spotify-url').value.trim() === link) return
+    if (!$('#spotify-url').value.trim()) acceptClipboard(link)
+    else { pendingClipboardLink = link; $('#clipboard-prompt').hidden = false }
+  })
+  await action(() => bridge.ready(getLanguage()))
 } else {
   initializeDownloads()
   try { state.settings = preferences(JSON.parse(localStorage.getItem('fsd-preferences-v1') || '{}')) } catch { /* use defaults */ }

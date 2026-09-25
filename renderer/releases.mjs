@@ -1,5 +1,5 @@
 export const REPOSITORY = 'https://github.com/Reini101083/free-spotify-downloader'
-export const RELEASE_VERSION = '0.1.1'
+export const RELEASE_VERSION = '0.1.2'
 export const PACKAGES = [
   { id: 'windows-setup', os: 'windows', label: 'Windows · Installer · Intel / AMD 64-Bit', suffix: 'windows-x64-setup.exe', extension: '.exe', primary: true },
   { id: 'windows-portable', os: 'windows', label: 'Windows · Portable · Intel / AMD 64-Bit', suffix: 'windows-x64-portable.exe', extension: '.exe' },

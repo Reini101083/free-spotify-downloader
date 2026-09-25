@@ -1,8 +1,9 @@
-const { app, BrowserWindow, ipcMain, dialog, shell, session } = require('electron')
+const { app, BrowserWindow, ipcMain, dialog, shell, session, clipboard } = require('electron')
 const fs = require('node:fs/promises')
 const path = require('node:path')
 const { pathToFileURL } = require('node:url')
 let window, queue, store, engine, ffmpeg, youtube, safeToQuit = false
+let uiLanguage = 'de', clipboardLinks, clipboardTimer, rendererReady = false
 const health = { engine: false, ffmpeg: false }
 const title = 'Free Spotify Downloader'
 
@@ -20,9 +21,12 @@ function guard(event) {
 function handle(channel, fn) { ipcMain.handle(channel, async (event, ...args) => { guard(event); return fn(...args) }) }
 async function createWindow() {
   safeToQuit = false
+  rendererReady = false
   window = new BrowserWindow({ width: 1350, height: 920, minWidth: 740, minHeight: 620, title, icon: path.join(__dirname, '../build/icon.png'), backgroundColor: '#0e1119', autoHideMenuBar: true, show: false, webPreferences: { preload: path.join(__dirname, 'preload.cjs'), contextIsolation: true, nodeIntegration: false, sandbox: true, webSecurity: true } })
   window.webContents.setWindowOpenHandler(() => ({ action: 'deny' }))
   window.webContents.on('will-navigate', event => event.preventDefault())
+  require('./context-menu.cjs')(window, () => uiLanguage)
+  window.on('focus', checkClipboard)
   window.once('ready-to-show', () => window.show())
   window.on('close', event => {
     if ((queue.active || queue.launching) && !safeToQuit) {
@@ -34,6 +38,14 @@ async function createWindow() {
   await window.loadFile(path.join(__dirname, '../web/index.html'))
 }
 
+function checkClipboard() {
+  if (!rendererReady || !window || window.isDestroyed() || !window.isFocused() || !queue.settings.clipboard) return
+  try {
+    const link = clipboardLinks.read(clipboard.readText())
+    if (link) window.webContents.send('clipboard-link', link)
+  } catch { /* A locked clipboard must not interrupt the app. */ }
+}
+
 app.setName(title)
 const locked = app.requestSingleInstanceLock()
 if (!locked) app.quit()
@@ -42,6 +54,8 @@ else {
   app.whenReady().then(async () => {
     const { DownloadQueue } = await import(pathToFileURL(path.join(__dirname, '../shared/queue.mjs')))
     const domain = await import(pathToFileURL(path.join(__dirname, '../shared/domain.mjs')))
+    const { ClipboardLinks } = await import(pathToFileURL(path.join(__dirname, '../shared/clipboard.mjs')))
+    clipboardLinks = new ClipboardLinks()
     const resources = app.isPackaged ? process.resourcesPath : path.join(__dirname, '..')
     const engineDirectory = path.join(resources, app.isPackaged ? 'engine' : 'engine-dist')
     engine = path.join(engineDirectory, process.platform === 'win32' ? 'spotdl-engine.exe' : 'spotdl-engine')
@@ -68,9 +82,11 @@ else {
     session.defaultSession.setPermissionRequestHandler((_contents, _permission, callback) => callback(false))
     session.defaultSession.setPermissionCheckHandler(() => false)
     handle('state', state)
+    handle('ui-ready', language => { uiLanguage = language === 'en' ? 'en' : 'de'; rendererReady = true; checkClipboard() })
+    handle('ui-language', language => { uiLanguage = language === 'en' ? 'en' : 'de' })
     handle('youtube-open', async language => { const blocked = queue.jobs.find(job => job.status === 'blocked'); await youtube.open(blocked?.authUrl, language); return state() })
     handle('youtube-clear', async () => { if (queue.active || queue.launching) throw new Error('Bitte pausiere zuerst die Downloads.'); await youtube.clear(); broadcast(); return state() })
-    handle('preferences', async value => { queue.settings = domain.preferences(value); await persist(); broadcast(); return state() })
+    handle('preferences', async value => { queue.settings = domain.preferences(value); await persist(); broadcast(); checkClipboard(); return state() })
     handle('choose-folder', async () => {
       const result = await dialog.showOpenDialog(window, { title: 'Musikordner wählen', defaultPath: queue.folder, properties: ['openDirectory', 'createDirectory'] })
       if (!result.canceled && result.filePaths[0]) { queue.folder = result.filePaths[0]; await persist(); broadcast() }
@@ -101,8 +117,10 @@ else {
       await shell.openExternal(url)
     })
     await createWindow()
+    clipboardTimer = setInterval(checkClipboard, 1000)
+    clipboardTimer.unref()
     app.on('activate', () => { if (BrowserWindow.getAllWindows().length === 0) void createWindow() })
   }).catch(error => { dialog.showErrorBox('App konnte nicht gestartet werden', error.message); app.quit() })
   app.on('window-all-closed', () => { if (process.platform !== 'darwin') app.quit() })
-  app.on('before-quit', () => queue?.stopAll())
+  app.on('before-quit', () => { clearInterval(clipboardTimer); queue?.stopAll() })
 }

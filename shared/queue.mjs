@@ -66,12 +66,17 @@ export class DownloadQueue extends EventEmitter {
       this.launching = false; this.changed(); void this.next(); return
     }
     this.active = { job, child }; this.launching = false
-    let settled = false, summary = null, pending = '', killTimer
+    let settled = false, summary = null, failure = null, pending = '', killTimer
     const line = value => {
       if (value.startsWith('FSD_EVENT ')) {
         try {
           const event = JSON.parse(value.slice(10))
           if (event.type === 'summary') summary = event
+          if (event.type === 'status') job.message = cleanOutput(event.message)
+          if (event.type === 'error') {
+            failure = cleanOutput(event.message)
+            job.logs.push(`${cleanOutput(event.code)}: ${failure}${event.detail ? `\n${cleanOutput(event.detail)}` : ''}`)
+          }
           if (event.type === 'auth') { job.requiresAuth = true; job.authUrl = event.url; this.running = false }
           if (event.type === 'track') {
             job.message = `${event.index}/${event.total} · ${event.title}`
@@ -93,7 +98,7 @@ export class DownloadQueue extends EventEmitter {
       if (pending) line(pending)
       if (job.cancelled) { job.status = 'paused'; job.message = 'Pausiert. Fertige Titel bleiben erhalten.' }
       else if (job.requiresAuth) { job.status = 'blocked'; job.message = 'YouTube benötigt eine manuelle Bestätigung.'; this.running = false }
-      else if (code !== 0 || !summary) { job.status = 'failed'; job.message = 'Unterbrochen. Du kannst den Auftrag fortsetzen.' }
+      else if (code !== 0 || !summary || failure) { job.status = 'failed'; job.message = failure || 'Unterbrochen. Du kannst den Auftrag fortsetzen.' }
       else {
         job.status = summary.skipped ? 'partial' : 'completed'
         job.message = `${summary.saved} gespeichert · ${summary.existing} bereits vorhanden · ${summary.skipped} übersprungen`
